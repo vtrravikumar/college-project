@@ -23,15 +23,15 @@ jobs:
           repository: vtrravikumar/vtr-press
           path: vtr-press
 
-      - name: Generate one manuscript from report and code sources
+      - name: Generate one manuscript from report and optional code sources
         run: |
-          PYTHONPATH="$GITHUB_WORKSPACE/vtr-press" python -m digitization "$GITHUB_WORKSPACE/source" "$GITHUB_WORKSPACE/digitization-output/manuscript.md"
-          wc -l "$GITHUB_WORKSPACE/digitization-output/manuscript.md"
-          grep -c '<!-- source-document:' "$GITHUB_WORKSPACE/digitization-output/manuscript.md"
+          PYTHONPATH="$GITHUB_WORKSPACE/vtr-press" python -m digitization "$GITHUB_WORKSPACE/source"
+          wc -l "$GITHUB_WORKSPACE/manuscript.md"
+          grep -c '<!-- source-document:' "$GITHUB_WORKSPACE/manuscript.md"
 
       - name: Package manuscript
         uses: actions/upload-artifact@v4
         with:
           name: college-project-digitization
-          path: digitization-output/manuscript.md
+          path: manuscript.md
           if-no-files-found: error
