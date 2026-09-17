@@ -1,19 +1,5 @@
-# Python
-__pycache__/
-*.py[cod]
-.venv/
-venv/
+# Local digitization working files
+.digitization-work/
 
-# OS / editor
-.DS_Store
-.vscode/
-.idea/
-
-# Local source scans and large intermediate files
-source/*.pdf
-source/*.PDF
-pages/
-processed/
-
-# OCR temporary files
-*.tmp
+# Generated digitization output that can be regenerated
+# (Keep committed manuscript/pages/assets/run statistics only when intentionally published.)
