@@ -1,0 +1,37 @@
+name: One-time digitization validation
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  digitize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install OCR runtime
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr poppler-utils
+          python -m pip install --upgrade pip
+          python -m pip install pillow
+
+      - name: Checkout VTR Press digitization engine
+        uses: actions/checkout@v4
+        with:
+          repository: vtrravikumar/vtr-press
+          path: vtr-press
+
+      - name: Generate one manuscript from report and code sources
+        run: |
+          PYTHONPATH="$GITHUB_WORKSPACE/vtr-press" python -m digitization "$GITHUB_WORKSPACE/source" "$GITHUB_WORKSPACE/digitization-output/manuscript.md"
+          wc -l "$GITHUB_WORKSPACE/digitization-output/manuscript.md"
+          grep -c '<!-- source-document:' "$GITHUB_WORKSPACE/digitization-output/manuscript.md"
+
+      - name: Package manuscript
+        uses: actions/upload-artifact@v4
+        with:
+          name: college-project-digitization
+          path: digitization-output/manuscript.md
+          if-no-files-found: error
