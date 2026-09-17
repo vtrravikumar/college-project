@@ -16,5 +16,4 @@ pages/
 processed/
 
 # OCR temporary files
-o cr/
 *.tmp
