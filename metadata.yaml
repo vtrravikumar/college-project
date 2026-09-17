@@ -1,0 +1,18 @@
+# College Project Book Metadata
+# Fill from the original report after the title page is digitized.
+
+title: ""
+subtitle: ""
+year: ""
+authors: []
+
+# Additional project metadata can be added after the source report is reviewed.
+project:
+  institution: ""
+  department: ""
+  degree: ""
+  guide: ""
+
+publishing:
+  engine: "vtr-press"
+  target_version: "2.1"
