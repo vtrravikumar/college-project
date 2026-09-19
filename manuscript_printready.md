@@ -146,35 +146,75 @@ I.GO GAs work by maintaining a population of candidate solutions to a given prob
 
 #### TERMINOLOGIES USED
 
-Many biological terms are used in the Genetic Algorithm literature. The pool of solutions is often called the "population", individual strings in the pool are "chromosome", individual features are "genes" and the value of the feature in a particular solution is "allele". Example don In a particular problem, a variable x to be optimized is evolved using 4-bit encoded string. The illustration of strings during some intermediate step is shown in the table X3 X4 X2
+Many biological terms are used in the Genetic Algorithm literature. The pool of solutions is often called the "population", individual strings in the pool are "chromosome", individual features are "genes" and the value of the feature in a particular solution is "allele". 
 
-### THE ALGORITHM
+Example: In a particular problem, a variable x to be optimized is evolved using 4-bit encoded string. The illustration of strings during some intermediate step is shown in the table 
 
-#### PSEUDOCODE
+| x1 | x2 | x3 | x4 |
+|:-:|:-:|:-:|:-:|
+| 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 1 |
+| 1 | 0 | 0 | 1 |
+| 1 | 1 | 1 | 0 |
 
-The Genetic Algorithm pseudo code is given as, Initialise population POPIO]. Evaluate population POPIOI. Generation =1. While termination criterion not reached Select solutions for POPIGeneration] from POPIGeneration-1]. Perform Crossover on POP[Generation]. Perform Mutation on POP[Generation]. Evaluate POPIGeneration]. Generation = Generation + 1
 
-#### OVERVIEW
+
+#### THE ALGORITHM
+
+
+
+##### PSEUDOCODE
+
+The Genetic Algorithm pseudo code is given as.
+```c
+        Initialize population POP[0]
+        Evaluate population POP[0]
+        Generation = 1
+        While termination criterion not reached
+        {
+          Select solutions for POP[Generation]
+          from POP[Generation -1 ]
+          Perform Crossover on POP[Generation]
+          Perform Mutation on POP[Generation]
+          Evaluate POP[Generation]
+          Generation = Generation + 1
+
+        }
+```
+
+##### OVERVIEW
 
 The initial population is usually created randomly. Individual members of the population i.e., chromosomes are selected for the next generation in proportion of their fitness, the measure of how near the particular solution is form the optimal solution. Two parent chromosomes are altered using generic operator to produce two children. The resultant children are each evaluated and assigned a fitness value. Next, the strings of old population is replaced by the new fittest string and the process is repeated. The stopping criterion can be maximum number of iteration, convergence or reaching an acceptable fitness level.
 
-DIAGRAMATIC ILLUSTRATION: The working of GA can be illustrated diagramatically as in figure Offsprings Decoded strings Population (Chromosomes) New Generation Evaluation (Fitness) Genetic Operators Parents Selection Reproduction Manipulation Mates Thus a GA has the following components, a population of binary strings control parameters. a fitness function. genetic operators. a selection mechanism & a mechanism to encode the solution as binary strings.
+*DIAGRAMMATIC ILLUSTRATION: *
 
-#### OPERATORS DESCRIPTION
+The working of GA can be illustrated diagrammatically as in figure
 
-SELECTION OPERATOR Selection models nature's "survival of the fitness" mechanism. Fitter solution survive while weaker one perish. It can be done using a ranking method, roulette wheel selector or by tournament selection. In roulette-wheel selection, each chromosome is assigned a pie-shaped slice on a roulette-wheel where the size is proportional to the fitness of the individual chromosome. The spin is simulated by gencrating and the total of individual fitness. The winning chromosome is the one in whose slice the roulette spinner ends up. In rank based selection, two individuals are chosen using roulette wheel and the member with higher fitness is selected. In tournament selection, a set of individuals are sequentially chosen, and the member with the highest fitness is added to the mating pool. CROSSOVER OPERATOR The purpose of cross over is to create children whose genetic material resembles their parent's genes in some fashion. Thus is done with a hope that a child will have better features of both of its parents. A simple, one-point crossover between two individuals proceed in two steps. First, a cross site along the string length is chosen uniformly at random. Then the position values are exchanged between the two strings following the cross site
+![The working of GA](assets/images/workingofga.png)
+ 
+ Thus a GA has the following components, 
+  a population of binary strings 
+  control parameters. 
+  a fitness function. 
+  genetic operators. 
+  a selection mechanism & 
+  a mechanism to encode the solution as binary strings.
 
-For example, if two selected strings are, A1111 B= 00000000 If the random choice of cross site turns out to be three, the two new strings got are, C=11100000 D=00011111 following the crossover operation. There are other two types of crossover namely multipoint crossover, partially matched crossover useful for particular application. MUTATION OPERATOR It is the occasional alteration of a chromosome like flipping a bit which has a low probability. Mutation is used to rejuvenate the search, extending the search into previously unexplored areas. It also helps in restoring lost genetic material. For example, if all the strings in a population have converged to zero at a given position and the optimal solution has a one at that position. Then crossover cannot generate a one there, while mutation could.
+##### OPERATORS DESCRIPTION
 
-#### PROBLEM DEPENDENT ISSUES
+SELECTION OPERATOR Selection models nature's "survival of the fitness" mechanism. Fitter solution survive while weaker one perish. It can be done using a ranking method, roulette wheel selector or by tournament selection. In roulette-wheel selection, each chromosome is assigned a pie-shaped slice on a roulette-wheel where the size is proportional to the fitness of the individual chromosome. The spin is simulated by generating and the total of individual fitness. The winning chromosome is the one in whose slice the roulette spinner ends up. In rank based selection, two individuals are chosen using roulette wheel and the member with higher fitness is selected. In tournament selection, a set of individuals are sequentially chosen, and the member with the highest fitness is added to the mating pool. CROSSOVER OPERATOR The purpose of cross over is to create children whose genetic material resembles their parent's genes in some fashion. Thus is done with a hope that a child will have better features of both of its parents. A simple, one-point crossover between two individuals proceed in two steps. First, a cross site along the string length is chosen uniformly at random. Then the position values are exchanged between the two strings following the cross site
+
+For example, if two selected strings are, A1111 B= 00000000 If the random choice of cross site turns out to be three, the two new strings got are, C=11100000 D=00011111 following the crossover operation. There are other two types of crossover namely multi-point crossover, partially matched crossover useful for particular application. MUTATION OPERATOR It is the occasional alteration of a chromosome like flipping a bit which has a low probability. Mutation is used to rejuvenate the search, extending the search into previously unexplored areas. It also helps in restoring lost genetic material. For example, if all the strings in a population have converged to zero at a given position and the optimal solution has a one at that position. Then crossover cannot generate a one there, while mutation could.
+
+##### PROBLEM DEPENDENT ISSUES
 
 The remaining components apart from the operators are grouped under problem dependent issues as they can be decided upon the given problem.
 
-They are, Encoding mechanism - Representation of the problem as a string of digits Fitness - A means of evaluating individual potential solutions. Control parameters - The specification of problem parameters. ENCODING MECHANISM Fundamental to GA structure is the encoding mechanism for representing the optimization variables. The encoding mechanism depends upon the number of variables and the range of values taken by the variables. The length of the binary string is determined for each variables depending on its range. The bit strings for all the variables are usually concatenated and used. Sometimes, if they are real valued continuous variables, it linearly mapped and it is encoded using fixed number of bits FITNESS FUNCTION: In Generic Algorithm, the fitness value of each chromosome has to be evaluated. For this, a fitness function is needed. This function should return a value that is indicative of how good the solution string is. The fitness returned is high for fitter strings and low for worse ones. Obviously, it should return the highest value for an optimal string. Thus fitness function is problem dependent. For example, in a LPP with a maximising objective function, the objective function can be used as fitness function.
+They are, Encoding mechanism - Representation of the problem as a string of digits Fitness - A means of evaluating individual potential solutions. Control parameters - The specification of problem parameters. ENCODING MECHANISM Fundamental to GA structure is the encoding mechanism for representing the optimization variables. The encoding mechanism depends upon the number of variables and the range of values taken by the variables. The length of the binary string is determined for each variables depending on its range. The bit strings for all the variables are usually concatenated and used. Sometimes, if they are real valued continuous variables, it linearly mapped and it is encoded using fixed number of bits FITNESS FUNCTION: In Generic Algorithm, the fitness value of each chromosome has to be evaluated. For this, a fitness function is needed. This function should return a value that is indicative of how good the solution string is. The fitness returned is high for fitter strings and low for worse ones. Obviously, it should return the highest value for an optimal string. Thus fitness function is problem dependent. For example, in a LPP with a maximizing objective function, the objective function can be used as fitness function.
 
 FIXUP OF CONTROL PARAMETERS The parameters of GA like probabilities of crossover and mutation, number of generations, population size and the length of strings are decided based on problem domain
 
-### COMPARISION WITH OTHER TECHNIQUES
+### COMPARISON WITH OTHER TECHNIQUES
 
 In order for GA to surpass their more traditional cousins in the quest for robustness, GA must differ in some very fundamental ways. Genetic algorithms are different from more normal optimization search procedures in the following ways. Advantages: GAs works with a coding of the parameter set, rather than the parameter themselves. * GAs search from a population of points, rather than from a single point. * GAs use payoff(objective function) information and not derivatives or other auxiliary knowledge. * GAs make use of probabilistic rather than deterministic transition rules.
 
