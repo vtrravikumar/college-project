@@ -8,7 +8,9 @@ type: "technical-document"
 language: "en"
 ---
 
-# Viva Voce Examination
+# ANALYSIS OF ARTIFICIAL NEURAL NETWORK
+
+## Viva Voce Examination
 
 The Viva Voce Examination of the Project work done by RAVIKUMAR V.I.R. E 451640 (Reg. No) in partial fulfillment of the requirements for the B.E degree in COMPUTER SCIENCE & ENGINEERING was held on 13 OCTOBER'98 b110198 2210198 INTERNAL EXAMINER EXTERNAL EXAMINER
 
