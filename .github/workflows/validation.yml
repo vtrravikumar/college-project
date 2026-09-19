@@ -27,3 +27,10 @@ jobs:
 
       - name: Run XOR validation
         run: python validation/validate_project.py --runs 3 --seed 42
+
+      - name: Upload validation results
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase1-xor-validation-results
+          path: validation/results/
+          if-no-files-found: error
