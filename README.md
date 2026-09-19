@@ -1,77 +1,89 @@
 # College Project — Digitization & Technical Book
 
-This repository contains the digitization work for an original college project report, with the long-term goal of producing a professional technical book using [VTR Press](https://github.com/vtrravikumar/vtr-press).
+This repository contains the digitization and reconstruction of the original college project report, with the long-term goal of producing a professional technical book using VTR Press.
 
 ## Objective
 
-Preserve the original college project faithfully while converting the physical report into a structured Markdown manuscript suitable for modern publishing.
+Preserve the original college project faithfully while recreating its experiments in a modern programming language.
 
-The source report contains:
+The Phase 1 objective is **historical reconstruction, not modernization**:
 
-- prose and technical documentation
-- Watcom C source code
-- tables
-- diagrams and other images
-- references and supporting material
+- preserve the original theory and manuscript
+- recover the algorithmic intent from the report and surviving Watcom C source
+- implement the algorithms in modern Python
+- reproduce the documented applications and experiments
+- compare historical and reproduced results
+- record runtime and hardware context
+- document uncertainty and discrepancies explicitly
+
+Modern research extensions will be considered only after Phase 1 is complete.
 
 ## Digitization principle
 
 The physical report / master scan is the source of truth. OCR and automated processing are used to reduce manual work, but technical content, source code, tables, captions, and figures must be verified against the original pages.
 
-The initial objective is **faithful digitization**, not modernization or rewriting of the original technical content.
+The surviving Watcom C source is treated as implementation evidence. Because extraction/transcription errors may exist, it is not assumed to be authoritative until verified against the source pages.
 
-## Planned workflow
+## Phase 1 workflow
 
 ```text
-Physical report
-      ↓
-High-resolution scan
-      ↓
-Page preprocessing
-      ↓
-OCR / extraction
-      ↓
-Structure and cleanup
-      ↓
-Manual fidelity review
-      ↓
-manuscript.md
-      ↓
-VTR Press
-      ↓
-Technical book PDF / EPUB
+Original report / scan
+        ↓
+Faithful manuscript
+        ↓
+Algorithm & experiment reconstruction
+        ↓
+Old C source as implementation evidence
+        ↓
+Modern Python implementation
+        ↓
+Reproduced applications and results
+        ↓
+Historical vs modern comparison
+        ↓
+Completed technical book
 ```
 
 ## Repository structure
 
 ```text
 college-project/
-├── manuscript.md             # Main book manuscript
-├── metadata.yaml              # Book and author metadata
-├── README.md
-├── .gitignore
-│
-├── source/                    # Source material policy documented separately
-├── ocr/                       # OCR output and intermediate text
-├── images/                    # Extracted / cleaned figures
-├── tables/                    # Reconstructed tables where useful
-├── notes/                     # Digitization and editorial notes
-├── scripts/                   # Reproducible digitization tooling
-└── tests/                     # Tests for scripts and validation
+├── archive/
+│   ├── manuscripts/
+│   └── original-code/          # Surviving Watcom C source PDFs
+├── source/
+│   └── report/                 # Original report scans
+├── manuscript_printready.md
+├── metadata.yaml
+├── docs/
+│   └── reconstruction.md       # Phase 1 reconstruction methodology
+├── validation/                 # Modern reconstruction and validation code
+├── tests/
+├── digitization/
+├── notes/
+└── README.md
 ```
 
 ## Authors
 
-The original report has three authors. Multi-author publishing support in VTR Press is tracked as a **v2.1 requirement** and this project will serve as a practical test case for that capability.
+The original report has three authors. Multi-author publishing support in VTR Press is tracked as a **v2.1 requirement** and this project serves as a practical test case for that capability.
 
-Author names will be recorded from the original report rather than inferred.
+Author names are recorded from the original report rather than inferred.
 
-## Source files and Git
+## Phase 1 status
 
-The original physical scan will be treated as the immutable source. Large scans and other binary intermediates should not be committed until the storage approach is decided. Reproducible scripts, manuscript content, metadata, notes, and appropriately sized source assets belong in Git.
+**Manuscript:** substantially reconstructed; fidelity review continues.
 
-## Status
+**Theory:** documented in the manuscript; reconstruction matrix established.
 
-**Phase 0 — Repository setup**
+**Code:** modern validation harness exists; historical algorithm reconstruction continues.
 
-The repository is initialized and ready for the first representative scan. The next step is to scan a small sample of pages and use them to validate the OCR and document-reconstruction workflow before processing the full report.
+**Experiments:** XOR validation is the initial experiment. Additional documented applications remain to be reconstructed.
+
+**Results:** validation results are persisted in `validation/results/`; historical-vs-modern comparison remains in progress.
+
+See `docs/reconstruction.md` for the reconstruction rules, evidence hierarchy, experiment sequence, and Phase 1 exit condition.
+
+## Phase 2 — future
+
+After Phase 1 is frozen, the project may investigate the relationship between the 1998 work and modern neuroevolution, neural architecture search, evolutionary optimisation, and any unanswered research questions identified during reconstruction.
