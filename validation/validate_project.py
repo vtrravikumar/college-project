@@ -95,6 +95,14 @@ def run_xor(runs: int, seed: int) -> dict:
             "history": bp["history"],
         },
         "genetic_algorithm": {
+            "configuration": {
+                "population_size": config.population_size,
+                "generations": config.generations,
+                "crossover_probability": config.crossover_probability,
+                "mutation_probability": config.mutation_probability,
+                "weight_min": config.weight_min,
+                "weight_max": config.weight_max,
+            },
             "runs": ga_runs,
             "summary": {
                 "successful_runs": sum(r["converged"] for r in ga_runs),
