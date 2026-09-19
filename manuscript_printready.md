@@ -1,84 +1,132 @@
 ---
-title: "ANALYSIS OF ARTIFICIAL NEURAL NETWORK"
+# ------------------------------------------------------------------
+# Book Identity
+# ------------------------------------------------------------------
+
+title: ANALYSIS OF ARTIFICIAL NEURAL NETWORK
+subtitle: USING BACK PROPAGATION & GENETIC ALGORITHM
 author:
-  - "KUMARESAN U"
-  - "RAGUPATHI KUMAR D."
-  - "RAVI KUMAR V.T.R."
-type: "technical-document"
-language: "en"
+  - KUMARESAN U
+  - RAGUPATHI KUMAR D.
+  - RAVI KUMAR V.T.R.
+
+# ------------------------------------------------------------------
+# Publication
+# ------------------------------------------------------------------
+
+edition: Reading Draft
+version: v1.0
+copyright_year: 2026
+# ------------------------------------------------------------------
+# Layout
+# ------------------------------------------------------------------
+
+type: technical-document
+language: en
 ---
+# ANALYSIS OF ARTIFICIAL NEURAL NETWORK
 
-# Viva Voce Examination
+## VIVA VOCE EXAMINATION
 
-The Viva Voce Examination of the Project work done by RAVIKUMAR V.I.R. E 451640 (Reg. No) in partial fulfillment of the requirements for the B.E degree in COMPUTER SCIENCE & ENGINEERING was held on 13 OCTOBER'98 b110198 2210198 INTERNAL EXAMINER EXTERNAL EXAMINER
 
-# Certificate
 
-This is to certify that the project titled "Analysis of Artificial Neural Network" is a bonofide work done be by RAVIKUMAR V.T.R. Reg.No E451640 in partial fulfillment of the requirement for the award of the degree of Bachelor of Engineering in Computer Science and Engineering during 1994-1998. Thule 70198 HEAD OF THE DEPARTMENT PROJECT GUIDE ONE IS
+The Viva Voce Examination of the Project work done by RAVI KUMAR V.I.R. E 451640 (Reg. No) in partial fulfillment of the requirements for the B.E degree in COMPUTER SCIENCE & ENGINEERING was held on 13 OCTOBER'98 
 
-# Acknowledgement
 
-We are thankful to our Director Dr. V. Shanmuganathan excellent opportunity for taking up the course and providing a conducive environment to finish our project successfully We extend our sincere thanks to Prof.S. Ramakrishnan.(System Manager & Head Of CSE Dept.) for his guidance and suggestions towards the improvement of our project. We have immense pleasure in thanking our guide Miss.Shameem Fathima and our guide Mr. R.Balasubramanian under whose guidance the project has been shaped in a very successful manner. Last but not the least we would like to thank the Technical support group of our Brainland Computer Centre for providing all that we needed and staying late in the night for us. Above all, I express my gratitude to my beloved parents for shaping me as an Engineer.
+INTERNAL EXAMINER                                   EXTERNAL EXAMINER
 
-# Abstract
+## CERTIFICATE
 
-The aim of the project is to implement a system based on Genetic algorithm with enhanced encoding. The system is used to evolve forward Artificial Neural Network which has been applied to problem areas of boolean functions. Evolving Neural Network means that optimising of the connection and connectivity of the Neural Network. Although many techniques like Back Propagation learning exists, a new approach using Genetic Algorithm has been tried in this work Genetic Algorithm is randomised search technique that is domain free, robust and has a fast rate of convergence. Genetic Algorithm search methods are rooted in the mechanism of evolution and natural genetics. They combine survival of the fittest among string randomised information exchange to form search algorithm with some of the innovative flairs of human search. In this project we compare the efficiency of Genetic Algorithm and Back Propagation Algorithm and observe that Genetic Algorithm are efficient and robust optimization tools which outperform their counterpart.
 
-# INTRODUCTION
 
-## GENERAL
+This is to certify that the project titled "Analysis of Artificial Neural Network" is a bonofide work done be by RAVI KUMAR V.T.R. Reg.No E451640 in partial fulfillment of the requirement for the award of the degree of Bachelor of Engineering in Computer Science and Engineering during 1994-1998. 
 
-Artificial Neural Net models have been studied for many years on the hope of achieving human-like performance in various fields to find number of real world applications. These models are composed of many non - linear computational elements operating in parallel and arranged inpatterns reminiscent of biological neural nets. Computational elements or nodes are connected by weights that are typically adapted during use to improve performance. There has been a recent resurgence in the field of Artificial Neural Networks caused by new net topologies, algorithms and analog VLSI implementation techniques. Standard techniques exist for training Neural Networks. But there is still a need for better and efficient techniques to train Neural Networks. In the proposed project, this problem has been modelled as an optimization problem and novell approach called GENETIC ALGORITHM has been adopted to solve it.
 
-## STATE OF THE ART
 
-Currently there are various classical optimization techniques. Calculus based methods use a set of necessary and sufficient conditions to be satisried by the solution of an optimization problem. This method can be further divided into Direct and Indirect methods. These techniques can be used only in a restricted set of well. behaved problem. Enumerated techniques search every point related to an objective function's domain space one point at a time. They are simple to implement but may required significant computation. Guided random search techniques are based on enumeration techniques but use additional information to guide the search They can solve very complete problems. The major sub classes are Simulated Annealing and Evolutionary Algorithms. Both are evolutionary processes. But Simulated Annealing on the other hand are based on natural selection principles. This form of search evolves throughout generations, improving the features of potential solutions by means of biologically inspired operations . This in turn subdivided into Evolutionary Strategies and Genetic Algorithms.
 
-GAs came into existence as a result of doctoral dissertion of Dr.John Holland of university of Michigan, Ann Arbor. Ever since it gained immense popularity and prominence and have been applied to a number of areas .A lot of research work have been carried out throughout the world .David E. Goldberg, prof, General Engineering, University of Illinois at Urbana-campaign, has been a forerunner of research in GA and has produced one of the widely referenced text on GA .Dr. Kenneth Dejong of george Mason University has proposed a test suite that attempts to formalise the concepts behind the working of GA.
+PROJECT GUIDE                                       HEAD OF THE DEPARTMENT 
 
-## MOTIVATION OF THE PROJECT
+## Acknowledgement
 
-The field of Genetic Algorithm is new and evolving. It has a wide variety of application. One of the major problem in constructing any Neural Network is fixing the inter neuron weight in real - time .Genetic algorithm to be a useful integration, when not a viable alternative to more common algorithm such as Backpropagation .So these stood as a cause of motivation to pursue this project.
+We are thankful to our Director Dr. V. Shanmuganathan for giving excellent opportunity for taking up the course and providing a conducive environment to finish our project successfully.
 
-## SCOPE OF THE PROJECT
+We extend our sincere thanks to Prof.S. Ramakrishnan.(System Manager & Head Of CSE Dept.) for his guidance and suggestions towards the improvement of our project. 
+
+We have immense pleasure in thanking our guide Miss.Shameem Fathima and our guide Mr. R.Balasubramanian under whose guidance the project has been shaped in a very successful manner. 
+
+Last but not the least we would like to thank the Technical support group of our Brainland Computer Centre for providing all that we needed and staying late in the night for us. 
+
+Above all, I express my gratitude to my beloved parents for shaping me as an Engineer.
+
+## Abstract
+
+The aim of the project is to implement a system based on Genetic algorithm with enhanced encoding. The system is used to evolve forward Artificial Neural Network which has been applied to problem areas of boolean functions. 
+
+Evolving Neural Network means that optimizing of the connection and connectivity of the Neural Network. Although many techniques like Back Propagation learning exists, a new approach using Genetic Algorithm has been tried in this work
+
+Genetic Algorithm is randomized search technique that is domain free, robust and has a fast rate of convergence. Genetic Algorithm search methods are rooted in the mechanism of evolution and natural genetics. They combine survival of the fittest among string randomized information exchange to form search algorithm with some of the innovative flairs of human search.
+
+In this project we compare the efficiency of Genetic Algorithm and Back Propagation Algorithm and observe that Genetic Algorithm are efficient and robust optimization tools which outperform their counterpart.
+
+## INTRODUCTION
+
+### GENERAL
+
+Artificial Neural Net models have been studied for many years on the hope of achieving human-like performance in various fields to find number of real world applications. These models are composed of many non - linear computational elements operating in parallel and arranged in patterns reminiscent of biological neural nets. Computational elements or nodes are connected by weights that are typically adapted during use to improve performance. There has been a recent resurgence in the field of Artificial Neural Networks caused by new net topologies, algorithms and analog VLSI implementation techniques. 
+
+Standard techniques exist for training Neural Networks. But there is still a need for better and efficient techniques to train Neural Networks. In the proposed project, this problem has been modelled as an optimization problem and novell approach called *GENETIC ALGORITHM* has been adopted to solve it.
+
+### STATE OF THE ART
+
+Currently there are various classical optimization techniques. 
+
+Calculus based methods use a set of necessary and sufficient conditions to be satisfied by the solution of an optimization problem. This method can be further divided into Direct and Indirect methods. These techniques can be used only in a restricted set of well. behaved problem. 
+
+Enumerated techniques search every point related to an objective function's domain space one point at a time. They are simple to implement but may required significant computation. 
+
+Guided random search techniques are based on enumeration techniques but use additional information to guide the search They can solve very complete problems. The major sub classes are Simulated Annealing and Evolutionary Algorithms. Both are evolutionary processes. But Simulated Annealing on the other hand are based on natural selection principles. This form of search evolves throughout generations, improving the features of potential solutions by means of biologically inspired operations . This in turn subdivided into Evolutionary Strategies and Genetic Algorithms.
+
+GAs came into existence as a result of doctoral dissertation of Dr.John Holland of university of Michigan, Ann Arbor. Ever since it gained immense popularity and prominence and have been applied to a number of areas .A lot of research work have been carried out throughout the world .David E. Goldberg, prof, General Engineering, University of Illinois at Urbana-campaign, has been a forerunner of research in GA and has produced one of the widely referenced text on GA .Dr. Kenneth De jong of george Mason University has proposed a test suite that attempts to formalize the concepts behind the working of GA.
+
+### MOTIVATION OF THE PROJECT
+
+The field of Genetic Algorithm is new and evolving. It has a wide variety of application. 
+
+One of the major problem in constructing any Neural Network is fixing the inter neuron weight in real - time .Genetic algorithm to be a useful integration, when not a viable alternative to more common algorithm such as Back propagation .So these stood as a cause of motivation to pursue this project.
+
+### SCOPE OF THE PROJECT
 
 Artificial Neural Network have a spectrum of practical application in various fields. The work of this project can be applied for determining the optimal network for any such application.
 
-# PROBLEM DEFINITION AND METHODIOGY
+## PROBLEM DEFINITION AND METHODOLOGY
 
-## PROBLEM DEFINITION
+### PROBLEM DEFINITION
 
 The aim of the project is to implement a system based on Genetic algorithm with enhanced encoding. The system is used to evolve feed forward. Artificial Neural Network which has been applied to problem areas of boolean function learning and Robot arm movement.
 
-## METHODOLOGY
+### METHODOLOGY
 
 A Generic algorithm emulates biological evolutionary theories to solve optimization problems .A GA consist of set individual elements ( the population) and a set of biologically inspired operators defined over the population itself. According to evolutionary theories, only the most suited elements in a population are likely to survive and generates offspring , thus transmitting their biological heredity to new generations. In computing terms, a GA maps a problem onto a set of (typically binary)strings, each string representing a potential solution. The GA that manipulates the most promising strings in its search for improved solution. Thus this concept is applied to a Neural Network design it as an optimization problem. First an initial set of individuals are generated, each representing a concatenated string of weights of the links of a neural network. Tine each string is evaluated for a fitness solution using the objective function of calculating the mean squared error by feed forwarding on the network.
 
 As per the GA the fitter string i.e., one with aless error will be eligible for survival and the strings of lesser fitness are omitted from going to next generation. The GA operations like reproduction, crossover, mutation etc. are applied in every generation and this process is repeated for a fixed number of generation or until a fittest solution is evaluated. The string with optimal fitness value will be taken as final concatenated weight of the links
 
-# EVOLUTIONARY DESIGN CONCEPTS
+## EVOLUTIONARY DESIGN CONCEPTS
 
-## INTRODUCTION
+### INTRODUCTION
 
 Technology periodically steals a leaf from nature's book Evolutionary design paradigm is one such example. This paradigm is focused on Genetic Algorithm to explore its advantage over conventional algorithms while learning neural networks.
 
-## GENETIC ALGORITHM
+### GENETIC ALGORITHM
 
 Genetic Algorithm are essentially robust search algorithm based on the mechanics of natural selection and natural genetics. They are best suited for problems having comparatively larger solution spaces. They use randomized information exchange between solutions to obtain an optimal solution. Genetic Algorithms start with a finite set of solution strings called the initial population and then apply the operators, Reproduction, Crossover & Mutation These operators are applied repeatedly thereby guiding the search towards better and better solutions. The power of GA stands in its ability to exploit historical information to improve future performance. Moreover the algorithm conducts a parallel search by sampling various parts of the hyperplane of solution at the same time.
 
-### ALGORITHM INTERNALS
+#### ALGORITHM INTERNALS
 
 I.GO GAs work by maintaining a population of candidate solutions to a given problem.. Each solution is stored as an artificial chromosome, represented by a string of bits,integers or characters(usually represented by bits). An initial population of solution is created randomly. Only a fixed number of candidate solutions are transferred from one generation to the next. Those solutions that are less fit tend to die off( this is done by selection operation to be discussed later). Successively new solutions are created by building on the better solution previously encountered( this is done using crossover and mutation operators explained later) thereby inducing the search to become successively concentrated in areas of current optima.
 
-### TERMINOLOGIES USED
+#### TERMINOLOGIES USED
 
-Many biological terms are used in the Genetic Algorithm
-
-# literature. The pool of solutions is often called the "population", individual
-
-strings in the pool are "chromosome", individual features are "genes" and the value of the feature in a particular solution is "allele". Example don In a particular problem, a variable x to be optimized is evolved using 4-bit encoded string. The illustration of strings during some intermediate step is shown in the table X3 X4
-
-# X2
+Many biological terms are used in the Genetic Algorithm literature. The pool of solutions is often called the "population", individual strings in the pool are "chromosome", individual features are "genes" and the value of the feature in a particular solution is "allele". Example don In a particular problem, a variable x to be optimized is evolved using 4-bit encoded string. The illustration of strings during some intermediate step is shown in the table X3 X4 X2
 
 ### THE ALGORITHM
 
@@ -106,39 +154,39 @@ They are, Encoding mechanism - Representation of the problem as a string of digi
 
 FIXUP OF CONTROL PARAMETERS The parameters of GA like probabilities of crossover and mutation, number of generations, population size and the length of strings are decided based on problem domain
 
-## COMPARISION WITH OTHER TECHNIQUES
+### COMPARISION WITH OTHER TECHNIQUES
 
 In order for GA to surpass their more traditional cousins in the quest for robustness, GA must differ in some very fundamental ways. Genetic algorithms are different from more normal optimization search procedures in the following ways. Advantages: GAs works with a coding of the parameter set, rather than the parameter themselves. * GAs search from a population of points, rather than from a single point. * GAs use payoff(objective function) information and not derivatives or other auxiliary knowledge. * GAs make use of probabilistic rather than deterministic transition rules.
 
 Disadvantages: * The lack of an accurate measure of their convergence to the optimum and their intuitive nature as opposed to other proven and well established methods. * The loss of accuracy while approximating the solution string for the sake of representability in digital computers.
 
-# Conclusion
+### Conclusion
 
 GAs are efficient and robust optimization tools which outperform their counterparts. They are applied in search, optimization and machine learning. They have their own drawbacks owing to the limited nature of digital computers in terms of computational power, storage and the lack of formal proof of the facts behind their working
 
-# DESIGN OF ANN EVOLUTION USING GA
+## DESIGN OF ANN EVOLUTION USING GA
 
-## INTRODUCTION
+### INTRODUCTION
 
 Artificial neural systems are characterised by a set of nodes and interconnecting links. Given an application, a Neural Network has to be trained to learn to correlate a given input to an output. In this chapter, it has been shown how GA can be applied to designing and training a neural Networks. Evolutionary learning for ANNs has been introduced to perform a global exploration of the search space, thus avoiding the problem of stagnation that is characteristic of local search procedures.
 
-## NEURAL NETWORK DESIGN PROBLEM
+### NEURAL NETWORK DESIGN PROBLEM
 
 The problem is to determine an optimal network structure and optimal set of weights of connection of the structure for a given application. More clearly the problem involves two sub problems.
 
-### DETERMINING THE NEURAL NETWORK
+#### DETERMINING THE NEURAL NETWORK
 
 ARCHITECTURE A fully connected Neural Network may contain some links which will not affect its performance. These redundant links can be pruned. Thus an optimal Neural Network in terms of number of links has to be obtained. Such a network will be cost-effective and will work ] better.
 
-### DETERMINING THE SET OF WEIGHTS
+#### DETERMINING THE SET OF WEIGHTS
 
 In a Neural Network, knowledge is stored in the weights of its links. Finding an optimal set of weights for the links of a Neural Network that produces the least deviance of the actual output from the desired output completes the Neural Networks design.
 
-## APPLICATION OF EVOLUTIONARY DESIGN PRINCIPLES
+### APPLICATION OF EVOLUTIONARY DESIGN PRINCIPLES
 
 TO NN DESIGN PROBLEM As said earlier, the NN design problem cosists of optimizing connections and weights of the network. Since, evolutionary design procedures are essentially optimizing tools, it is high time now to get into the details of how they can be applied to solve the NN design problem. The two major design issues, as elucidated in last chapter are addressed for the problem at hand as follows:-
 
-### STRING REPRESENTATION OF SOLUTIONS
+#### STRING REPRESENTATION OF SOLUTIONS
 
 The string representation for the two optimization problems i.e. weights and connections are separately discussed below:
 
@@ -164,23 +212,23 @@ For the weight optimization problem, each member of the set of weights that is r
 
 In the connectivity optimization problem, the fitness of a given set of links is determined by the quickness with which the weights of the links that are present in the network are optimised. To put this in precise terms, consider a population of network architecture with different sets of links. Each of these network is run for a fixed number of generations. The minimised error at the end of this process in each case is noted. Fitter architecture is the one having less error. APPLICATION & RESULTS
 
-# APPLICATIONS AND RESULTS
+## APPLICATIONS AND RESULTS
 
-## BENCH-MARKING APPLICATION
+### BENCH-MARKING APPLICATION
 
-### BOOLEAN FUNCTION LEARNING
+#### BOOLEAN FUNCTION LEARNING
 
 The problem dealt here are toy applications which are often used for testing and bench marking a network. Typically the training set contains all possible input patterns, so there is no question of generalisation. The result obtained when training using Back propagation Algorithm and that using Genetic Algorithm are given in this sub-division.
 
-### RESULTS OF BP AND GA EVOLUTION
+#### RESULTS OF BP AND GA EVOLUTION
 
 EXCLUSIVE OR Problem Definition : The problem is to produce the output which is the XOR function of the given input value. Parameters Of WIN : The initial configuration is, two nodes in the input layer two nodes in the first hidden layer, two nodes in the second hidden layer, and single node in the output layer. The network is fully connected
 
 Optimal set ofweights Links weights 2.081 5.732 .1.013 5.564 .4.215
 
-# 836
+836
 
-# 337
+337
 
 -5. 538 -5.689 4.210 OUTE Neural Network For Exclusive OR All weight of the links contribute to the network
 
@@ -188,11 +236,11 @@ Parameter of GA :- 100 Chromosome length 25 Population size 1400 No. of generati
 
 Time comparison of GA & BP! -
 
-# secs
+secs
 
 [Time taken for training using BP
 
-# secs
+secs
 
 Time taken for training using GA THREE BIT PARITY Problens denition The problem is to produce an output of 1 if there is an odd number of Is in the input pattern. O otherwise Darameters Of NIN The initial configuration is, three nodes in the input layer, two nodes in the first hidden layer, two nodes in the second hidden layer and a single node in the output layer. The network is not fully connected Parameters of GA 132 Chromosome length 30 Population S1ze 1000 No. of generation Probability of cross over 0. 0.09 Probability of mutation -12, 12 Range of weights
 
@@ -200,7 +248,7 @@ Training data :- INPUT OUTPUT Optimal set of weights & links Optimal set of link
 
 Neural Network For Exclusive OR Weights of links 4,9, are zero & others are non zero. So the link with zero weights are pruned from the network. Time comparison of GA & BP: - Ting secs Time taken for training using BP
 
-# secs
+secs
 
 Time taken for training using GA
 
@@ -210,21 +258,21 @@ Optimal set of weights & links :- Optimal set of link Optimal set ofweights link
 
 Time Comparison of GA & BP !-
 
-# secs
+secs
 
 Time taken for training using BP
 
-# secs
+secs
 
 Time taken for training using GA
 
-# Conclusion
+#### Conclusion
 
 Thus the results of both, training using a Back propagation Algorithm and that with a genetic Algorithm infers that the GA has a faster rate of convergence than a conventional training algorithm.
 
-## REAL-WORLD APPLICATOIN
+### REAL-WORLD APPLICATION
 
-5,2.1 ROBOT INVERSE KINEMATIC PROBLEM
+### ROBOT INVERSE KINEMATIC PROBLEM
 
 #### INTRODUCTION
 
@@ -248,60 +296,73 @@ FIXING THE POPULATION SIZE Population size is an important GA parameter that inf
 
 #### CONNECTIVITY OPTIMIZATION
 
-Having fixed the parameters of the network and the weight optimization module, one can now embark on the task at hand. Here a two step connectivity optimization is adopted. In the first step, a population of network architecture is evolved. The criterion is that, cach architecture should have different set of connection While evaluating each of the architecture, the weights optimization module is called and the quickness with which the architecture settles to an optimal set of weights is measured. Actually, The weight optimization module is run for a fixed number of generations for each of the architecture. More fitness is assigned to the architecture that settles to less error. Finally the weights of the network with optimal connections are optimized by applying the weight optimization module for sufficient number of generation. Parameter of NN The initial configuration is, eight nodes in the input layer, two nodes in the first hidden layer, two nodes in the second hidden layer and one node in the output The network is not fully connected. layer.
+Having fixed the parameters of the network and the weight optimization module, one can now embark on the task at hand. Here a two step connectivity optimization is adopted. In the first step, a population of network architecture is evolved. The criterion is that, cach architecture should have different set of connection While evaluating each of the architecture, the weights optimization module is called and the quickness with which the architecture settles to an optimal set of weights is measured. Actually, The weight optimization module is run for a fixed number of generations for each of the architecture. M$$e fitness is assigned to the architecture that settles to less error. Finally the weights of the network with optimal connections are optimized by applying the weight optimization module for sufficient number of generation. Parameter of NN The initial configuration is, eight nodes in the input layer, two nodes in the first hidden layer, two nodes in the second hidden layer and one node in the output The network is not fully connected. layer.
 
 Parameters of GA !- 128 Chromosome length 30 Population size 500 No. of generation 0.4 Probability of cross over 0.01 Probability of mutation 1.5.1.5 Range of weights Training Data : Ipput Output 02 y 81 0.290889 2.9386 0.174533 8.40739 0.32725 0.19635 8.25326 3.28037 0.374 8.0309 0.2244 3.70669 0.436333 7.69392 4.24922 0.2618 0.5236 0.31416 7.14987 4.9518 0.6545 5.86087 0.3927 6.19551 0.872667 6.92405 0.5236 4.33232 optimal set of weights & links :- Optimal set of link 111011101111110
 
 Optimal set ofweights links weichts -1.11 0.39 -0.37 nAn -0.73 0.6 nAn 053 063 -15 - 1.42 0.03 0.95 -0.78 16 0.00 Neural Networks for Robot kinematics problem Weights of link 4,8, 11, 16 are zero & others are non-zero. So that the link with zero weights can be pruned from the network. Summed Error: 0.000208
 
-## CONCLUSION
+### CONCLUSION
 
 Evolutionary design concepts have been successfully applied to design and to train Neural Network. The results that are obtained confirm the fact that Genetic Algorithm is better tool to train a Neural Network than conventional training tools.
 
-# Conclusion
+## CONCLUSION
 
-# CONCLUSION
-
-## INTRODUCTION
+### INTRODUCTION
 
 GAs have shown to be good optimizers for solving problems of NNs. In this chapter future enhancements are given and concluding remarks are done.
 
-## HIGHLIGHTS OF THE WORK
+### HIGHLIGHTS OF THE WORK
 
 A system based on Evolutionary design concepts to train Neural Networks has been successfully developed, and promising results have been obtained. In this process the following observations are done:- GAs converge quicker to the optimal solution if there is diversity is not guaranteed for all generation and to boost the diversity, adaptiveness was used. This was done by reinitialising the population and increasing the rate of mutation. Parameter tuning is one of the most critical issue relating to both NN training to both NN training and GAs. The effect of varying, certain important parameters has been thoroughly studied and results have been shown in the form of tables and results. The performance of the GA as an optimization tool for training and designing NNs is very good and is comparable to that of the available standard techniques.
 
 It can be concluded that GAs can be applied to solve any optimization problem equally well. Application of Evolutionary concepts to Neural architecture is one such example. It is sure that there are lot more vistas to be explored.
 
-## FUTURE ENHANCEMENT
+### FUTURE ENHANCEMENT
 
 There are many parameters in GA that can be manipulated and for each and every combination of the parameters, there will be some marked improvement in performance. More study can be made on the impact of these parameters on the GAs performance and the result can be used suitably. Parallelism can be increased by using distributed GAs. Here multiple copies of GAs are run in parallel and from time to time, best solution are exchanged.
 
-# References
+## References
 
 D.E.Golberg, "Genetic Algorithm in Search Optimization and Machine learning", Addison Wesley, 1989. [21 Jacek M. Zarada," Introduction to Artificial Neural Systems" ,Jaico publishing India, 1991 [3] James A. Freeman & David M.Skapura,"Neural Network Algorithm, Applications and Programming techniques". Addison Wesley. 1991. [4] Darrel Whitely, Timothy Starkweather & Chris Bogart," Genetic Algorithms and Neural Networks : Optimising Connections anc Connectivity", Parallel Computing, 14(1990) pp 347-361. [5] Daniel Graupe, "Principles of Artificial Neural Network", World Scientific Publication Co. Pte. Ltd. [6] Chin-Teng Lin & C.S George Lee, "Neural Fuzzy System". [71 LiMin Fu, "Neural Networks in Computer Intelligence",McGraw Hill International. APPENDI
 
-# Appendix
+## Appendix
 
-COUNTER PROPAGATION NETWORKS INTRODUCTION: The Counterpropagation network developed by Robert Hecht Nielsen goes beyond the representational limits of single - layer networks. As compared to Backpropagation, it can reduce training time by hundredfold Counter propagation is a combination of two well-known algorithms; the self - organizing map of Kohonen and the Grossberg The Counter propagation network functions as a look-up table capable of generalization. The training process associates input vectors with corresponding output vectors. These vectors may be binary consisting of ones and zeros, or continuous. Once the network is trained application of an input vector produces the desired output vector. The generalization capability of the network allows it to produce a correct output even when it is given an input vector that is partially incorrect. This makes the network useful for pattern -recognition, pattern - completion, and signal - enhancement applications.
+### COUNTER PROPAGATION NETWORKS INTRODUCTION: 
+The Counterpropagation network developed by Robert Hecht Nielsen goes beyond the representational limits of single - layer networks. As compared to Backpropagation, it can reduce training time by hundredfold Counter propagation is a combination of two well-known algorithms; the self - organizing map of Kohonen and the Grossberg The Counter propagation network functions as a look-up table capable of generalization. The training process associates input vectors with corresponding output vectors. These vectors may be binary consisting of ones and zeros, or continuous. Once the network is trained application of an input vector produces the desired output vector. The generalization capability of the network allows it to produce a correct output even when it is given an input vector that is partially incorrect. This makes the network useful for pattern -recognition, pattern - completion, and signal - enhancement applications.
 
-NETWORK STRUCTURE: The neuron in layer O serve only as fan - out points and perform no computation. Each layer O neuron connects to every neuron in layer 1 (called the KOHONEN LAYER) through a separate weight Wmin these will be collectively reffered to as the weight matrix W. Each neuron in layer 1 is connected to every neuron in layer2 (called the GROSSBERG LAYER) by a weight Vnp ;these comprise the weight matrix V. Input Kohenen Grossherg Laver layer LaveL - Y1 - 72 6 Desired output
-
-# Kn
+### NETWORK STRUCTURE: 
+The neuron in layer O serve only as fan - out points and perform no computation. Each layer O neuron connects to every neuron in layer 1 (called the KOHONEN LAYER) through a separate weight Wmin these will be collectively reffered to as the weight matrix W. Each neuron in layer 1 is connected to every neuron in layer2 (called the GROSSBERG LAYER) by a weight Vnp ;these comprise the weight matrix V. Input Kohenen Grossherg Laver layer LaveL - Y1 - 72 6 Desired output
+Kn
 
 ‡ Ga - In e Kohenen Grossnera Neurons Feedfortrard Counterpropagation Network Counter propagation functions in two modes; the NORMAL MODE, in which it accepts an input vector X and produces an output vector Y, and the TRAINING MODE in which an input vector is applied and the weights are adjusted to yield the desired output vector
 
-NORMAL OPERATION: The Kohonen laver : The Kohonen layer functions in a 'winner- take -all fashion'; that is, for given input vector, one and only one Kohonen neuron outputs a logical one; all other outputs are zero. Associated with each Kohonen neuron it to each input Kohonen neuron K1 has weights wIl,w21,.. wm1, comprising a weight vector WI.These connect by way of the input layer to input signals x1,×2,.....xm,comprising the input vector X. As with neurons in most networks, the NET output of each Kohonen neuron is simply the summation inputs . This may be expressed as follows: .............tWmiXm NET j = wljx1+w2ix2+ where NET i is the NET output of kohonen neuron j NET j = xiwij or in vector notation N= XW where N is the vector of Kohonen layer NET ouputs. The Kohonen neuron with the largest NET value is the 'winner'. Its output is set to one; all others are set to zero.
+### NORMAL OPERATION: 
+#### The Kohonen layer : 
+The Kohonen layer functions in a 'winner- take -all fashion'; that is, for given input vector, one and only one Kohonen neuron outputs a logical one; all other outputs are zero. Associated with each Kohonen neuron it to each input Kohonen neuron K1 has weights wIl,w21,.. wm1, comprising a weight vector WI.These connect by way of the input layer to input signals x1,×2,.....xm,comprising the input vector X. As with neurons in most networks, the NET output of each Kohonen neuron is simply the summation inputs . This may be expressed as follows: .............tWmiXm NET j = wljx1+w2ix2+ where NET i is the NET output of kohonen neuron j NET j = xiwij or in vector notation N= XW where N is the vector of Kohonen layer NET ouputs. The Kohonen neuron with the largest NET value is the 'winner'. Its output is set to one; all others are set to zero.
 
-Grossberg Laver: The Grossberg layer functions in a familiar manner. Its NET output is the weighted sum of the Kohonen layer outputs k1.k2.k3. ..kn, forming the vector K. The connecting weight vector designated V consists of the weights v11, v21, .....p. The NET output of each Grossberg neuron is then NET i = kiwii where NET j is the output of the Grossberg neuron j, or in vector form Y=KV where Y= the Grossberg - layer output vector K=the Kohonen - layer output vector V= the Grossberg layer weight matrix If the Kohonen layer is operated such that one neuron's NET is at one and all others are at zero, only ane element of the K vector is nonzero, and the calculation is simple. The only action of each neuron in the Grossberg layer is to output the value of the weight that connects it to the single nonzero Kohonen neuron. TRAINING THE KOHONEN LAYER: Kohonen training is aself - organizing algorithm that operates in the supervised mode. For this reason, it is difficult to predict which specific Kohonen neuron will be activated for a given input vector. It is only necessary to ensure that training separates input vectors.
+#### Grossberg Laver: 
+The Grossberg layer functions in a familiar manner. Its NET output is the weighted sum of the Kohonen layer outputs k1.k2.k3. ..kn, forming the vector K. The connecting weight vector designated V consists of the weights v11, v21, .....p. The NET output of each Grossberg neuron is then NET i = kiwii where NET j is the output of the Grossberg neuron j, or in vector form Y=KV where Y= the Grossberg - layer output vector K=the Kohonen - layer output vector V= the Grossberg layer weight matrix If the Kohonen layer is operated such that one neuron's NET is at one and all others are at zero, only ane element of the K vector is nonzero, and the calculation is simple. The only action of each neuron in the Grossberg layer is to output the value of the weight that connects it to the single nonzero Kohonen neuron. 
 
-Preprocessing the Input Vectors : It is highly to normalize all input vector before applyingthem to the network. This is done by dividing each component of an input vector by that vector's length. This length is found by taking the square root of the sum of the squares of all of the vector's components . In symbols Xi'= Xi /(X1^2+X2^2 + hmmm+ Xn^2)^1/2 This converts an input vector into a unit vector pointing in the same direction ;that is, a vector of unit length in n-dimensional space. ring To train the Kohonen layer, an input vector is applied and its dot product is calculated with the weight vector associated with each Kohonen neuron. The neuron with the highest dot product is declared the "winner " and its weighta are adjusted Because the dot product operation used to calculate the NET values is a measure of similarity between the inut and weight vectors the training process actually consists of selecting the Kohonen neuron whose weight is most similar to the input vector, and it still more similar. The network self - organizes so that a given Kohonen neuron has maximum output for a given input vector: The training equation that follows is used Wnew = Wold + (x - Wold ) where Wnew = the new value of a weight connecting an input component x to the winning neuron Wnew = the previous value of this weight
+#### TRAINING THE KOHONEN LAYER: 
+Kohonen training is aself - organizing algorithm that operates in the supervised mode. For this reason, it is difficult to predict which specific Kohonen neuron will be activated for a given input vector. It is only necessary to ensure that training separates input vectors.
+
+#### Preprocessing the Input Vectors : 
+It is highly to normalize all input vector before applyingthem to the network. This is done by dividing each component of an input vector by that vector's length. This length is found by taking the square root of the sum of the squares of all of the vector's components . In symbols Xi'= Xi /(X1^2+X2^2 + hmmm+ Xn^2)^1/2 This converts an input vector into a unit vector pointing in the same direction ;that is, a vector of unit length in n-dimensional space. ring To train the Kohonen layer, an input vector is applied and its dot product is calculated with the weight vector associated with each Kohonen neuron. The neuron with the highest dot product is declared the "winner " and its weighta are adjusted Because the dot product operation used to calculate the NET values is a measure of similarity between the inut and weight vectors the training process actually consists of selecting the Kohonen neuron whose weight is most similar to the input vector, and it still more similar. The network self - organizes so that a given Kohonen neuron has maximum output for a given input vector: The training equation that follows is used Wnew = Wold + (x - Wold ) where Wnew = the new value of a weight connecting an input component x to the winning neuron Wnew = the previous value of this weight
 
 = a training rate coefficient that may vary during the training process Each weight associated with the winning Kohonen neuron is changed by an amount proportional to the difference between its value and the value of the input to which it connects The direction of the change minimizes the difference between the weight its input. The variable is a training rate coefficient that usually starts out at 0.7 and may be gradually reduced during training. This allows large intial steps for rapid, coarse training and smaller steps as the final value approached . If only one input vector were to be associated with each Kohonen neuron, the Kohonen layer could be trained with a single calculation per weight. The weights of a winning neuron would be made equal to the components of the training vector (=1_ Usually the training set includes many input vectors that are similar and the network should be trained to activate the same Kohonen neuron for each of them. In this case, the weights of that neuron should be the average of the input vectors that will activate it. Setting to a low value will reduce the effect of each training step, making the final value an average of the input vectors to which it was trained. In this way, the weights associated with a neuron will assume a value near the "center" of the input vectors for which that neuron is the "winner".
 
-Interpolative Mode: In the interpolative mode, a group of the Kohonen neurons having the highest outputs is allowed to persent its outputs to the Grossberg layer. The number of neurons in this group must be chosen for the application, and ther is no conclusive evidence regarding an optimum size Once the group is determined , its set of NET outputs is treated as a vector and normalized to until length by dividing each each NET value by the squareroot of the sum of the squares of the NET values in the group. All neurons not in the group have their outputs set to zero. TRAINING THE GROSSBERG LAYER An input vector is applied, the Kohonen outputs are established, and the grossberg outputs are calculated as in normal operation. Next, each weight is adjusted only if it connects to a Kohonen neuron having a nonzero output. The amount of the weight adjustment is proportional to the difference between the weight and desired output of the Grossberg neuron to which it connects. In symbols Vij=Vij old + (Yj -Vij ) Ki Ki = the output of Kohonen neuron i (only one Kohonen neuron where is nonzero ) Yj = component j of the vector of desired outputs Initially is set approximately 0.1 and is gradually reduced as training progresses.
+#### Interpolative Mode: 
+In the interpolative mode, a group of the Kohonen neurons having the highest outputs is allowed to persent its outputs to the Grossberg layer. The number of neurons in this group must be chosen for the application, and ther is no conclusive evidence regarding an optimum size Once the group is determined , its set of NET outputs is treated as a vector and normalized to until length by dividing each each NET value by the squareroot of the sum of the squares of the NET values in the group. All neurons not in the group have their outputs set to zero. 
 
-The weights of the grossberg layer will converge to the average values of the desired out whereas the weights of the Kohonen layer are trained to the average values of the inputs. Grossberrg training is supervised; the algorithm has a desired output to which it trains. The unsupervised, self - organising operation of the Kohonen layer produces outputs at indeterminate positions;these mapped to the desired output of the Grossberg layer. APPLICATION: In addition to the usual vector - mapping functions ,counter propagation is useful in Data Compression. Acounter propagation network can be used to compress data prior to transmission, there by reducing the number of bits that must be sent Suppose an image to transmitted. It can be divided into subimages S Each subimage is further sudivided into pixels (picture elements ). Each subimage is then a vector, the elements of which are the pixels of which are the pixels of which the subimage is composed. For simplicity, assume that each pixel is either one (light) or zero (dark) If there are n pixels in asubimage If there are n pixels in asubimage, then n bits will be required to transmit it. If some distortion can be tolerated, substantially fewer bits are actually required to transmit typical images, thereby allowing an image to be transmitted rapidly. This is possible because of the statistical distribution of sub image vectors. Some occur frequently while others occur so seldom that they can be
+#### TRAINING THE GROSSBERG LAYER 
+An input vector is applied, the Kohonen outputs are established, and the grossberg outputs are calculated as in normal operation. Next, each weight is adjusted only if it connects to a Kohonen neuron having a nonzero output. The amount of the weight adjustment is proportional to the difference between the weight and desired output of the Grossberg neuron to which it connects. In symbols Vij=Vij old + (Yj -Vij ) Ki Ki = the output of Kohonen neuron i (only one Kohonen neuron where is nonzero ) Yj = component j of the vector of desired outputs Initially is set approximately 0.1 and is gradually reduced as training progresses.
 
-approximated roughly. The method of vector quantisation finds these shorter bit strings that best represent subimages A Counter propagation network can be used to perform vector quantisation. The set of subimage vectors is used as input to train the kohonen layer in the accertive mode in which only a single neuron is allowed to be 1. The Grossberg weights are trained to produce the binary code of the index of the Kohonen neuron that is 1. For example, if Kohonen neuron 7 is 1 (and the others are all 0), the Grossberg layer will be trained to output 00... ..000111 (the binary code for 7 ). It is this shorter bit string is transmitted. At the receiving end, an identically trained counterpropagation network accepts the binary code and produces the inverse function, an approximation of the original subimage. This method has been applied both to speech and images, yielding dat compression ratios of 10:1 to 100:1. The quality has been acceptable, however some distortion of the data at the receiving end is inevitable. ROE CODE LISTINI SOT
+The weights of the grossberg layer will converge to the average values of the desired out whereas the weights of the Kohonen layer are trained to the average values of the inputs. Grossberrg training is supervised; the algorithm has a desired output to which it trains. The unsupervised, self - organising operation of the Kohonen layer produces outputs at indeterminate positions;these mapped to the desired output of the Grossberg layer. 
+
+#### APPLICATION: 
+In addition to the usual vector - mapping functions ,counter propagation is useful in Data Compression. Acounter propagation network can be used to compress data prior to transmission, there by reducing the number of bits that must be sent Suppose an image to transmitted. It can be divided into subimages S Each subimage is further sudivided into pixels (picture elements ). Each subimage is then a vector, the elements of which are the pixels of which are the pixels of which the subimage is composed. For simplicity, assume that each pixel is either one (light) or zero (dark) If there are n pixels in asubimage If there are n pixels in asubimage, then n bits will be required to transmit it. If some distortion can be tolerated, substantially fewer bits are actually required to transmit typical images, thereby allowing an image to be transmitted rapidly. This is possible because of the statistical distribution of sub image vectors. Some occur frequently while others occur so seldom that they can be
+
+approximated roughly. The method of vector quantisation finds these shorter bit strings that best represent subimages A Counter propagation network can be used to perform vector quantisation. The set of subimage vectors is used as input to train the kohonen layer in the accertive mode in which only a single neuron is allowed to be 1. The Grossberg weights are trained to produce the binary code of the index of the Kohonen neuron that is 1. For example, if Kohonen neuron 7 is 1 (and the others are all 0), the Grossberg layer will be trained to output 00... ..000111 (the binary code for 7 ). It is this shorter bit string is transmitted. At the receiving end, an identically trained counterpropagation network accepts the binary code and produces the inverse function, an approximation of the original subimage. This method has been applied both to speech and images, yielding dat compression ratios of 10:1 to 100:1. The quality has been acceptable, however some distortion of the data at the receiving end is inevitable.
 
 ---
