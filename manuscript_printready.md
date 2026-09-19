@@ -16,7 +16,15 @@ author:
 
 edition: Reading Draft
 version: v1.0
-copyright_year: 2026
+copyright_year: 1998
+
+publisher:
+  name:
+    - DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING
+    - J.J. COLLEGE OF ENGINEERING AND TECHNOLOGY
+    - (Affiliated to the Bharathidasan University)
+    - THIRUCHIRAPPALLI - 620 009
+    logo: assets/college-logo.png
 # ------------------------------------------------------------------
 # Layout
 # ------------------------------------------------------------------
@@ -33,7 +41,12 @@ language: en
 The Viva Voce Examination of the Project work done by RAVI KUMAR V.I.R. E 451640 (Reg. No) in partial fulfillment of the requirements for the B.E degree in COMPUTER SCIENCE & ENGINEERING was held on 13 OCTOBER'98 
 
 
-INTERNAL EXAMINER                                   EXTERNAL EXAMINER
+
+INTERNAL EXAMINER
+
+
+
+EXTERNAL EXAMINER
 
 ## CERTIFICATE
 
@@ -44,7 +57,8 @@ This is to certify that the project titled "Analysis of Artificial Neural Networ
 
 
 
-PROJECT GUIDE                                       HEAD OF THE DEPARTMENT 
+PROJECT GUIDE
+HEAD OF THE DEPARTMENT 
 
 ## Acknowledgement
 
