@@ -306,7 +306,7 @@ OVERVIEW Trajectory control of robotics manipulator traditionally consists of fo
 
 The robot is assumed to have 2 degree of freedom and hence two link s. It is a polar configuration robot (R-R Configuration). Now the problem is to map a Cartesian co- ordinated (x,y,) to the (01,02). of the two links. So inputs is (x,y) and the output is (01,02).
 
-# APPENDIX A — GENETIC ALGORITHM SOURCE CODE
+## APPENDIX A — GENETIC ALGORITHM SOURCE CODE
 
 The following is the reconstructed historical source listing corresponding to the surviving `Code-01.pdf` source document. It is preserved as a documentary reconstruction and is not represented as a verified compilable copy of the original 1998 source.
 
@@ -1232,7 +1232,7 @@ void storeweights(population pop)
 
 ```
 
-# APPENDIX B — BACK-PROPAGATION SOURCE CODE
+## APPENDIX B — BACK-PROPAGATION SOURCE CODE
 
 The following is the reconstructed historical source listing corresponding to the surviving Back-Propagation program in `Code-02.pdf`. It is preserved as a documentary reconstruction and is not represented as a verified compilable copy of the original 1998 source.
 
@@ -1834,7 +1834,7 @@ void get_op(void)
 
 ```
 
-# APPENDIX C — COUNTER-PROPAGATION SOURCE CODE
+## APPENDIX C — COUNTER-PROPAGATION SOURCE CODE
 
 The following is the reconstructed historical source listing corresponding to the Counter-Propagation program spanning `Code-02.pdf` and `Code-03.pdf`. It is preserved as a documentary reconstruction and is not represented as a verified compilable copy of the original 1998 source.
 
