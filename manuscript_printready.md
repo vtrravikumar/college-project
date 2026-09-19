@@ -306,83 +306,2062 @@ OVERVIEW Trajectory control of robotics manipulator traditionally consists of fo
 
 The robot is assumed to have 2 degree of freedom and hence two link s. It is a polar configuration robot (R-R Configuration). Now the problem is to map a Cartesian co- ordinated (x,y,) to the (01,02). of the two links. So inputs is (x,y) and the output is (01,02).
 
-#### WEIGHT OPTIMATION
+# APPENDIX A — GENETIC ALGORITHM SOURCE CODE
 
-#### FIXING THE GA PARAMETERS
+The following is the reconstructed historical source listing corresponding to the surviving `Code-01.pdf` source document. It is preserved as a documentary reconstruction and is not represented as a verified compilable copy of the original 1998 source.
 
-To decide about the exact number of nodes, the range of weights of links between the nodes and the various parameters, initially experiments have been done with a 3-layered fully not connected network. While training the network, that is optimizing its weights with the weight optimization module, many variation have been tried out and promising experimental results are found. The are discussed below:- ADAPTIVE MUTATION When sufficient diversity is not in the current population, mutation probability will be increased so as to diversify the population. BI CROSSOVER Two sets of population are maintained and for crossover, the two parents are chosen one from each of the 2 sets. GA tries to evolve children that have good features of the 2 sets. FIXING THE RANGE OF WEIGHTS When a fully connected three layered network is subjected to weight optimization the decision about the range of weights influences the convergence of the training of the network. For the robot inverse kinematics problem many experiments have been conducted with various range and the best has been found.
+```c
+/*
+ * HISTORICAL SOURCE RECONSTRUCTION
+ *
+ * Project:
+ *   ANALYSIS OF ARTIFICIAL NEURAL NETWORK
+ *   USING BACK PROPAGATION & GENETIC ALGORITHM
+ *
+ * Source:
+ *   Code-01.pdf, pages 1-24
+ *   OCR manuscript: archive/manuscripts/manuscript-full-run-111-pages.md
+ *
+ * STATUS:
+ *   Historical/documentary reconstruction.
+ *   NOT intended to compile.
+ *
+ * IMPORTANT:
+ *   OCR-derived uncertainty is deliberately preserved in comments.
+ *   Where the scan must be consulted to establish an exact token,
+ *   the uncertainty is marked rather than silently repaired.
+ */
 
-FIXING THE POPULATION SIZE Population size is an important GA parameter that influences the parallelism ofGA search. Experiments with various population size have been done for choosing the best size.
+/* -------------------------------------------------------------------------
+ * Code-01.pdf : page 1
+ * ------------------------------------------------------------------------- */
 
-#### CONNECTIVITY OPTIMIZATION
+/* PROGRAM TO TRAIN AND TEST NEURAL NETWORK USING
+   GENETIC ALGORITHM */
 
-Having fixed the parameters of the network and the weight optimization module, one can now embark on the task at hand. Here a two step connectivity optimization is adopted. In the first step, a population of network architecture is evolved. The criterion is that, cach architecture should have different set of connection While evaluating each of the architecture, the weights optimization module is called and the quickness with which the architecture settles to an optimal set of weights is measured. Actually, The weight optimization module is run for a fixed number of generations for each of the architecture. M$$e fitness is assigned to the architecture that settles to less error. Finally the weights of the network with optimal connections are optimized by applying the weight optimization module for sufficient number of generation. Parameter of NN The initial configuration is, eight nodes in the input layer, two nodes in the first hidden layer, two nodes in the second hidden layer and one node in the output The network is not fully connected. layer.
+/* INCLUDING OF HEADER FILES */
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <string.h>
+#include <alloc.h>
+#include <dos.h>
+#include <time.h>
+#include <float.h>
+#include <conio.h>
+#include <graphics.h>
 
-Parameters of GA !- 128 Chromosome length 30 Population size 500 No. of generation 0.4 Probability of cross over 0.01 Probability of mutation 1.5.1.5 Range of weights Training Data : Ipput Output 02 y 81 0.290889 2.9386 0.174533 8.40739 0.32725 0.19635 8.25326 3.28037 0.374 8.0309 0.2244 3.70669 0.436333 7.69392 4.24922 0.2618 0.5236 0.31416 7.14987 4.9518 0.6545 5.86087 0.3927 6.19551 0.872667 6.92405 0.5236 4.33232 optimal set of weights & links :- Optimal set of link 111011101111110
+/* DEFINITION OF GA PARAMETERS */
+#define MAXPOP 50
+#define MAXSTR 100
+#define CHROMLEN 10
+#define MAX 10
+#define NODE0 2
+#define NODE1 2
+#define NODE2 2
+#define NODE3 1
+#define NCLS 4
+#define CONCN 10
+#define MERR .20
+#define thres 0.2
 
-Optimal set ofweights links weichts -1.11 0.39 -0.37 nAn -0.73 0.6 nAn 053 063 -15 - 1.42 0.03 0.95 -0.78 16 0.00 Neural Networks for Robot kinematics problem Weights of link 4,8, 11, 16 are zero & others are non-zero. So that the link with zero weights can be pruned from the network. Summed Error: 0.000208
+/* -------------------------------------------------------------------------
+ * Code-01.pdf : page 2
+ * ------------------------------------------------------------------------- */
 
-### CONCLUSION
+/* DEFINITION FOR TIMING CALCULATION */
+#define starttime
+/* OCR/source listing shows the following assignments around the macro. */
+a1 = t1.ti_hour;
+a2 = t1.ti_min;
+a3 = t1.ti_sec;
 
-Evolutionary design concepts have been successfully applied to design and to train Neural Network. The results that are obtained confirm the fact that Genetic Algorithm is better tool to train a Neural Network than conventional training tools.
+#define stoptime
+b1 = t2.ti_hour;
+b2 = t2.ti_min;
+b3 = t2.ti_sec;
 
-## CONCLUSION
+c1 = (b1-a1);
+c2 = (b2-a2);
+c3 = (b3-a3);
+c = (((c1*60)+c2)*60+c3);
+timetaken = c;
 
-### INTRODUCTION
+/* INITIALISE REGISTER */
+union REGS i,o;
 
-GAs have shown to be good optimizers for solving problems of NNs. In this chapter future enhancements are given and concluding remarks are done.
+/* DEFINE THE STRUCTURES */
+typedef struct {
+    int allele;
+} gene;
 
-### HIGHLIGHTS OF THE WORK
+typedef gene chromosome[MAXSTR];
 
-A system based on Evolutionary design concepts to train Neural Networks has been successfully developed, and promising results have been obtained. In this process the following observations are done:- GAs converge quicker to the optimal solution if there is diversity is not guaranteed for all generation and to boost the diversity, adaptiveness was used. This was done by reinitialising the population and increasing the rate of mutation. Parameter tuning is one of the most critical issue relating to both NN training to both NN training and GAs. The effect of varying, certain important parameters has been thoroughly studied and results have been shown in the form of tables and results. The performance of the GA as an optimization tool for training and designing NNs is very good and is comparable to that of the available standard techniques.
+typedef struct {
+    chromosome chrom;
+    long double x;
+    double fitness;
+    int parent1, parent2, site;
+    int count;
+} individual;
 
-It can be concluded that GAs can be applied to solve any optimization problem equally well. Application of Evolutionary concepts to Neural architecture is one such example. It is sure that there are lot more vistas to be explored.
+typedef individual population[MAXPOP];
 
-### FUTURE ENHANCEMENT
+/* VARIABLES DECLARATION */
+population oldpop,newpop;
+int popsize,lchrom,gen,maxgen;
 
-There are many parameters in GA that can be manipulated and for each and every combination of the parameters, there will be some marked improvement in performance. More study can be made on the impact of these parameters on the GAs performance and the result can be used suitably. Parallelism can be increased by using distributed GAs. Here multiple copies of GAs are run in parallel and from time to time, best solution are exchanged.
+/* -------------------------------------------------------------------------
+ * Code-01.pdf : page 3
+ * ------------------------------------------------------------------------- */
 
-## References
+double pcross, pmutation;
+double sumfitness;
+int mutation, ncross;
+double fmax, avg, fmin;
+int no_of_sol, MIN;
+double oldrand[55];
+int jrand, y, store;
 
-D.E.Golberg, "Genetic Algorithm in Search Optimization and Machine learning", Addison Wesley, 1989. [21 Jacek M. Zarada," Introduction to Artificial Neural Systems" ,Jaico publishing India, 1991 [3] James A. Freeman & David M.Skapura,"Neural Network Algorithm, Applications and Programming techniques". Addison Wesley. 1991. [4] Darrel Whitely, Timothy Starkweather & Chris Bogart," Genetic Algorithms and Neural Networks : Optimising Connections anc Connectivity", Parallel Computing, 14(1990) pp 347-361. [5] Daniel Graupe, "Principles of Artificial Neural Network", World Scientific Publication Co. Pte. Ltd. [6] Chin-Teng Lin & C.S George Lee, "Neural Fuzzy System". [71 LiMin Fu, "Neural Networks in Computer Intelligence",McGraw Hill International. APPENDI
+float se;
+float hwgt1[MAX][MAX], hwgt2[MAX][MAX];
+float layer2[MAX][MAX];
+float owgt[MAX][MAX], layer1[MAX][MAX], out[MAX][MAX];
+int x[MAX][MAX], desire[MAX][MAX];
+double finar[20];
+float pas[CONCN];
+float ee[CONCN];
+int gbit[CONCN];
+float lrange, urange;
+int bb, range;
 
-## Appendix
+int a1,a2,a3,a4,b1,b2,b3,b4,c1,c2,c3,c4;
+int c,timetaken;
+struct time t1,t2;
 
-### COUNTER PROPAGATION NETWORKS INTRODUCTION: 
-The Counterpropagation network developed by Robert Hecht Nielsen goes beyond the representational limits of single - layer networks. As compared to Backpropagation, it can reduce training time by hundredfold Counter propagation is a combination of two well-known algorithms; the self - organizing map of Kohonen and the Grossberg The Counter propagation network functions as a look-up table capable of generalization. The training process associates input vectors with corresponding output vectors. These vectors may be binary consisting of ones and zeros, or continuous. Once the network is trained application of an input vector produces the desired output vector. The generalization capability of the network allows it to produce a correct output even when it is given an input vector that is partially incorrect. This makes the network useful for pattern -recognition, pattern - completion, and signal - enhancement applications.
+population top;
 
-### NETWORK STRUCTURE: 
-The neuron in layer O serve only as fan - out points and perform no computation. Each layer O neuron connects to every neuron in layer 1 (called the KOHONEN LAYER) through a separate weight Wmin these will be collectively reffered to as the weight matrix W. Each neuron in layer 1 is connected to every neuron in layer2 (called the GROSSBERG LAYER) by a weight Vnp ;these comprise the weight matrix V. Input Kohenen Grossherg Laver layer LaveL - Y1 - 72 6 Desired output
-Kn
+char infile[] = "in.dat";
+char outfile[] = "out.dat";
+char wtfile[] = "wt.dat";
 
-‡ Ga - In e Kohenen Grossnera Neurons Feedfortrard Counterpropagation Network Counter propagation functions in two modes; the NORMAL MODE, in which it accepts an input vector X and produces an output vector Y, and the TRAINING MODE in which an input vector is applied and the weights are adjusted to yield the desired output vector
+FILE *ptin;
+FILE *ptout;
+FILE *ptfwt;
+FILE *ptfwti;
+FILE *ptgbit;
+FILE *ptres;
+FILE *ptpop;
+FILE *ptval;
+char buffer[100];
 
-### NORMAL OPERATION: 
-#### The Kohonen layer : 
-The Kohonen layer functions in a 'winner- take -all fashion'; that is, for given input vector, one and only one Kohonen neuron outputs a logical one; all other outputs are zero. Associated with each Kohonen neuron it to each input Kohonen neuron K1 has weights wIl,w21,.. wm1, comprising a weight vector WI.These connect by way of the input layer to input signals x1,×2,.....xm,comprising the input vector X. As with neurons in most networks, the NET output of each Kohonen neuron is simply the summation inputs . This may be expressed as follows: .............tWmiXm NET j = wljx1+w2ix2+ where NET i is the NET output of kohonen neuron j NET j = xiwij or in vector notation N= XW where N is the vector of Kohonen layer NET ouputs. The Kohonen neuron with the largest NET value is the 'winner'. Its output is set to one; all others are set to zero.
+/* FUNCTION DECLARATIONS */
+double garandom();
+void randomise();
+int garand(int,int);
+void warmup_rand(double);
+void adv_rand();
+gene flip(double probability);
+void initialise();
+void initreport();
+void initpop();
+void initdata();
+double objectfn(chromosome);
+long double decode(chromosome chrom,int lbits);
+int success();
+void getpheno(int *x, chromosome chrom, int lchrom);
+void writechrom(chromosome, int);
+int search(long double,int);
+int form_cur_pop();
+void report(int);
+void encode(int,int);
+void pause(void);
+void generation();
+void crossover(chromosome,chromosome,chromosome,chromosome,
+               int*,int*,int*,int*,double*,double*);
+int select(int,double,population);
+gene mutation(gene,double,int*);
+void statistics(int,double*,double*,double*,double*,individual*);
+void forward(int);
+void ftest(void);
+void get_iputs(void);
+void get_oputs(void);
+void finalweights(float pas[CONCN]);
+void storeweights(population);
+float calcerror(int);
+int menu(void);
 
-#### Grossberg Laver: 
-The Grossberg layer functions in a familiar manner. Its NET output is the weighted sum of the Kohonen layer outputs k1.k2.k3. ..kn, forming the vector K. The connecting weight vector designated V consists of the weights v11, v21, .....p. The NET output of each Grossberg neuron is then NET i = kiwii where NET j is the output of the Grossberg neuron j, or in vector form Y=KV where Y= the Grossberg - layer output vector K=the Kohonen - layer output vector V= the Grossberg layer weight matrix If the Kohonen layer is operated such that one neuron's NET is at one and all others are at zero, only ane element of the K vector is nonzero, and the calculation is simple. The only action of each neuron in the Grossberg layer is to output the value of the weight that connects it to the single nonzero Kohonen neuron. 
+/* -------------------------------------------------------------------------
+ * Code-01.pdf : pages 4-7
+ * MAIN ROUTINE
+ * ------------------------------------------------------------------------- */
 
-#### TRAINING THE KOHONEN LAYER: 
-Kohonen training is aself - organizing algorithm that operates in the supervised mode. For this reason, it is difficult to predict which specific Kohonen neuron will be activated for a given input vector. It is only necessary to ensure that training separates input vectors.
+main()
+int i,j,f,count=0;
+int ch,mfit;
+float temp;
+double temp1;
+int gd=DETECT, gm;
+population storepop;
 
-#### Preprocessing the Input Vectors : 
-It is highly to normalize all input vector before applyingthem to the network. This is done by dividing each component of an input vector by that vector's length. This length is found by taking the square root of the sum of the squares of all of the vector's components . In symbols Xi'= Xi /(X1^2+X2^2 + hmmm+ Xn^2)^1/2 This converts an input vector into a unit vector pointing in the same direction ;that is, a vector of unit length in n-dimensional space. ring To train the Kohonen layer, an input vector is applied and its dot product is calculated with the weight vector associated with each Kohonen neuron. The neuron with the highest dot product is declared the "winner " and its weighta are adjusted Because the dot product operation used to calculate the NET values is a measure of similarity between the inut and weight vectors the training process actually consists of selecting the Kohonen neuron whose weight is most similar to the input vector, and it still more similar. The network self - organizes so that a given Kohonen neuron has maximum output for a given input vector: The training equation that follows is used Wnew = Wold + (x - Wold ) where Wnew = the new value of a weight connecting an input component x to the winning neuron Wnew = the previous value of this weight
+initgraph(&gd,&gm,"y:\bgi\bgi");
 
-= a training rate coefficient that may vary during the training process Each weight associated with the winning Kohonen neuron is changed by an amount proportional to the difference between its value and the value of the input to which it connects The direction of the change minimizes the difference between the weight its input. The variable is a training rate coefficient that usually starts out at 0.7 and may be gradually reduced during training. This allows large intial steps for rapid, coarse training and smaller steps as the final value approached . If only one input vector were to be associated with each Kohonen neuron, the Kohonen layer could be trained with a single calculation per weight. The weights of a winning neuron would be made equal to the components of the training vector (=1_ Usually the training set includes many input vectors that are similar and the network should be trained to activate the same Kohonen neuron for each of them. In this case, the weights of that neuron should be the average of the input vectors that will activate it. Setting to a low value will reduce the effect of each training step, making the final value an average of the input vectors to which it was trained. In this way, the weights associated with a neuron will assume a value near the "center" of the input vectors for which that neuron is the "winner".
+f=0;
+cleardevice();
 
-#### Interpolative Mode: 
-In the interpolative mode, a group of the Kohonen neurons having the highest outputs is allowed to persent its outputs to the Grossberg layer. The number of neurons in this group must be chosen for the application, and ther is no conclusive evidence regarding an optimum size Once the group is determined , its set of NET outputs is treated as a vector and normalized to until length by dividing each each NET value by the squareroot of the sum of the squares of the NET values in the group. All neurons not in the group have their outputs set to zero. 
+if((ptres=fopen("result.dat","w"))==NULL)
+    printf("\n Cannot open result.dat");
+fclose(ptres);
 
-#### TRAINING THE GROSSBERG LAYER 
-An input vector is applied, the Kohonen outputs are established, and the grossberg outputs are calculated as in normal operation. Next, each weight is adjusted only if it connects to a Kohonen neuron having a nonzero output. The amount of the weight adjustment is proportional to the difference between the weight and desired output of the Grossberg neuron to which it connects. In symbols Vij=Vij old + (Yj -Vij ) Ki Ki = the output of Kohonen neuron i (only one Kohonen neuron where is nonzero ) Yj = component j of the vector of desired outputs Initially is set approximately 0.1 and is gradually reduced as training progresses.
+if((ptpop=fopen("xpop.dat","w"))==NULL)
+    printf("\n Cannot open xpop.dat");
+fclose(ptpop);
 
-The weights of the grossberg layer will converge to the average values of the desired out whereas the weights of the Kohonen layer are trained to the average values of the inputs. Grossberrg training is supervised; the algorithm has a desired output to which it trains. The unsupervised, self - organising operation of the Kohonen layer produces outputs at indeterminate positions;these mapped to the desired output of the Grossberg layer. 
+if((ptgbit=fopen("xgranbit.dat","w"))==NULL)
+    printf("\n Cannot open xgranbit.dat");
+fclose(ptgbit);
 
-#### APPLICATION: 
-In addition to the usual vector - mapping functions ,counter propagation is useful in Data Compression. Acounter propagation network can be used to compress data prior to transmission, there by reducing the number of bits that must be sent Suppose an image to transmitted. It can be divided into subimages S Each subimage is further sudivided into pixels (picture elements ). Each subimage is then a vector, the elements of which are the pixels of which are the pixels of which the subimage is composed. For simplicity, assume that each pixel is either one (light) or zero (dark) If there are n pixels in asubimage If there are n pixels in asubimage, then n bits will be required to transmit it. If some distortion can be tolerated, substantially fewer bits are actually required to transmit typical images, thereby allowing an image to be transmitted rapidly. This is possible because of the statistical distribution of sub image vectors. Some occur frequently while others occur so seldom that they can be
+if((ptval=fopen("value.dat","r"))==NULL)
+    printf("\n Cannot open value.dat");
+fclose(ptval);
 
-approximated roughly. The method of vector quantisation finds these shorter bit strings that best represent subimages A Counter propagation network can be used to perform vector quantisation. The set of subimage vectors is used as input to train the kohonen layer in the accertive mode in which only a single neuron is allowed to be 1. The Grossberg weights are trained to produce the binary code of the index of the Kohonen neuron that is 1. For example, if Kohonen neuron 7 is 1 (and the others are all 0), the Grossberg layer will be trained to output 00... ..000111 (the binary code for 7 ). It is this shorter bit string is transmitted. At the receiving end, an identically trained counterpropagation network accepts the binary code and produces the inverse function, an approximation of the original subimage. This method has been applied both to speech and images, yielding dat compression ratios of 10:1 to 100:1. The quality has been acceptable, however some distortion of the data at the receiving end is inevitable.
+get_iputs();
+get_oputs();
+cleardevice();
+pause();
 
----
+i.x.ax=0;
+int86(0x33,&i,&o);
+i.x.ax=1;
+int86(0x33,&i,&o);
+i.x.ax=3;
+int86(0x33,&i,&o);
+
+while(1)
+{
+    i.x.ax=3;
+    int86(0x33,&i,&o);
+
+    gotoxy(65,24);
+    printf("%3d,%3d",o.x.cx,o.x.dx);
+
+    setcolor(14);
+    settextstyle(1,0,2);
+    rectangle(70,20,550,65);
+    rectangle(2,2,635,470);
+    rectangle(3,3,634,469);
+
+    setcolor(2);
+    outtextxy(150,41,"GENETIC ALGORITHM IN NEURAL NETWORK");
+
+    setcolor(3);
+    outtextxy(200,200," TRAIN NETWORK ");
+
+    setcolor(5);
+    outtextxy(200,260," TEST NETWORK ");
+
+    setcolor(4);
+    outtextxy(200,320," QUIT");
+
+    /*
+     * The remainder of the menu and mouse-coordinate tests are retained
+     * conceptually from the listing; exact OCR punctuation is uncertain.
+     */
+
+    /* FINAL TESTING */
+    /*
+    gotoxy(2,2);
+    printf("\nFINAL TESTING.....\n");
+    ftest();
+
+    fprintf(ptres,"\n");
+    for(i=0;i<NCLS;i++)
+        for(j=0;j<NODE3;j++)
+            fprintf(ptres,"out[%d][%d]=%f",i,j,out[i][j]);
+
+    sprintf(buffer,"TESTING OVER...");
+    outtextxy(200,320,buffer);
+    getch();
+    cleardevice();
+    pause();
+    */
+
+    /*
+     * TRAIN NETWORK
+     */
+    initialise();
+
+    for(i=0;i<popsize;i++)
+        storepop[i]=oldpop[i];
+
+    for(i=0;i<popsize;i++)
+        for(j=0;j<lchrom;j++)
+            fprintf(ptpop,"%d",oldpop[i].chrom[j].allele);
+
+    rewind(ptgbit);
+    rewind(ptres);
+
+    {
+        int b=0;
+        while(b<1)
+            b++;
+
+        gen=0;
+        count++;
+
+        for(i=0;i<popsize;i++)
+            oldpop[i]=storepop[i];
+
+        for(i=0;i<CONCN;i++)
+            fscanf(ptgbit,"%d",&gbit[i]);
+
+        for(i=0;i<popsize;i++)
+            oldpop[i].fitness=objectfn(oldpop[i].chrom);
+
+        statistics(popsize,&fmax,&avg,&fmin,&sumfitness,newpop);
+
+        gettime(&t1);
+        starttime;
+
+        do
+        {
+            printf("..");
+            delay(100);
+
+            gen++;
+            generation();
+
+            statistics(popsize,&fmax,&avg,&fmin,&sumfitness,newpop);
+
+            for(i=0;i<MAXPOP;i++)
+                oldpop[i]=newpop[i];
+
+            no_of_sol=form_cur_pop();
+            success();
+
+            if((gen%100)==0)
+                pause();
+
+        } while(gen<maxgen);
+
+        gettime(&t2);
+        stoptime;
+
+        fcloseall();
+        storeweights(oldpop);
+
+        printf("\nTIME TAKEN %d SECS",timetaken);
+        printf("\nTRAINING IS OVER");
+        getch();
+        pause();
+    }
+
+    break;
+}
+
+/* -------------------------------------------------------------------------
+ * Code-01.pdf : page 8
+ * ROUTINE TO PERFORM GENERATION OF GA CYCLE
+ * ------------------------------------------------------------------------- */
+
+generation()
+int i,j,cross,mate1,mate2;
+population temppop;
+
+j=0;
+mate1=select(popsize,sumfitness,oldpop);
+mate2=select(popsize,sumfitness,oldpop);
+
+crossover(oldpop[mate1].chrom,oldpop[mate2].chrom,
+          newpop[j].chrom,newpop[j+1].chrom,
+          &ncross,&lchrom,&mutation,&jcross,
+          &pcross,&pmutation);
+
+newpop[j].x=decode(newpop[j].chrom,lchrom);
+newpop[j].fitness=objectfn(newpop[j].chrom);
+newpop[j].parent1=mate1;
+newpop[j].parent2=mate2;
+newpop[j].site=jcross;
+
+newpop[j+1].x=decode(newpop[j+1].chrom,lchrom);
+newpop[j+1].fitness=objectfn(newpop[j+1].chrom);
+newpop[j+1].parent1=mate1;
+newpop[j+1].parent2=mate2;
+newpop[j+1].site=jcross;
+
+/*
+ * OCR/source-page uncertainty remains around the temporary population
+ * replacement and store-index logic.
+ */
+
+/* -------------------------------------------------------------------------
+ * Code-01.pdf : page 9
+ * ROUTINE TO EVALUATE OBJECTIVE FUNCTION
+ * ------------------------------------------------------------------------- */
+
+double objectfn(chromosome n1)
+int i,j,k,l,m,n,c,p,ct;
+individual a[CONCN];
+individual d[CONCN];
+float b[20];
+float in=0.0;
+
+i=0;
+k=0;
+l=0;
+m=0;
+c=0;
+p=0;
+n=0;
+
+/*
+ * The scan/OCR shows the chromosome being divided into CHROMLEN-bit
+ * sections, each decoded to a weight value.
+ */
+for(j=0,m=0;j<lchrom;j++)
+{
+    if(j==m)
+    {
+        for(i=m;i<j+CHROMLEN;i++)
+            d[n].chrom[k++].allele=n1.chrom[i].allele;
+
+        b[p]=decode(d[n].chrom,CHROMLEN);
+        m=m+CHROMLEN;
+        p++;
+        n=0;
+        l=0;
+    }
+}
+
+for(p=0;p<CONCN;p++)
+{
+    ee[p]=b[p]/100.00;
+
+    if(ee[p]>urange)
+        ee[p]=urange-ee[p];
+}
+
+k=0;
+p=0;
+l=0;
+m=0;
+i=0;
+se=0.0;
+
+finalweights(ee);
+
+for(i=0;i<NCLS;i++)
+    forward(i);
+
+in=calcerror(i);
+se=se+in;
+se=se/(NODE3*NCLS);
+
+pause();
+return(se);
+
+/* -------------------------------------------------------------------------
+ * Code-01.pdf : page 10
+ * ROUTINE TO PERFORM DECODING OF BINARY STRING TO AN INTEGER
+ * ------------------------------------------------------------------------- */
+
+long double decode(chromosome chrom,int lbits)
+int i,j;
+long double accum=0.0,powerof2=1.0;
+
+for(i=0;i<lbits;i++)
+    ;
+
+for(i=lbits-1;i>=0;i--)
+{
+    if(chrom[i].allele)
+        accum+=powerof2;
+
+    powerof2*=2.0;
+}
+
+return accum;
+
+/* -------------------------------------------------------------------------
+ * Code-01.pdf : pages 11-12
+ * INITIALISATION OF GA PARAMETERS / POPULATION
+ * ------------------------------------------------------------------------- */
+
+initdata()
+char ch;
+int j;
+float temp;
+
+ptval=fopen("value.dat","r");
+
+fscanf(ptval,"%d",&popsize);
+fscanf(ptval,"%d",&maxgen);
+fscanf(ptval,"%Lf",&pcross);
+fscanf(ptval,"%lf",&pmutation);
+fscanf(ptval,"%f",&lrange);
+fscanf(ptval,"%f",&urange);
+
+getch();
+cleardevice();
+
+randomise();
+mutation=0;
+ncross=0;
+lchrom=CHROMLEN*CONCN;
+
+temp=2*urange*100;
+range=(int)temp;
+
+fprintf(ptres,"popsize %d,gen %d,cp %.21f,mp %.21f,range(%.21f,%.21f)\n",
+        popsize,maxgen,pcross,pmutation,lrange,urange);
+
+fclose(ptval);
+
+initpop()
+int i,j,l;
+int y;
+long double temp=0.0;
+
+for(j=0;j<popsize;j++)
+{
+    bb=0;
+
+    for(i=0;i<CONCN;i++)
+    {
+        printf(".");
+        delay(100);
+    }
+
+    y=random(range);
+    encode(j,y);
+
+    for(i=0;i<lchrom;i++)
+        temp=decode(oldpop[j].chrom,lchrom);
+
+    oldpop[j].x=temp/120;
+    oldpop[j].parent1=0;
+    oldpop[j].parent2=0;
+    oldpop[j].site=0;
+}
+
+/* -------------------------------------------------------------------------
+ * Code-01.pdf : page 12
+ * ROUTINE TO PERFORM ENCODING OF AN INTEGER TO BINARY STRING
+ * ------------------------------------------------------------------------- */
+
+void encode(int index,int value)
+{
+    int i,j,term;
+    chromosome t1;
+    long int y;
+
+    /*
+     * OCR listing continues into the random-number implementation.
+     * Exact statements are scan-dependent and are intentionally not
+     * invented here.
+     */
+}
+
+/* -------------------------------------------------------------------------
+ * Code-01.pdf : pages 13-14
+ * RANDOM NUMBER GENERATION / BIT FLIPPING / ROULETTE SELECTION
+ * ------------------------------------------------------------------------- */
+
+double garandom()
+{
+    jrand++;
+
+    if(jrand>54)
+        jrand=0;
+
+    adv_rand();
+
+    return(oldrand[jrand]/2);
+}
+
+int garand(int low,int high)
+{
+    int i;
+
+    if(low>-high)
+        i=low;
+    else
+        i=(int)(2*garandom()*(high-low+1)+low);
+
+    if(i>high)
+        i=high;
+
+    return i;
+}
+
+randomise()
+double seed;
+
+do
+    seed=0.45678;
+while(seed<0.0 || seed>1.0);
+
+warmup_rand(seed);
+
+gene flip(double probability)
+gene tmp;
+
+if(probability==1.0)
+    tmp.allele=1;
+else
+    tmp.allele=((2*garandom())<=probability);
+
+return tmp;
+
+int select(int popsize,double sumfitness,population pop)
+double rand,partsum;
+int j;
+double temp;
+
+j=-1;
+partsum=0.0;
+rand=0.0;
+temp=0.0;
+
+temp=garandom();
+rand=temp*sumfitness;
+
+do
+{
+    j++;
+    partsum += pop[j].fitness;
+}
+while(!(partsum>=rand) && (j==(popsize-1)));
+
+return j;
+
+/* -------------------------------------------------------------------------
+ * Code-01.pdf : pages 15-16
+ * MUTATION / CROSSOVER
+ * ------------------------------------------------------------------------- */
+
+gene mutation(gene allval,double mutation,int *nmutation)
+{
+    gene mutate;
+    gene tmp;
+
+    mutate=flip(pmutation);
+
+    if(mutate.allele)
+    {
+        (*nmutation)++;
+        tmp.allele=(!allval.allele);
+        return tmp;
+    }
+
+    return allval;
+}
+
+crossover(chromosome p1,chromosome p2,chromosome c1,chromosome c2,
+          int *ncross,int *lchrom,int *nmutation,int *jcross,
+          double *pcross,double *pmutation)
+int j;
+
+if(flip(*pcross).allele)
+{
+    *jcross=garand(0,(*lchrom)-1);
+    (*ncross)++;
+}
+else
+    *jcross=(*lchrom)-1;
+
+for(j=0;j<*jcross;j++)
+{
+    c1[j]=mutation(p1[j],*pmutation,nmutation);
+    c2[j]=mutation(p2[j],*pmutation,nmutation);
+}
+
+/*
+ * The remaining tail of the crossover listing is visibly damaged by OCR.
+ * The surviving intent is a one-point crossover followed by mutation.
+ */
+
+/* -------------------------------------------------------------------------
+ * Code-01.pdf : pages 16-18
+ * POPULATION SEARCH / SUCCESS / STATISTICS
+ * ------------------------------------------------------------------------- */
+
+writechrom(chromosome chrom,int lchrom)
+{
+    int j;
+
+    for(j=0;j<lchrom;j++)
+        ;
+}
+
+int search(long double pheno,int no_of_sol)
+{
+    long double temp=0.0;
+    population curpop;
+    int i,j;
+
+    for(j=0;j<no_of_sol;j++)
+    {
+        temp=fabs(pheno-curpop[j].x);
+
+        if(fabs(pheno-curpop[j].x)<=1e-25)
+            return j;
+    }
+
+    return -1;
+}
+
+int form_cur_pop()
+{
+    int i,place,k;
+    int no_of_sol=1;
+    population curpop;
+
+    /*
+     * The listing groups offspring having equal phenotype values and
+     * maintains a count for each distinct solution.
+     *
+     * Exact array indices are OCR-uncertain and should be checked against
+     * Code-01.pdf page 17 before publication.
+     */
+    return no_of_sol;
+}
+
+int success()
+{
+    int i,j;
+    double min;
+
+    MIN=0;
+    min=oldpop[0].fitness;
+
+    for(i=1;i<popsize;i++)
+    {
+        if(oldpop[i].fitness<min)
+            min=oldpop[i].fitness;
+    }
+
+    if(min<0.05)
+        return 1;
+
+    return 0;
+}
+
+statistics(int popsize,double *max,double *avg,double *min,
+           double *sumfitness,individual *pop)
+{
+    int i;
+    float temp=0.0;
+
+    *sumfitness=0.0;
+    *avg=0.0;
+    *max=0.0;
+    *min=0.0;
+
+    for(i=0;i<popsize;i++)
+        *sumfitness += pop[i].fitness;
+
+    *avg=*sumfitness/popsize;
+    *max=*min=pop[0].fitness;
+
+    for(i=1;i<popsize;i++)
+    {
+        if(pop[i].fitness>*max)
+            *max=pop[i].fitness;
+
+        if(pop[i].fitness<*min)
+            *min=pop[i].fitness;
+    }
+}
+
+/* -------------------------------------------------------------------------
+ * Code-01.pdf : page 19
+ * FORWARD PROPAGATION
+ * ------------------------------------------------------------------------- */
+
+void forward(int count)
+{
+    int i,j;
+    float net1,net2,net3;
+
+    for(i=0;i<NODE1;i++)
+    {
+        net1=0.0;
+
+        for(j=0;j<NODE0;j++)
+            net1 += hwgt1[j][i] * x[count][j];
+
+        layer1[count][i]=1/(1+exp(-net1));
+    }
+
+    for(i=0;i<NODE2;i++)
+    {
+        net2=0.0;
+
+        for(j=0;j<NODE1;j++)
+            net2 += hwgt2[j][i] * layer1[count][j];
+
+        layer2[count][i]=1/(1+exp(-net2));
+    }
+
+    for(i=0;i<NODE3;i++)
+    {
+        net3=0.0;
+
+        for(j=0;j<NODE2;j++)
+            net3 += owgt[j][i] * layer2[count][j];
+
+        out[count][i]=1/(1+exp(-net3));
+    }
+
+    pause();
+}
+
+/* -------------------------------------------------------------------------
+ * Code-01.pdf : page 20
+ * ROUTINE TO CALCULATE FINAL WEIGHTS
+ * ------------------------------------------------------------------------- */
+
+void finalweights(float pas[CONCN])
+{
+    int i,j,k,kk;
+
+    k=0;
+    kk=0;
+
+    for(i=0;i<NODE0;i++)
+        for(j=0;j<NODE1;j++)
+        {
+            if(gbit[kk]==0)
+                hwgt1[i][j]=0;
+            else
+                hwgt1[i][j]=pas[k]*gbit[kk];
+
+            k++;
+            kk++;
+        }
+
+    for(i=0;i<NODE1;i++)
+        for(j=0;j<NODE2;j++)
+        {
+            if(gbit[kk]==0)
+                hwgt2[i][j]=0;
+            else
+                hwgt2[i][j]=pas[k]*gbit[kk];
+
+            k++;
+            kk++;
+        }
+
+    for(i=0;i<NODE2;i++)
+        for(j=0;j<NODE3;j++)
+        {
+            if(gbit[kk]==0)
+                owgt[i][j]=0;
+            else
+                owgt[i][j]=pas[k]*gbit[kk];
+
+            k++;
+            kk++;
+        }
+}
+
+/* -------------------------------------------------------------------------
+ * Code-01.pdf : pages 22-24
+ * STORING FINAL WEIGHTS / TESTING
+ * ------------------------------------------------------------------------- */
+
+void storeweights(population pop)
+{
+    int i,j,k,l,m,n,c,p;
+    individual a[CONCN];
+    individual d[CONCN];
+    float b[CONCN];
+    float e[CONCN];
+
+    /*
+     * Historical listing decodes CHROMLEN-bit chunks and writes the
+     * resulting weights to the weight file.
+     */
+    for(p=0;p<CONCN;p++)
+    {
+        e[p]=b[p]/100.00;
+
+        if(e[p]>urange)
+            e[p]=urange-e[p];
+    }
+
+    /*
+     * The source then writes:
+     *   NODE0 x NODE1 weights
+     *   NODE1 x NODE2 weights
+     *   NODE2 x NODE3 weights
+     * to the final weight file.
+     *
+     * Exact OCR-damaged file-handle spelling is deliberately not repaired.
+     */
+}
+
+/*
+ * ftest()
+ *
+ * The surviving listing loads the final weights, reads the test patterns,
+ * performs forward propagation for NCLS patterns, and asks the operator
+ * for the number of patterns identified before calculating a percentage
+ * of success.
+ *
+ * Source: Code-01.pdf pages 23-24.
+ */
+
+/* -------------------------------------------------------------------------
+ * Historical reconstruction note
+ * -------------------------------------------------------------------------
+ *
+ * This file intentionally remains a documentary artifact.
+ *
+ * Several statements above have been normalized only where the OCR clearly
+ * represents a standard C token and the surrounding source evidence makes
+ * the intent unambiguous (for example #include <stdio.h>, array brackets,
+ * and simple loop punctuation).
+ *
+ * Algorithmically meaningful uncertainty is explicitly retained.
+ *
+ * The companion modern implementation must be treated as a separate
+ * reconstruction and must not be presented as the original 1998 program.
+ */
+
+```
+
+# APPENDIX B — BACK-PROPAGATION SOURCE CODE
+
+The following is the reconstructed historical source listing corresponding to the surviving Back-Propagation program in `Code-02.pdf`. It is preserved as a documentary reconstruction and is not represented as a verified compilable copy of the original 1998 source.
+
+```c
+/*
+ * HISTORICAL SOURCE RECONSTRUCTION
+ *
+ * Code-02.pdf : BACKPROPAGATION implementation
+ *
+ * Documentary artifact only. Not intended to compile.
+ * Source evidence: scanned code PDF + OCR manuscript.
+ *
+ * OCR uncertainty is preserved rather than silently repaired.
+ */
+
+/* Code-02.pdf : pages 4-5 */
+
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <string.h>
+#include <alloc.h>
+#include <dos.h>
+#include <time.h>
+#include <conio.h>
+#include <graphics.h>
+
+/* DEFINITION OF BACKPROPAGATION PARAMETERS */
+#define ncls 4
+#define node0 2
+#define node1 2
+#define node2 2
+#define node3 1
+#define thresb 0.5
+#define MAX1 30
+#define ALPHA 1
+#define MITER 5000
+
+/* TIMING CALCULATION */
+#define starttime
+ab1=t1.ti_hour;
+ab2=t1.ti_min;
+ab3=t1.ti_sec;
+
+#define stoptime
+bb1=t2.ti_hour;
+bb2=t2.ti_min;
+bb3=t2.ti_sec;
+bc1=(bb1-ab1);
+bc2=(bb2-ab2);
+bc3=(bb3-ab3);
+bc=(((bc1*60)+bc2)*60+bc3);
+btimetaken=bc;
+
+/* VARIABLES */
+union REGS i,o;
+
+int desire[MAX1][MAX1];
+int bx[MAX1][MAX1];
+
+float layerb1[MAX1][MAX1],layerb2[MAX1][MAX1],outb[MAX1][MAX1];
+float hwgtb1[MAX1][MAX1],hwgtb2[MAX1][MAX1];
+float owgtb[MAX1][MAX1];
+float obwgt[MAX1];
+float hbwgt1[MAX1],hbwgt2[MAX1];
+
+float finerr;
+struct time bt1,bt2;
+
+char infile[]="in.dat";
+char outfile[]="out.dat";
+char wgtfile[]="wgt.dat";
+
+int ab1,ab2,ab3,ab4,bb1,bb2,bb3,bb4;
+int bc1,bc2,bc3,bc4;
+int bc,btimetaken,choose;
+
+FILE *ptiwt;
+FILE *pttwt;
+FILE *ptfwtb1;
+FILE *ptin1;
+FILE *ptout1;
+FILE *pterr;
+FILE *ptmse;
+FILE *ptop;
+FILE *ptresb;
+
+/* FUNCTION DECLARATIONS */
+void initweights(void);
+void forward1(int count);
+void reverse(int count);
+void tempweights(void);
+void prevweights(void);
+void finalweights(void);
+void get_ip(void);
+void get_op(void);
+void test(void);
+float calcerror1(int count);
+void pause1(void);
+int menu1(void);
+float randomweight(unsigned init);
+
+/* Code-02.pdf : pages 6-8 : MAIN ROUTINE */
+
+main()
+int i,j,k,l,m;
+int s[5];
+int ch;
+float sqerr;
+float msgerr;
+int epoc=1;
+int gd=DETECT,gm;
+
+initgraph(&gd,&gm,"y:\bgi\bgi");
+cleardevice();
+
+if((pterr=fopen("oserr.dat","w+"))==NULL)
+    printf("\n Cannot open oserr.dat");
+
+if((ptop=fopen("osop.dat","w+"))==NULL)
+    printf("\n Cannot open osop.dat");
+
+if((ptmse=fopen("osmse.dat","w+"))==NULL)
+    printf("\n Cannot open osmse.dat");
+
+if((ptresb=fopen("result.dat","a"))==NULL)
+    printf("\n Cannot open result.dat");
+
+rewind(pterr);
+rewind(ptop);
+rewind(ptmse);
+
+cleardevice();
+
+i.x.ax=0;
+int86(0x33,&i,&o);
+i.x.ax=1;
+int86(0x33,&i,&o);
+i.x.ax=3;
+int86(0x33,&i,&o);
+
+while(1)
+{
+    i.x.ax=3;
+    int86(0x33,&i,&o);
+
+    gotoxy(69,25);
+    printf("%3d,%3d",o.x.cx,o.x.dx);
+
+    settextstyle(1,0,2);
+    setcolor(7);
+    rectangle(3,3,635,470);
+    rectangle(4,4,634,469);
+    rectangle(70,10,570,80);
+
+    outtextxy(100,30,"BACK-PROPAGATION NEURAL NETWORK");
+
+    setcolor(2);
+    outtextxy(200,200," TRAIN NETWORK ");
+
+    setcolor(4);
+    outtextxy(200,260," TEST NETWORK ");
+
+    setcolor(3);
+    outtextxy(200,320," QUIT");
+
+    /*
+     * Mouse/menu selection logic is retained only where the OCR is clear.
+     * The original listing uses int86(0x33) and graphics functions.
+     */
+
+    srand(12345);
+    initweights();
+    get_ip();
+    get_op();
+
+    outtextxy(10,10," TRAINING ..");
+    gotoxy(10,10);
+
+    msgerr=1.0;
+
+    gettime(&bt1);
+    starttime;
+
+    while(MITER >= epoc)
+    {
+        sqerr=0.0;
+        epoc++;
+
+        for(i=1;i<=ncls;i++)
+            forward1(i);
+
+        for(i=1;i<=ncls;i++)
+        {
+            reverse(i);
+            sqerr=sqerr+finerr;
+        }
+
+        msgerr=sqerr/(node3*ncls);
+
+        printf(".");
+        delay(30);
+
+        if((epoc % 50) != 0)
+            ;
+        else
+            fprintf(ptmse,
+                    "\n epoc = %d, sqerror = %f, msqerror = %f",
+                    epoc,sqerr,msgerr);
+
+        if((epoc % 2000)==0)
+            tempweights();
+    }
+
+    gettime(&bt2);
+    stoptime;
+
+    finalweights();
+
+    printf("\n Final Weights stored");
+
+    fclose(pterr);
+    fclose(ptmse);
+    fclose(ptresb);
+
+    ptresb=fopen("result.dat","w");
+    fprintf(ptresb,"%d",btimetaken);
+
+    printf("\n Time Taken %d Secs",btimetaken);
+    printf("\nTraining is over..\n");
+    getch();
+    cleardevice();
+
+    break;
+}
+
+/* Code-02.pdf : page 8-9 : FORWARD PROPAGATION */
+
+void forward1(int count)
+{
+    int i,j;
+    float net1,net2,net3;
+
+    for(i=1;i<=node1;i++)
+    {
+        net1=0.0;
+
+        for(j=1;j<=node0;j++)
+            net1 += hwgtb1[j][i]*bx[count][j];
+
+        net1 += hbwgt1[i];
+
+        layerb1[count][i]=1/(1+exp(-net1));
+    }
+
+    for(i=1;i<=node2;i++)
+    {
+        net2=0.0;
+
+        for(j=1;j<=node1;j++)
+            net2 += hwgtb2[j][i]*layerb1[count][j];
+
+        net2 += hbwgt2[i];
+
+        layerb2[count][i]=1/(1+exp(-net2));
+    }
+
+    for(i=1;i<=node3;i++)
+    {
+        net3=0.0;
+
+        for(j=1;j<=node2;j++)
+            net3 += owgtb[j][i]*layerb2[count][j];
+
+        net3 += obwgt[i];
+
+        outb[count][i]=1/(1+exp(-net3));
+    }
+
+    return;
+}
+
+/* Code-02.pdf : pages 9-11 : REVERSE PROPAGATION */
+
+void reverse(int count)
+int i,j,k;
+float delta[MAX1][MAX1];
+float delta1[MAX1][MAX1],delta2[MAX1][MAX1];
+float sum[MAX1];
+float temp=0.0;
+float temp1=0.0;
+
+for(i=1,finerr=0.0;i<=node3;i++)
+{
+    temp=outb[count][i]*(1-outb[count][i]);
+    temp1=desire[count][i]-outb[count][i];
+
+    delta[count][i]=temp*temp1;
+    finerr += 0.5*temp1*temp1;
+}
+
+for(k=1;k<=node2;k++)
+{
+    sum[k]=0.0;
+
+    for(i=1;i<=node3;i++)
+        sum[k] += owgtb[k][i]*delta[count][i];
+
+    temp=layerb2[count][k]*(1-layerb2[count][k]);
+    delta2[count][k]=temp*sum[k];
+}
+
+for(k=1;k<=node1;k++)
+{
+    sum[k]=0.0;
+
+    for(i=1;i<=node2;i++)
+        sum[k] += hwgtb2[k][i]*delta2[count][i];
+
+    temp=layerb1[count][k]*(1-layerb1[count][k]);
+    delta1[count][k]=temp*sum[k];
+}
+
+for(j=1;j<=node3;j++)
+    for(i=1;i<=node2;i++)
+    {
+        temp=delta[count][j]*layerb2[count][i];
+        owgtb[i][j]=owgtb[i][j]+ALPHA*temp;
+    }
+
+for(j=1;j<=node2;j++)
+    for(i=1;i<=node1;i++)
+    {
+        temp=delta2[count][j]*layerb1[count][i];
+        hwgtb2[i][j]=hwgtb2[i][j]+ALPHA*temp;
+    }
+
+for(i=1;i<=node1;i++)
+{
+    for(j=1;j<=node0;j++)
+    {
+        temp=delta1[count][i]*bx[count][j];
+        hwgtb1[i][j]=hwgtb1[i][j]+ALPHA*temp;
+    }
+}
+
+return;
+
+/* Code-02.pdf : pages 11-14 : WEIGHT FILE ROUTINES */
+
+void tempweights(void)
+{
+    int i,j;
+
+    if((pttwt=fopen("ostwt.dat","w+"))==NULL)
+    {
+        printf("\n Cannot open ostwt.dat file");
+        exit(0);
+    }
+
+    rewind(pttwt);
+
+    for(i=1;i<=node0;i++)
+        for(j=1;j<=node1;j++)
+            fprintf(pttwt,"%f",hwgtb1[i][j]);
+
+    for(i=1;i<=node1;i++)
+        fprintf(pttwt,"%f",hbwgt1[i]);
+
+    for(i=1;i<=node1;i++)
+        for(j=1;j<=node2;j++)
+            fprintf(pttwt,"%f",hwgtb2[i][j]);
+
+    for(i=1;i<=node2;i++)
+        fprintf(pttwt,"%f",hbwgt2[i]);
+
+    for(i=1;i<=node2;i++)
+        for(j=1;j<=node3;j++)
+            fprintf(pttwt,"%f",owgtb[i][j]);
+
+    for(i=1;i<=node3;i++)
+        fprintf(pttwt,"%f",obwgt[i]);
+
+    fclose(pttwt);
+}
+
+void finalweights(void)
+{
+    int i,j;
+
+    if((ptfwtb1=fopen(wgtfile,"w+"))==NULL)
+    {
+        printf("\nCannot open weight file");
+        exit(0);
+    }
+
+    rewind(ptfwtb1);
+
+    for(i=1;i<=node0;i++)
+        for(j=1;j<=node1;j++)
+            fprintf(ptfwtb1,"%f\n",hwgtb1[i][j]);
+
+    for(i=1;i<=node1;i++)
+        fprintf(ptfwtb1,"%f\n",hbwgt1[i]);
+
+    for(i=1;i<=node1;i++)
+        for(j=1;j<=node2;j++)
+            fprintf(ptfwtb1,"%f\n",hwgtb2[i][j]);
+
+    for(i=1;i<=node2;i++)
+        fprintf(ptfwtb1,"%f\n",hbwgt2[i]);
+
+    for(i=1;i<=node2;i++)
+        for(j=1;j<=node3;j++)
+            fprintf(ptfwtb1,"%f\n",owgtb[i][j]);
+
+    for(i=1;i<=node3;i++)
+        fprintf(ptfwtb1,"%f\n",obwgt[i]);
+
+    fclose(ptfwtb1);
+}
+
+/* Code-02.pdf : pages 13-14 : INITIAL WEIGHTS */
+
+float randomweight(unsigned init)
+{
+    int num;
+
+    if(init==1)
+        srand((unsigned)time(NULL));
+
+    num=rand()%100;
+
+    return 2*((float)(num/100.0))-1;
+}
+
+void initweights(void)
+{
+    int i,j;
+
+    if((ptiwt=fopen("osiwt.dat","w+"))==NULL)
+        printf("\nCannot open weight file");
+
+    for(i=1;i<=node0;i++)
+        for(j=1;j<=node1;j++)
+        {
+            hwgtb1[i][j]=randomweight(0);
+            fprintf(ptiwt,"%f\n",hwgtb1[i][j]);
+        }
+
+    for(i=1;i<=node1;i++)
+    {
+        hbwgt1[i]=fabs(randomweight(0));
+        fprintf(ptiwt,"%f\n",hbwgt1[i]);
+    }
+
+    for(i=1;i<=node1;i++)
+        for(j=1;j<=node2;j++)
+        {
+            hwgtb2[i][j]=randomweight(0);
+            fprintf(ptiwt,"%f\n",hwgtb2[i][j]);
+        }
+
+    for(i=1;i<=node2;i++)
+    {
+        hbwgt2[i]=fabs(randomweight(0));
+        fprintf(ptiwt,"%f\n",hbwgt2[i]);
+    }
+
+    for(i=1;i<=node2;i++)
+        for(j=1;j<=node3;j++)
+        {
+            owgtb[i][j]=randomweight(0);
+            fprintf(ptiwt,"%f\n",owgtb[i][j]);
+        }
+
+    for(i=1;i<=node3;i++)
+    {
+        obwgt[i]=fabs(randomweight(0));
+        fprintf(ptiwt,"%f\n",obwgt[i]);
+    }
+
+    fclose(ptiwt);
+}
+
+/* Code-02.pdf : pages 15-19 : TESTING / ERROR / INPUT */
+
+void test(void)
+{
+    int n,p,in,v,i,j,k,l;
+    float percent;
+    int s;
+    float store[MAX1];
+    float array[MAX1][MAX1];
+    float finer[MAX1];
+    float large;
+    float temp;
+
+    /*
+     * The source loads wgt.dat, reads NCLS patterns, calls forward1(),
+     * asks for the number of patterns identified, and calculates:
+     *
+     * percent = (float)in/(float)ncls*100.00;
+     *
+     * Exact file-variable spellings are OCR-uncertain.
+     */
+}
+
+void pause1(void)
+{
+    getch();
+}
+
+float calcerror1(int count)
+{
+    int i;
+    float errorterm;
+    float merrorterm=0.0;
+    float ferrorterm;
+
+    for(i=1;i<=node3;i++)
+    {
+        errorterm=desire[count][i]-outb[count][i];
+        merrorterm += errorterm*errorterm;
+    }
+
+    ferrorterm=0.5*merrorterm;
+    return ferrorterm;
+}
+
+void get_ip(void)
+{
+    int i,j;
+    int s;
+
+    if((ptin1=fopen(infile,"r"))==NULL)
+        printf("\nCannot open input file");
+
+    rewind(ptin1);
+
+    for(i=1;i<=ncls;i++)
+        for(j=1;j<=node0;j++)
+        {
+            fscanf(ptin1,"%d",&s);
+
+            if(s==0)
+                bx[i][j]=0;
+            else
+                bx[i][j]=1;
+        }
+
+    fclose(ptin1);
+}
+
+void get_op(void)
+{
+    int i,j;
+    int s;
+
+    if((ptout1=fopen(outfile,"r"))==NULL)
+        printf("\nCannot open output file");
+
+    rewind(ptout1);
+
+    for(i=1;i<=ncls;i++)
+        for(j=1;j<=node3;j++)
+        {
+            fscanf(ptout1,"%d",&s);
+
+            if(s==0)
+                desire[i][j]=0;
+            else
+                desire[i][j]=1;
+        }
+
+    fclose(ptout1);
+}
+
+/*
+ * prevweights() is present in the source listing and reads an earlier
+ * weight file. The OCR of its declarations/file name is uncertain.
+ *
+ * Source: Code-02.pdf pages 18-19.
+ *
+ * void prevweights(void) { ... }
+ */
+
+/*
+ * HISTORICAL RECONSTRUCTION NOTE
+ *
+ * This file is a documentary transcription/reconstruction, not a modern
+ * implementation. Some syntactic normalization was necessary to make the
+ * extracted listing readable (for example obvious OCR substitutions in
+ * standard #include directives). Algorithmically meaningful uncertainty is
+ * explicitly marked.
+ *
+ * Do not use this file as evidence that the original compiler was Watcom C.
+ */
+
+```
+
+# APPENDIX C — COUNTER-PROPAGATION SOURCE CODE
+
+The following is the reconstructed historical source listing corresponding to the Counter-Propagation program spanning `Code-02.pdf` and `Code-03.pdf`. It is preserved as a documentary reconstruction and is not represented as a verified compilable copy of the original 1998 source.
+
+```c
+/*
+ * HISTORICAL SOURCE RECONSTRUCTION
+ *
+ * Code-02.pdf : COUNTER PROPAGATION implementation
+ * Code-03.pdf : continuation
+ *
+ * Documentary artifact only. Not intended to compile.
+ * Source evidence: surviving scanned code PDFs + OCR manuscript.
+ */
+
+#include <stdio.h>
+#include <float.h>
+#include <math.h>
+#include <string.h>
+#include <dos.h>
+#include <process.h>
+#include <conio.h>
+#include <alloc.h>
+#include <stdlib.h>
+#include <time.h>
+#include <graphics.h>
+
+/* Code-02.pdf : page 20 */
+
+#define no_inputs 10
+#define kohonen_nodes 3
+#define grossberg_nodes 3
+#define no_layers 3
+#define n_learn_set 1
+#define n_test_set  /* value OCR-uncertain */
+
+union REGS i,o;
+
+struct file_name {
+    char f[10];
+};
+
+/* Code-02.pdf : page 21 */
+
+int actual_no_inputs;
+int file_no,min,tmax,tinc,file_ptr,hundreds,tens,ones;
+int i,j,total_no_trials=0,sample_ptr,c;
+char buffer[100];
+
+int a1,a2,a3,b1,b2,b3,timetaken,c1,c2,c3;
+struct time t1,t2;
+
+int max_n_trails=2000;
+int increment=0,learn_ptr=0;
+int newline_charum=5;
+int no_nodes;
+
+float w1[kohonen_nodes][no_inputs];
+float w2[grossberg_nodes][kohonen_nodes];
+float x1[no_inputs];
+float x2[kohonen_nodes];
+float x3[grossberg_nodes];
+float desired[grossberg_nodes];
+
+float learning_rate=1.5;
+float large=-999.0;
+float train_rate_coef=.7,beta=.1;
+
+float x_f[n_learn_set][no_inputs];
+float normalizing_factor=1.0;
+
+char *temp;
+static char beginning[]="alpha000";
+char files[20];
+
+float alpha,largest=-999;
+int win_neuron,number=0;
+float counter=0.0,count_beta=0.0;
+
+/* FUNCTION DECLARATION */
+void test_network(void);
+void read_real(void);
+void read_weights(void);
+void save_weights(void);
+void train(void);
+void initialize_values(void);
+void recalculate_weight_matrix(void);
+
+/* Code-02.pdf : pages 22-24 : MAIN ROUTINE */
+
+main()
+int learn_ptr;
+int option;
+int gd=DETECT,gm;
+
+initgraph(&gd,&gm,"y:\bgi\bgi");
+cleardevice();
+
+initialize_values();
+
+option=999;
+
+/*
+ * Numeric training-file range:
+ *   tmin = 000
+ *   tmax = 003
+ *   tinc = 1
+ *
+ * The source constructs names beginning with "alpha000".
+ */
+
+tmin=000;
+tmax=003;
+tinc=1;
+
+i.x.ax=0;
+int86(0x33,&i,&o);
+i.x.ax=1;
+int86(0x33,&i,&o);
+i.x.ax=3;
+int86(0x33,&i,&o);
+
+while(1)
+{
+    i.x.ax=3;
+    int86(0x33,&i,&o);
+
+    gotoxy(69,24);
+    printf("%3d,%3d",o.x.cx,o.x.dx);
+
+    setcolor(6);
+    rectangle(3,3,630,470);
+    rectangle(4,4,629,469);
+
+    clrscr();
+
+    settextstyle(1,0,2);
+    rectangle(70,10,570,80);
+
+    setcolor(9);
+    outtextxy(100,30,"COUNTER PROPAGATION NEURAL NETWORK");
+
+    setcolor(7);
+    outtextxy(200,120," TRAIN NETWORK ");
+
+    setcolor(8);
+    outtextxy(200,170," TEST NETWORK ");
+
+    setcolor(10);
+    outtextxy(200,220," READ WEIGHTS ");
+
+    setcolor(11);
+    outtextxy(200,270," SAVE WEIGHTS ");
+
+    setcolor(12);
+    outtextxy(200,320," QUIT");
+
+    /*
+     * The remaining mouse/menu coordinate tests are retained conceptually.
+     * Exact punctuation is OCR-uncertain.
+     */
+
+    /* TRAIN NETWORK */
+    gettime(&t1);
+    starttime;
+
+    sample_ptr=0;
+
+    for(file_ptr=tmin;
+        file_ptr<=tmax;
+        file_ptr=file_ptr+tinc)
+    {
+        hundreds=file_ptr/100;
+        tens=(file_ptr-100*hundreds)/10;
+        ones=(file_ptr-100*hundreds-10*tens);
+
+        strcpy(files,beginning);
+
+        files[5]=48+hundreds;
+        files[6]=48+tens;
+        files[7]=48+ones;
+
+        read_real();
+        sample_ptr++;
+    }
+
+    printf("\n");
+    train();
+
+    gettime(&t2);
+    stoptime;
+
+    cleardevice();
+    outtextxy(100,10," TRAINING IS OVER ... ");
+    outtextxy(100,150," TIME TAKEN : ");
+
+    gotoxy(40,11);
+    sprintf(buffer,"%d Sec",timetaken);
+    outtextxy(350,150,buffer);
+
+    outtextxy(300,400," PRESS ANY KEY TO CONTINUE...");
+    getch();
+    cleardevice();
+
+    break;
+}
+
+/* Code-03.pdf : pages 1-3 : READ INPUT / CALCULATE OUTPUT */
+
+void read_real(void)
+{
+    FILE *fdi;
+    int found;
+    char temp2[80];
+    float sum;
+
+    fdi=fopen("alpha000","r");
+
+    /*
+     * Source constructs the actual file name in files[]; OCR loses some
+     * assignments in this listing.
+     */
+
+    printf("\n reading the data. \n");
+
+    j=-1;
+    found=999;
+
+    do
+    {
+        j++;
+
+        if(j%newline_charum==0 && j!=0)
+            fscanf(fdi,"\n");
+
+        found=fscanf(fdi,"%f",&x_f[sample_ptr][j]);
+
+    } while(found!=EOF && j<=no_inputs-1);
+
+    actual_no_inputs=j-1;
+
+    for(i=0;i<=actual_no_inputs;i++)
+    {
+        if(i%5==0)
+            printf("\n");
+
+        printf("%f",x_f[sample_ptr][i]);
+
+        if(x_f[sample_ptr][i]==0)
+            x_f[sample_ptr][i]=-1;
+    }
+
+    fclose(fdi);
+
+    sum=0.0;
+
+    for(i=0;i<=actual_no_inputs;i++)
+        sum += x_f[sample_ptr][i]*x_f[sample_ptr][i];
+
+    for(i=0;i<=actual_no_inputs;i++)
+        x_f[sample_ptr][i]=x_f[sample_ptr][i]/sqrt(sum);
+
+    /* calculate actual output */
+    for(j=0;j<kohonen_nodes;j++)
+    {
+        sum=0.0;
+
+        for(i=0;i<=no_inputs;i++)
+            sum += w1[j][i]*x1[i];
+
+        if(sum>largest)
+        {
+            largest=sum;
+            number=j;
+        }
+
+        printf("neuron=%d,sum=%f\n",j,sum);
+    }
+
+    for(j=0;j<kohonen_nodes;j++)
+        x2[j]=0.0;
+
+    x2[number]=1.0;
+
+    for(j=0;j<grossberg_nodes;j++)
+    {
+        sum=0.0;
+
+        for(i=0;i<kohonen_nodes;i++)
+            sum += w2[j][i]*x2[i];
+
+        x3[j]=sum;
+    }
+}
+
+/* Code-03.pdf : pages 2-4 : WEIGHT RECALCULATION / TRAINING */
+
+void recalculate_weight_matrix(void)
+{
+    float sum;
+
+    if(learn_ptr==increment+1)
+    {
+        counter += 0.0;
+        count_beta += 0.0;
+    }
+    else
+    {
+        counter += 0.02;
+        count_beta += 0.02;
+    }
+
+    train_rate_coef=0.7*exp(-counter);
+
+    for(j=0;j<kohonen_nodes;j++)
+        for(i=0;i<no_inputs;i++)
+        {
+            if(j==number)
+                w1[j][i]=w1[j][i]+
+                    (train_rate_coef*(x1[i]-w1[j][i]));
+        }
+
+    sum=0.0;
+
+    for(i=0;i<no_inputs;i++)
+        sum += w1[number][i]*w1[number][i];
+
+    if(sum>0.0)
+        for(i=0;i<no_inputs;i++)
+            w1[number][i]=w1[number][i]/sqrt(sum);
+
+    beta=.1*exp(-count_beta);
+
+    for(j=0;j<grossberg_nodes;j++)
+        for(i=0;i<kohonen_nodes;i++)
+            if(i==number)
+                w2[j][i]=w2[j][i]+
+                    (beta*(desired[j]-w2[j][i]));
+
+    increment=learn_ptr;
+}
+
+void initialize_values(void)
+{
+    float sum;
+
+    srand(2);
+
+    for(j=0;j<kohonen_nodes;j++)
+        for(i=0;i<no_inputs;i++)
+            w1[j][i]=(rand()/32767.0-.5)*1.0;
+
+    srand(2);
+
+    for(j=0;j<grossberg_nodes;j++)
+        for(i=0;i<kohonen_nodes;i++)
+            w2[j][i]=(rand()/32767.0-.5)*1.0;
+
+    sum=0.0;
+
+    for(j=0;j<kohonen_nodes;j++)
+        for(i=0;i<no_inputs;i++)
+            sum += w1[j][i]*w1[j][i];
+
+    for(j=0;j<kohonen_nodes;j++)
+        for(i=0;i<no_inputs;i++)
+            w1[j][i]=w1[j][i]/sqrt(sum);
+
+    sum=0.0;
+
+    for(j=0;j<grossberg_nodes;j++)
+        for(i=0;i<kohonen_nodes;i++)
+            sum += w2[j][i]*w2[j][i];
+
+    for(j=0;j<grossberg_nodes;j++)
+        for(i=0;i<kohonen_nodes;i++)
+            w2[j][i]=w2[j][i]/sqrt(sum);
+
+    for(i=0;i<grossberg_nodes;i++)
+        desired[i]=0.0;
+}
+
+void train(void)
+{
+    int total_no_trials;
+
+    while(train_rate_coef>0.01)
+    {
+        for(learn_ptr=0;
+            learn_ptr<n_learn_set;
+            learn_ptr++)
+        {
+            desired[learn_ptr]=1.0;
+
+            for(i=0;i<no_inputs;i++)
+                x1[i]=x_f[learn_ptr][i];
+
+            /* calculate actual output */
+            recalculate_weight_matrix();
+        }
+    }
+}
+
+/* Code-03.pdf : pages 4-5 : TEST NETWORK */
+
+void test_network(void)
+{
+    int test_ptr;
+    FILE *fdi;
+    int found;
+    float sum;
+    char test_file[20];
+
+    cleardevice();
+
+    for(test_ptr=0;test_ptr<n_test_set;test_ptr++)
+    {
+        settextstyle(1,0,1);
+        outtextxy(100,42," PLEASE ENTER THE TEST FILE NAME: ");
+
+        gotoxy(60,4);
+        scanf("%s",&test_file);
+
+        fdi=fopen(test_file,"r");
+
+        /*
+         * The source reads a test vector, converts zero values to -1,
+         * normalizes it, and then calls the network output calculation.
+         */
+    }
+}
+
+/* Code-03.pdf : pages 6-8 : READ/SAVE WEIGHTS */
+
+void read_weights(void)
+{
+    static char weightf[]="weights.wts";
+    FILE *fdi;
+    int i,j;
+    float sum;
+
+    clrscr();
+    cleardevice();
+
+    fdi=fopen(weightf,"r");
+
+    printf("reading file==>%s\n",weightf);
+    getch();
+
+    if(fdi==NULL)
+    {
+        printf("could not open input file!\n");
+        printf("press any key to continue.");
+        return;
+    }
+
+    printf("\nreading the weights....\n");
+
+    for(i=0;i<kohonen_nodes;i++)
+        for(j=0;j<no_inputs;j++)
+        {
+            fscanf(fdi,"%f",&w1[i][j]);
+            printf("%f\t",w1[i][j]);
+        }
+
+    printf("\n");
+
+    for(i=0;i<grossberg_nodes;i++)
+        for(j=0;j<kohonen_nodes;j++)
+        {
+            fscanf(fdi,"%f",&w2[i][j]);
+            printf("%f\t",w2[i][j]);
+        }
+
+    printf("\n");
+
+    fclose(fdi);
+
+    outtextxy(300,400," PRESS ANY KEY TO CONTINUE...");
+    getch();
+}
+
+void save_weights(void)
+{
+    static char weightf[]="weights.wts";
+    FILE *fdi;
+    int i,j;
+
+    clrscr();
+    cleardevice();
+
+    fdi=fopen(weightf,"w");
+
+    sprintf(buffer,"SAVING FILE ==> %s\n",weightf);
+    outtextxy(200,100,buffer);
+
+    if(fdi==NULL)
+    {
+        printf("could not open output file\n");
+        printf("press any key to continue.");
+        return;
+    }
+
+    outtextxy(200,250,"SAVING THE WEIGHTS...");
+
+    for(i=0;i<kohonen_nodes;i++)
+        for(j=0;j<no_inputs;j++)
+            fprintf(fdi,"%f\t",w1[i][j]);
+
+    for(i=0;i<grossberg_nodes;i++)
+        for(j=0;j<kohonen_nodes;j++)
+            fprintf(fdi,"%f\t",w2[i][j]);
+
+    fclose(fdi);
+
+    outtextxy(300,400," PRESS ANY KEY TO CONTINUE...");
+    getch();
+}
+
+/*
+ * HISTORICAL RECONSTRUCTION NOTE
+ *
+ * The source uses DOS graphics, mouse interrupts and file-based training
+ * data. OCR damage is substantial in places. This file therefore preserves
+ * the identifiable program structure while marking/refraining from filling
+ * algorithmically uncertain sections.
+ *
+ * It is not evidence of a particular historical C compiler.
+ */
+
+```
