@@ -129,6 +129,54 @@ def main() -> int:
     result = run_xor(args.runs, args.seed)
     output = results_dir / "xor.json"
     output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    summary_output = results_dir / "phase1-xor-results.md"
+    bp = result["backpropagation"]
+    ga = result["genetic_algorithm"]["summary"]
+    config = result["genetic_algorithm"]["configuration"]
+    summary = [
+        "# Phase 1 Validation — XOR Experiment",
+        "",
+        "This file records the outcome of the reproducibility-oriented Phase 1 validation harness. "
+        "It is not a claim of byte-for-byte reproduction of the original 1998 Watcom C implementation.",
+        "",
+        "## Experiment",
+        "",
+        f"- Dataset: XOR ({len(result['dataset'])} patterns)",
+        f"- Network: {result['network']}",
+        f"- Validation seed: {args.seed}",
+        f"- GA runs: {args.runs}",
+        "",
+        "## Back Propagation",
+        "",
+        f"- Epochs: {bp['epochs']}",
+        f"- Final MSE: {bp['final_mse']:.8f}",
+        f"- Accuracy: {bp['accuracy']:.1%}",
+        "",
+        "## Genetic Algorithm",
+        "",
+        f"- Population: {config['population_size']}",
+        f"- Maximum generations: {config['generations']}",
+        f"- Crossover probability: {config['crossover_probability']}",
+        f"- Mutation probability: {config['mutation_probability']}",
+        f"- Successful runs: {ga['successful_runs']}/{ga['total_runs']}",
+        f"- Best MSE: {ga['best_mse']:.8f}",
+        f"- Mean MSE: {ga['mean_mse']:.8f}",
+        f"- Worst MSE: {ga['worst_mse']:.8f}",
+        "",
+        "## Encoding Smoke Test",
+        "",
+        f"- Bits per weight: {result['encoding_smoke_test']['bits_per_weight']}",
+        f"- Encoded weight count: {result['encoding_smoke_test']['encoded_weight_count']}",
+        f"- Status: {result['encoding_smoke_test']['status']}",
+        "",
+        "## Interpretation",
+        "",
+        "These results document the current Phase 1 Python reconstruction. Exact comparison with the original project requires verification of the archived C source and its encoding and GA conventions.",
+        "",
+        "The complete machine-readable run record, including per-run histories, is stored in xor.json.",
+        "",
+    ]
+    summary_output.write_text("\n".join(summary), encoding="utf-8")
 
     bp = result["backpropagation"]
     ga = result["genetic_algorithm"]["summary"]
