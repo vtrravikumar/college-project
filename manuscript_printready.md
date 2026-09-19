@@ -12,19 +12,19 @@ language: "en"
 
 The Viva Voce Examination of the Project work done by RAVIKUMAR V.I.R. E 451640 (Reg. No) in partial fulfillment of the requirements for the B.E degree in COMPUTER SCIENCE & ENGINEERING was held on 13 OCTOBER'98 b110198 2210198 INTERNAL EXAMINER EXTERNAL EXAMINER
 
-# Certificate
+## Certificate
 
 This is to certify that the project titled "Analysis of Artificial Neural Network" is a bonofide work done be by RAVIKUMAR V.T.R. Reg.No E451640 in partial fulfillment of the requirement for the award of the degree of Bachelor of Engineering in Computer Science and Engineering during 1994-1998. Thule 70198 HEAD OF THE DEPARTMENT PROJECT GUIDE ONE IS
 
-# Acknowledgement
+## Acknowledgement
 
 We are thankful to our Director Dr. V. Shanmuganathan excellent opportunity for taking up the course and providing a conducive environment to finish our project successfully We extend our sincere thanks to Prof.S. Ramakrishnan.(System Manager & Head Of CSE Dept.) for his guidance and suggestions towards the improvement of our project. We have immense pleasure in thanking our guide Miss.Shameem Fathima and our guide Mr. R.Balasubramanian under whose guidance the project has been shaped in a very successful manner. Last but not the least we would like to thank the Technical support group of our Brainland Computer Centre for providing all that we needed and staying late in the night for us. Above all, I express my gratitude to my beloved parents for shaping me as an Engineer.
 
-# Abstract
+## Abstract
 
 The aim of the project is to implement a system based on Genetic algorithm with enhanced encoding. The system is used to evolve forward Artificial Neural Network which has been applied to problem areas of boolean functions. Evolving Neural Network means that optimising of the connection and connectivity of the Neural Network. Although many techniques like Back Propagation learning exists, a new approach using Genetic Algorithm has been tried in this work Genetic Algorithm is randomised search technique that is domain free, robust and has a fast rate of convergence. Genetic Algorithm search methods are rooted in the mechanism of evolution and natural genetics. They combine survival of the fittest among string randomised information exchange to form search algorithm with some of the innovative flairs of human search. In this project we compare the efficiency of Genetic Algorithm and Back Propagation Algorithm and observe that Genetic Algorithm are efficient and robust optimization tools which outperform their counterpart.
 
-# INTRODUCTION
+## INTRODUCTION
 
 ## GENERAL
 
@@ -44,7 +44,7 @@ The field of Genetic Algorithm is new and evolving. It has a wide variety of app
 
 Artificial Neural Network have a spectrum of practical application in various fields. The work of this project can be applied for determining the optimal network for any such application.
 
-# PROBLEM DEFINITION AND METHODIOGY
+## PROBLEM DEFINITION AND METHODIOGY
 
 ## PROBLEM DEFINITION
 
@@ -56,7 +56,7 @@ A Generic algorithm emulates biological evolutionary theories to solve optimizat
 
 As per the GA the fitter string i.e., one with aless error will be eligible for survival and the strings of lesser fitness are omitted from going to next generation. The GA operations like reproduction, crossover, mutation etc. are applied in every generation and this process is repeated for a fixed number of generation or until a fittest solution is evaluated. The string with optimal fitness value will be taken as final concatenated weight of the links
 
-# EVOLUTIONARY DESIGN CONCEPTS
+## EVOLUTIONARY DESIGN CONCEPTS
 
 ## INTRODUCTION
 
@@ -74,11 +74,11 @@ I.GO GAs work by maintaining a population of candidate solutions to a given prob
 
 Many biological terms are used in the Genetic Algorithm
 
-# literature. The pool of solutions is often called the "population", individual
+## literature. The pool of solutions is often called the "population", individual
 
 strings in the pool are "chromosome", individual features are "genes" and the value of the feature in a particular solution is "allele". Example don In a particular problem, a variable x to be optimized is evolved using 4-bit encoded string. The illustration of strings during some intermediate step is shown in the table X3 X4
 
-# X2
+## X2
 
 ### THE ALGORITHM
 
@@ -112,11 +112,11 @@ In order for GA to surpass their more traditional cousins in the quest for robus
 
 Disadvantages: * The lack of an accurate measure of their convergence to the optimum and their intuitive nature as opposed to other proven and well established methods. * The loss of accuracy while approximating the solution string for the sake of representability in digital computers.
 
-# Conclusion
+## Conclusion
 
 GAs are efficient and robust optimization tools which outperform their counterparts. They are applied in search, optimization and machine learning. They have their own drawbacks owing to the limited nature of digital computers in terms of computational power, storage and the lack of formal proof of the facts behind their working
 
-# DESIGN OF ANN EVOLUTION USING GA
+## DESIGN OF ANN EVOLUTION USING GA
 
 ## INTRODUCTION
 
@@ -164,7 +164,7 @@ For the weight optimization problem, each member of the set of weights that is r
 
 In the connectivity optimization problem, the fitness of a given set of links is determined by the quickness with which the weights of the links that are present in the network are optimised. To put this in precise terms, consider a population of network architecture with different sets of links. Each of these network is run for a fixed number of generations. The minimised error at the end of this process in each case is noted. Fitter architecture is the one having less error. APPLICATION & RESULTS
 
-# APPLICATIONS AND RESULTS
+## APPLICATIONS AND RESULTS
 
 ## BENCH-MARKING APPLICATION
 
@@ -178,9 +178,9 @@ EXCLUSIVE OR Problem Definition : The problem is to produce the output which is 
 
 Optimal set ofweights Links weights 2.081 5.732 .1.013 5.564 .4.215
 
-# 836
+## 836
 
-# 337
+## 337
 
 -5. 538 -5.689 4.210 OUTE Neural Network For Exclusive OR All weight of the links contribute to the network
 
@@ -188,11 +188,11 @@ Parameter of GA :- 100 Chromosome length 25 Population size 1400 No. of generati
 
 Time comparison of GA & BP! -
 
-# secs
+## secs
 
 [Time taken for training using BP
 
-# secs
+## secs
 
 Time taken for training using GA THREE BIT PARITY Problens denition The problem is to produce an output of 1 if there is an odd number of Is in the input pattern. O otherwise Darameters Of NIN The initial configuration is, three nodes in the input layer, two nodes in the first hidden layer, two nodes in the second hidden layer and a single node in the output layer. The network is not fully connected Parameters of GA 132 Chromosome length 30 Population S1ze 1000 No. of generation Probability of cross over 0. 0.09 Probability of mutation -12, 12 Range of weights
 
@@ -200,7 +200,7 @@ Training data :- INPUT OUTPUT Optimal set of weights & links Optimal set of link
 
 Neural Network For Exclusive OR Weights of links 4,9, are zero & others are non zero. So the link with zero weights are pruned from the network. Time comparison of GA & BP: - Ting secs Time taken for training using BP
 
-# secs
+## secs
 
 Time taken for training using GA
 
@@ -210,15 +210,15 @@ Optimal set of weights & links :- Optimal set of link Optimal set ofweights link
 
 Time Comparison of GA & BP !-
 
-# secs
+## secs
 
 Time taken for training using BP
 
-# secs
+## secs
 
 Time taken for training using GA
 
-# Conclusion
+## Conclusion
 
 Thus the results of both, training using a Back propagation Algorithm and that with a genetic Algorithm infers that the GA has a faster rate of convergence than a conventional training algorithm.
 
@@ -258,9 +258,9 @@ Optimal set ofweights links weichts -1.11 0.39 -0.37 nAn -0.73 0.6 nAn 053 063 -
 
 Evolutionary design concepts have been successfully applied to design and to train Neural Network. The results that are obtained confirm the fact that Genetic Algorithm is better tool to train a Neural Network than conventional training tools.
 
-# Conclusion
+## Conclusion
 
-# CONCLUSION
+## CONCLUSION
 
 ## INTRODUCTION
 
@@ -276,17 +276,17 @@ It can be concluded that GAs can be applied to solve any optimization problem eq
 
 There are many parameters in GA that can be manipulated and for each and every combination of the parameters, there will be some marked improvement in performance. More study can be made on the impact of these parameters on the GAs performance and the result can be used suitably. Parallelism can be increased by using distributed GAs. Here multiple copies of GAs are run in parallel and from time to time, best solution are exchanged.
 
-# References
+## References
 
 D.E.Golberg, "Genetic Algorithm in Search Optimization and Machine learning", Addison Wesley, 1989. [21 Jacek M. Zarada," Introduction to Artificial Neural Systems" ,Jaico publishing India, 1991 [3] James A. Freeman & David M.Skapura,"Neural Network Algorithm, Applications and Programming techniques". Addison Wesley. 1991. [4] Darrel Whitely, Timothy Starkweather & Chris Bogart," Genetic Algorithms and Neural Networks : Optimising Connections anc Connectivity", Parallel Computing, 14(1990) pp 347-361. [5] Daniel Graupe, "Principles of Artificial Neural Network", World Scientific Publication Co. Pte. Ltd. [6] Chin-Teng Lin & C.S George Lee, "Neural Fuzzy System". [71 LiMin Fu, "Neural Networks in Computer Intelligence",McGraw Hill International. APPENDI
 
-# Appendix
+## Appendix
 
 COUNTER PROPAGATION NETWORKS INTRODUCTION: The Counterpropagation network developed by Robert Hecht Nielsen goes beyond the representational limits of single - layer networks. As compared to Backpropagation, it can reduce training time by hundredfold Counter propagation is a combination of two well-known algorithms; the self - organizing map of Kohonen and the Grossberg The Counter propagation network functions as a look-up table capable of generalization. The training process associates input vectors with corresponding output vectors. These vectors may be binary consisting of ones and zeros, or continuous. Once the network is trained application of an input vector produces the desired output vector. The generalization capability of the network allows it to produce a correct output even when it is given an input vector that is partially incorrect. This makes the network useful for pattern -recognition, pattern - completion, and signal - enhancement applications.
 
 NETWORK STRUCTURE: The neuron in layer O serve only as fan - out points and perform no computation. Each layer O neuron connects to every neuron in layer 1 (called the KOHONEN LAYER) through a separate weight Wmin these will be collectively reffered to as the weight matrix W. Each neuron in layer 1 is connected to every neuron in layer2 (called the GROSSBERG LAYER) by a weight Vnp ;these comprise the weight matrix V. Input Kohenen Grossherg Laver layer LaveL - Y1 - 72 6 Desired output
 
-# Kn
+## Kn
 
 ‡ Ga - In e Kohenen Grossnera Neurons Feedfortrard Counterpropagation Network Counter propagation functions in two modes; the NORMAL MODE, in which it accepts an input vector X and produces an output vector Y, and the TRAINING MODE in which an input vector is applied and the weights are adjusted to yield the desired output vector
 
