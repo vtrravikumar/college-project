@@ -6,9 +6,10 @@
 title: ANALYSIS OF ARTIFICIAL NEURAL NETWORK
 subtitle: USING BACK PROPAGATION & GENETIC ALGORITHM
 author:
+  - RAVI KUMAR V.T.R.
   - KUMARESAN U
   - RAGUPATHI KUMAR D.
-  - RAVI KUMAR V.T.R.
+
 
 # ------------------------------------------------------------------
 # Publication
@@ -16,7 +17,7 @@ author:
 
 edition: Reading Draft
 version: v1.0
-copyright_year: 1998
+copyright_year: November 1998
 
 publisher:
   name:
@@ -24,7 +25,7 @@ publisher:
     - J.J. COLLEGE OF ENGINEERING AND TECHNOLOGY
     - (Affiliated to the Bharathidasan University)
     - THIRUCHIRAPPALLI - 620 009
-    logo: assets/college-logo.png
+  logo: college-logo.png
 # ------------------------------------------------------------------
 # Layout
 # ------------------------------------------------------------------
@@ -58,9 +59,13 @@ This is to certify that the project titled "Analysis of Artificial Neural Networ
 
 
 PROJECT GUIDE
+
+
+
 HEAD OF THE DEPARTMENT 
 
 ## Acknowledgement
+
 
 We are thankful to our Director Dr. V. Shanmuganathan for giving excellent opportunity for taking up the course and providing a conducive environment to finish our project successfully.
 
@@ -73,6 +78,7 @@ Last but not the least we would like to thank the Technical support group of our
 Above all, I express my gratitude to my beloved parents for shaping me as an Engineer.
 
 ## Abstract
+
 
 The aim of the project is to implement a system based on Genetic algorithm with enhanced encoding. The system is used to evolve forward Artificial Neural Network which has been applied to problem areas of boolean functions. 
 
