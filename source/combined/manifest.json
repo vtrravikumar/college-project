@@ -1,0 +1,41 @@
+{
+  "combined_pdf": "source.pdf",
+  "page_count": 55,
+  "sources": [
+    {
+      "path": "/Users/vtr/Library/CloudStorage/GoogleDrive-vtrravikumar@gmail.com/My Drive/Onedrive/Books/college-project/source/report/College-project-01.pdf",
+      "sha256": "6fdb8f4fa87008d52b3d776a21f156fd55a96503ed65df6b397bc0f2f518936a",
+      "profile": "prose"
+    },
+    {
+      "path": "/Users/vtr/Library/CloudStorage/GoogleDrive-vtrravikumar@gmail.com/My Drive/Onedrive/Books/college-project/source/report/College-project-02.pdf",
+      "sha256": "5a7899c9f98aa5a0f81abc20f4c545d1d7c349f6fda96891cc615048603e62cc",
+      "profile": "prose"
+    },
+    {
+      "path": "/Users/vtr/Library/CloudStorage/GoogleDrive-vtrravikumar@gmail.com/My Drive/Onedrive/Books/college-project/source/report/College-project-03.pdf",
+      "sha256": "fdbda07d2976e1366376a5ed22bc7e4128dded7a29f10bd5aaf78d98b9277668",
+      "profile": "prose"
+    }
+  ],
+  "segments": [
+    {
+      "source": "/Users/vtr/Library/CloudStorage/GoogleDrive-vtrravikumar@gmail.com/My Drive/Onedrive/Books/college-project/source/report/College-project-01.pdf",
+      "profile": "prose",
+      "start_page": 1,
+      "end_page": 24
+    },
+    {
+      "source": "/Users/vtr/Library/CloudStorage/GoogleDrive-vtrravikumar@gmail.com/My Drive/Onedrive/Books/college-project/source/report/College-project-02.pdf",
+      "profile": "prose",
+      "start_page": 25,
+      "end_page": 48
+    },
+    {
+      "source": "/Users/vtr/Library/CloudStorage/GoogleDrive-vtrravikumar@gmail.com/My Drive/Onedrive/Books/college-project/source/report/College-project-03.pdf",
+      "profile": "prose",
+      "start_page": 49,
+      "end_page": 55
+    }
+  ]
+}

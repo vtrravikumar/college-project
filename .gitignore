@@ -3,3 +3,6 @@
 
 # Generated digitization output that can be regenerated
 # (Keep committed manuscript/pages/assets/run statistics only when intentionally published.)
+
+# Generated page images from source PDFs
+pages/
