@@ -24,7 +24,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Iterable
 
-from .historical_encoding import (
+from historical_encoding import (
     DEFAULT_WEIGHT_BITS,
     bits_to_integer,
     decode_connectivity,
