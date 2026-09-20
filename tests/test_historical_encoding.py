@@ -14,6 +14,8 @@ from validation.historical_encoding import (
 
 
 def test_report_discretisation_example() -> None:
+    # The report prints 11111101; the 1998 C program stores it in a
+    # fixed-width 10-bit chromosome chunk, hence the leading zero here.
     assert encode_scaled_weight(2.63) == "0100000111"
     assert bits_to_integer("0100000111") == 263
 
@@ -36,7 +38,7 @@ def test_c_observed_positive_weight_round_trip() -> None:
 
 def test_c_observed_negative_weight_round_trip() -> None:
     bits = encode_weight_c_observed(-2.63, upper_range=4.5)
-    assert bits == "0111011001"
+    assert bits == "1011001001"
     assert decode_weight_c_observed(bits, upper_range=4.5) == pytest.approx(-2.63)
 
 
