@@ -59,12 +59,13 @@ def roulette_select_index(
 ) -> int:
     """Select an individual by roulette wheel.
 
-    Code-01 treats lower error as fitter, but the surviving selection routine
-    accumulates raw fitness values. This function therefore performs the
-    corresponding error-to-selection transformation: lower error receives
-    greater selection mass.
+    The surviving Code-01 selection routine accumulates the raw fitness
+    values and selects against that cumulative total. Because objectfn()
+    returns an error value, this creates a source-level inconsistency with
+    the report's statement that lower error is fitter. We preserve the
+    surviving routine here rather than silently correcting it.
 
-    A zero-error individual receives all selection mass when present.
+    A zero total cannot define a roulette wheel and is rejected.
     """
     values = np.asarray(fitness, dtype=float)
     if values.ndim != 1 or len(values) == 0:
@@ -72,12 +73,11 @@ def roulette_select_index(
     if not np.all(np.isfinite(values)) or np.any(values < 0):
         raise ValueError("fitness must contain finite non-negative values")
 
-    if np.any(values == 0):
-        zero_indices = np.flatnonzero(values == 0)
-        return int(rng.choice(zero_indices))
+    total = values.sum()
+    if total <= 0:
+        raise ValueError("fitness total must be positive")
 
-    weights = 1.0 / values
-    probabilities = weights / weights.sum()
+    probabilities = values / total
     return int(rng.choice(len(values), p=probabilities))
 
 
