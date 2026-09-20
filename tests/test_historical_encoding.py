@@ -1,8 +1,14 @@
 """Tests for the historically evidenced GA encoding."""
 
+import sys
+from pathlib import Path
+
 import pytest
 
-from validation.historical_encoding import (
+VALIDATION = Path(__file__).resolve().parents[1] / "validation"
+sys.path.insert(0, str(VALIDATION))
+
+from historical_encoding import (
     bits_to_integer,
     decode_connectivity,
     decode_weight_c_observed,
