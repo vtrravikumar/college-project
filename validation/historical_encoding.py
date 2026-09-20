@@ -73,7 +73,8 @@ def encode_scaled_weight(
     real weight -> scaled integer -> fixed-width binary.
 
     It intentionally does not apply a signed/excess transformation. The
-    report's published example is 2.63 -> 263 -> 11111101.
+    report's published example is 2.63 -> 263 -> 11111101. When represented
+    in the surviving C program's 10-bit chunk, that is 0100000111.
     """
     if scale <= 0:
         raise ValueError("scale must be positive")
