@@ -73,12 +73,12 @@ def test_crossover_probability_zero_uses_last_site():
     np.testing.assert_array_equal(child2, [1, 1, 1, 0])
 
 
-def test_roulette_selection_prefers_lower_error():
+def test_roulette_selection_matches_raw_historical_fitness():
     rng = np.random.default_rng(42)
     fitness = np.array([0.01, 1.0, 1.0])
     selections = [roulette_select_index(rng, fitness) for _ in range(1000)]
-    assert selections.count(0) > selections.count(1)
-    assert selections.count(0) > selections.count(2)
+    assert selections.count(0) < selections.count(1)
+    assert selections.count(0) < selections.count(2)
 
 
 def test_invalid_mutation_probability_is_rejected():
