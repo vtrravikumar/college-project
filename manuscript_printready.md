@@ -364,7 +364,9 @@ In the connectivity optimization problem, the fitness of a given set of links is
 
 #### BOOLEAN FUNCTION LEARNING
 
-The problem dealt here are toy applications which are often used for testing and bench marking a network. Typically the training set contains all possible input patterns, so there is no question of generalisation. The result obtained when training using Back propagation Algorithm and that using Genetic Algorithm are given in this sub-division.
+The problem dealt here are toy applications which are often used for testing and bench marking a network. Typically the training set contains all possible input patterns, so there is no question of generalization. 
+
+The result obtained when training using Back propagation Algorithm and that using Genetic Algorithm are given in this sub-division.
 
 #### RESULTS OF BP AND GA EVOLUTION
 
@@ -378,13 +380,21 @@ Parameters Of NN :
 
 The initial configuration is, two nodes in the input layer two nodes in the first hidden layer, two nodes in the second hidden layer, and single node in the output layer. The network is fully connected
 
-Optimal set ofweights Links weights 2.081 5.732 .1.013 5.564 .4.215
+Optimal set of weights Links weights 
 
-836
+| Links | Weights |
+|:-----:|:-------:|
+| 1 | -2.081 |
+| 2 | -5.732 |
+| 3 | -1.013 |
+| 4 | 5.564 |
+| 5 | -4.215 |
+| 6 | 3.836 |
+| 7 | 4.337 |
+| 8 | -5.538 |
+| 9 | -5.689 |
+| 10 | 4.210 |
 
-337
-
--5. 538 -5.689 4.210 OUTE 
 
 Neural Network For Exclusive OR 
 
@@ -392,33 +402,153 @@ Neural Network For Exclusive OR
 
 All weight of the links contribute to the network
 
-Parameter of GA :- 100 Chromosome length 25 Population size 1400 No. of generation 0.9 Probability of cross over Probability of mutation 0.04 -5.58,5,8 Range of weights Training Data :- OUTPUT INPUT 0 two node Optimal set of weights & links :- Optimal set oflink
+Parameter of GA :
+
+|:------------------|:---:|
+| Chromosome length | 100 |
+| Population size | 25 |
+| No. of generation | 1400 |
+| Probability of cross over | 0.9 |
+| Probability of mutation | 0.04 |
+| Range of weights Training Data |  -5.58,5,8 |
+
+Training Data :
+
+| INPUT | INPUT | OUTPUT |
+|:---:|:---:|:---:|
+| 0 | 0 | 0 |
+| 0 | 1 | 1 |
+| 1 | 0 | 1 |
+| 1 | 1 | 0 |
+
+Optimal set of weights & link :
+| Optimal set of link |
+|:-------------------:|
+| 1111111 |
 
 Time comparison of GA & BP! -
+| Time taken for training using BP | 57 Secs |
+|:--------------------------------:|:-------:|
+| Time taken for training using GA | 21 Secs |
 
-secs
+*THREE BIT PARITY* 
+Problems definition : The problem is to produce an output of 1 if there is an odd number of Is in the input pattern. O otherwise 
 
-[Time taken for training using BP
+Parameters Of NN : The initial configuration is, three nodes in the input layer, two nodes in the first hidden layer, two nodes in the second hidden layer and a single node in the output layer. The network is not fully connected.
 
-secs
+Parameters of GA : 
 
-Time taken for training using GA THREE BIT PARITY Problens denition The problem is to produce an output of 1 if there is an odd number of Is in the input pattern. O otherwise Darameters Of NIN The initial configuration is, three nodes in the input layer, two nodes in the first hidden layer, two nodes in the second hidden layer and a single node in the output layer. The network is not fully connected Parameters of GA 132 Chromosome length 30 Population S1ze 1000 No. of generation Probability of cross over 0. 0.09 Probability of mutation -12, 12 Range of weights
+| Attribute | value |
+|:------------------|:---:|
+| Chromosome length | 132 |
+| Population S1ze | 30 |
+| No. of generation | 1000 | 
+| Probability of cross over | 0.9 |
+| Probability of mutation | 0.09 |
+| Range of weights | -12, 12 |
 
-Training data :- INPUT OUTPUT Optimal set of weights & links Optimal set of link 111011110111 Optimal set of weights weights Links -3187 7.34 -6.41 0.00 6.21 -4.63 155 -5.03 0.00 -0.07 5.09 -1.85 12
+Training data :
+
+| INPUT | OUTPUT | 
+|:-----:|:------:|
+| 0 0 0 | 0|
+| 0 0 1 | 1|
+| 0 1 0 | 1|
+| 0 1 1 | 0|
+| 1 0 0 | 1| 
+| 1 0 1 | 0|
+| 1 1 0 | 0|
+| 1 1 1 | 1|
+
+Optimal set of weights & links 
+
+| Optimal set of link |
+|:-------------------:|
+| 111011110111 |
+  
+Optimal set of weights  
+| Links | weights |
+|:------|--------:|
+| 1 | -3.87 |
+| 2 | 7.34 |
+| 3 | -6.41 |
+| 4 | 0.00 |
+| 5 | 6.21 |
+| 6 | -4.63 |
+| 7 | -11.55 |
+| 8 |  -5.03 |
+| 9 | 0.00 |
+| 10 | -6.67 |
+| 11 | 5.09 |
+| 12 | -1.85 |
 
 Neural Network For Exclusive OR 
 
 ![Neural Network For Exclusive OR](assets/images/nneor2.png)
 
-Weights of links 4,9, are zero & others are non zero. So the link with zero weights are pruned from the network. Time comparison of GA & BP: - Ting secs Time taken for training using BP
+Weights of links 4,9, are zero & others are non zero. So the link with zero weights are pruned from the network. 
 
-secs
+Time comparison of GA & BP: 
 
-Time taken for training using GA
+- Time taken for training using BP -  108 secs
+- Time taken for training using GA -   37 secs
 
-DECODER Problem Definition:- The problem involves, producing the output which is the decoded values of the given input. Parameters of NN:- The initial configuration is, three nodes in the input layer, two nodes in the first hidden layer, two nodes in the second hidden layer and three node in the output layer. The network is not fully connected. Parameters of GA: - chromosome length 170 Population size 25 No. of generation 1900 Probability of cross over 0.5 Probabilit of mutation 0.01 RanGe of weights -12,12 Training Data :- INPUT OUTPUT 0 0
 
-Optimal set of weights & links :- Optimal set of link Optimal set ofweights links weights .7.27 0.00 .5 02 -11.55 3.45 0.00 2.92 8.18 .9.61 0.00 -2.38 8.28 -6.5 2.57 -2.05 5.09 
+*DECODER* 
+
+Problem Definition:
+
+The problem involves, producing the output which is the decoded values of the given input. 
+
+Parameters of NN:
+
+The initial configuration is, three nodes in the input layer, two nodes in the first hidden layer, two nodes in the second hidden layer and three node in the output layer. The network is not fully connected. 
+
+Parameters of GA: 
+
+
+- chromosome length 170 
+- Population size 25 
+- No. of generation 1900 
+- Probability of cross over 0.5 
+- Probability of mutation 0.01 
+- Range of weights -12,12 
+
+Training Data :
+
+| INPUT | OUTPUT |
+|:-----:|:------:|
+| 0 0 1 | 0 1 1 |
+| 1 0 1 | 1 0 1 |
+| 1 1 0 | 1 1 0 |
+
+
+Optimal set of weights & links :
+
+
+Optimal set of link 
+101110111011111111
+
+Optimal set of weights 
+
+| links | weights |
+|:------|-------:|
+| 1 | -7.27 |
+| 2 | 0.00 |
+| 3 | -5.02 |
+| 4 | -11.55 |
+| 5 | 3.45 |
+| 6 | 0.00 |
+| 7 | 2.92 |
+| 8 | 8.18 |
+| 9 | -9.61 |
+| 10 | 0.00 |
+| 11 | -2.38 |
+| 12 | 8.28 |
+| 13 | -6.50 |
+| 14 | 2.57 |
+| 15 | -2.05 |
+| 16 | 5.09 |
 
 Neural Network For Exclusive Decoder problem 
 
@@ -428,27 +558,26 @@ Weights of link 2,6,10 are zero others are all non zero
 
 Time Comparison of GA & BP !-
 
-secs
 
-Time taken for training using BP
 
-secs
+Time taken for training using BP - 84 secs
 
-Time taken for training using GA
+Time taken for training using GA - 70 secs
 
-#### Conclusion
+
+*Conclusion*
 
 Thus the results of both, training using a Back propagation Algorithm and that with a genetic Algorithm infers that the GA has a faster rate of convergence than a conventional training algorithm.
 
 ### REAL-WORLD APPLICATION
 
-### ROBOT INVERSE KINEMATIC PROBLEM
+#### ROBOT INVERSE KINEMATIC PROBLEM
 
-#### INTRODUCTION
+##### INTRODUCTION
 
 Although Neural Networks applicable to the solution of robotics control problem are in fect, neuro controllers, their function is specialised mainly to provide solution to robot arm movement problems. Robot kinematics involves the study of the geometry of manipulator linkages, kinematics if fundamental importance for robot design and control
 
-#### PROBLEM DEFINITION
+##### PROBLEM DEFINITION
 
 *OVERVIEW *
 
@@ -463,9 +592,7 @@ The Robot arms operate in a plane. To make the arm move, desired coordinates of 
 Given the Cartesian coordinates of the end effector, the problem is to map this coordinate to the angle by which the links of the robot manipulator have to be moved to reach that point. There are mathematical formulae for this mapping in terms of inverse trigonometric function. The real time computation of these formulae is time consuming Instead of using them, a NN is designed which was trained using sufficient number of training patterns for a given path manipulator
 
 ##### PROBLEM DOMAIN-DEPENDENT DETAILS
-The robot is assumed to have 2 degree of freedom and hence two link s. It is
-a polar configuration robot (R-R Configuration). Now the problem is to map a Cartesian co-
-ordinated (x,y,) to the (01,02). of the two links. So inputs is (x,y) and the output is (01,02).
+The robot is assumed to have 2 degree of freedom and hence two link s. It is a polar configuration robot (R-R Configuration). Now the problem is to map a Cartesian co-ordinated (x,y,) to the (01,02). of the two links. So inputs is (x,y) and the output is (01,02).
 
 ##### WEIGHT OPTIMATION
 
@@ -505,76 +632,62 @@ Finally the weights of the network with optimal connections are optimized by app
 The initial configuration is, eight nodes in the input layer, two nodes in the first hidden layer, two nodes in the second hidden layer and one node in the output The network is not fully connected layer.
 
 
-Parameters of GA !-
-128
-Chromosome length
-30
-Population size
-500
-No. of generation
-0.4
-Probability of cross over
-0.01
-Probability of mutation
-1.5.1.5
-Range of weights
+Parameters of GA :
+
+
+
+Chromosome length 128
+
+Population size 30
+
+No. of generation 500
+
+Probability of cross over 0.4
+
+Probability of mutation 0.01
+
+Range of weights -1.5,1.5
+
+
 Training Data :
-Ipput
-Output
-02
-y
-81
-0.290889
-2.9386
-0.174533
-8.40739
-0.32725
-0.19635
-8.25326
-3.28037
-0.374
-8.0309
-0.2244
-3.70669
-0.436333
-7.69392
-4.24922
-0.2618
-0.5236
-0.31416
-7.14987
-4.9518
-0.6545
-5.86087
-0.3927
-6.19551
-0.872667
-6.92405
-0.5236
-4.33232
+
+| Input x | Input y | Output 1 | Output 2 |
+|:-------:|:-------:|:--------:|:--------:|
+|         |         |          |          |
+|         |         |          |          |
+|         |         |          |          |
+|         |         |          |          |
+|         |         |          |          |
+|         |         |          |          |
+|         |         |          |          |
+
 optimal set of weights & links :-
+
+
 Optimal set of link
 111011101111110
 
-Optimal set ofweights
-links
-weichts
--1.11
-0.39
--0.37
-nAn
--0.73
-0.6
-nAn
-053
-063
--15
-- 1.42
-0.03
-0.95
--0.78
-16
-0.00
+
+Optimal set of weights
+
+| links | weights |
+|:-----:|:-------:|
+| 1 | -1.11 |
+| 2 | 0.39 |
+| 3 | -0.37 |
+| 4 | 0.00 |
+| 5 | 1.0 |
+| 6 | -0.73 |
+| 7 | 0.6 |
+| 8 | 0.00 |
+| 9 | 0.57 |
+| 10 | 0.63 |
+| 11 | -1.50 |
+| 12 | -1.42 |
+| 13 | 0.03 |
+| 14 | 0.95 |
+| 15 | -0.78 |
+| 16 | 0.00 |
 
 Neural Networks for Robot kinematics problem
 
@@ -582,7 +695,9 @@ Neural Networks for Robot kinematics problem
 
 Weights of link 4,8, 11, 16 are zero & others are non-zero. So that the link with zero
 weights can be pruned from the network.
+
 Summed Error: 0.000208
+
 
 ### CONCLUSION
 Evolutionary design concepts have been successfully applied to
@@ -597,120 +712,67 @@ training tools.
 GAs have shown to be good optimizers for solving problems
 of NNs. In this chapter future enhancements are given and concluding
 remarks are done.
+
 ### HIGHLIGHTS OF THE WORK
-A system based on Evolutionary design concepts to train
-Neural Networks has been successfully developed, and promising results
-have been obtained. In this process the following observations are done:-
-GAs converge quicker to the optimal solution if there is
-diversity is not guaranteed for all generation and to boost the diversity,
-adaptiveness was used. This was done by reinitialising the population and
+A system based on Evolutionary design concepts to train Neural Networks has been successfully developed, and promising results have been obtained. In this process the following observations are done:-
+
+GAs converge quicker to the optimal solution if there is diversity is not guaranteed for all generation and to boost the diversity, adaptiveness was used. This was done by reinitializing the population and
 increasing the rate of mutation.
-Parameter tuning is one of the most critical issue relating to
-both NN training to both NN training and GAs. The effect of varying,
-certain important parameters has been thoroughly studied and results have
-been shown in the form of tables and results.
-The performance of the GA as an optimization tool for
-training and designing NNs is very good and is comparable to that of the
-available standard techniques.
+
+Parameter tuning is one of the most critical issue relating to both NN training to both NN training and GAs. The effect of varying, certain important parameters has been thoroughly studied and results have been shown in the form of tables and results.
+
+The performance of the GA as an optimization tool for training and designing NNs is very good and is comparable to that of the available standard techniques.
 
 
-It can be concluded that GAs can be applied to solve any
-optimization problem equally well. Application of Evolutionary concepts
-to Neural architecture is one such example. It is sure that there are lot more
-vistas to be explored.
+It can be concluded that GAs can be applied to solve any optimization problem equally well. Application of Evolutionary concepts to Neural architecture is one such example. It is sure that there are lot more vistas to be explored.
+
 ### FUTURE ENHANCEMENT
-There are many parameters in GA that can be manipulated
-and for each and every combination of the parameters, there will be some
-marked improvement in performance. More study can be made on the
-impact of these parameters on the GAs performance and the result can be
-used suitably.
-Parallelism can be increased by using distributed GAs. Here
-multiple copies of GAs are run in parallel and from time to time, best
-solution are exchanged.
+There are many parameters in GA that can be manipulated and for each and every combination of the parameters, there will be some marked improvement in performance. More study can be made on the impact of these parameters on the GAs performance and the result can be used suitably. 
+
+Parallelism can be increased by using distributed GAs. Here multiple copies of GAs are run in parallel and from time to time, best solution are exchanged.
 
 
-## References
-D.E.Golberg, "Genetic Algorithm in Search Optimization and Machine
-learning", Addison Wesley, 1989.
-[21
-Jacek M. Zarada," Introduction to Artificial Neural Systems" ,Jaico
-publishing India, 1991
-[3]
-James A. Freeman & David M.Skapura,"Neural Network Algorithm,
-Applications and Programming techniques". Addison Wesley. 1991.
-[4]
-Darrel Whitely, Timothy Starkweather & Chris Bogart," Genetic
-Algorithms and Neural Networks : Optimising Connections anc
-Connectivity", Parallel Computing, 14(1990) pp 347-361.
-[5]
-Daniel Graupe, "Principles of Artificial Neural Network", World Scientific
-Publication Co. Pte. Ltd.
-[6]
-Chin-Teng Lin & C.S George Lee, "Neural Fuzzy System".
-[71
-LiMin Fu, "Neural Networks in Computer Intelligence",McGraw Hill
-International.
-APPENDI
+## REFERENCES
 
----
+- D.E.Golberg, "Genetic Algorithm in Search Optimization and Machine learning", Addison Wesley, 1989.
+- Jacek M. Zarada," Introduction to Artificial Neural Systems" ,Jaico publishing India, 1991
+- James A. Freeman & David M.Skapura,"Neural Network Algorithm, Applications and Programming techniques". Addison Wesley. 1991.
+- Darrel Whitely, Timothy Starkweather & Chris Bogart," Genetic Algorithms and Neural Networks : Optimising Connections and Connectivity", Parallel Computing, 14(1990) pp 347-361.
+- Daniel Graupe, "Principles of Artificial Neural Network", World Scientific Publication Co. Pte. Ltd.
+- Chin-Teng Lin & C.S George Lee, "Neural Fuzzy System".
+- LiMin Fu, "Neural Networks in Computer Intelligence",McGraw Hill International.
 
-<!-- source: College-project-02.pdf; page: 22 -->
-<!-- source-image: pages/02-College-project-02-page-22.png -->
-<!-- structure: prose; confidence: 0.50 -->
 
-## Appendix
+## APPENDIX
 
 
 
-COUNTER PROPAGATION NETWORKS
-INTRODUCTION:
-The Counterpropagation network developed by Robert
-Hecht Nielsen goes beyond the representational limits of single - layer
-networks. As compared to Backpropagation, it can reduce training time by
-hundredfold Counter propagation is a combination of two well-known
-algorithms; the self - organizing map of Kohonen and the Grossberg The
-Counter propagation network functions as a look-up table capable of
-generalization. The training process associates input vectors with
-corresponding output vectors. These vectors may be binary consisting of
-ones and zeros, or continuous. Once the network is trained application of
-an input vector produces the desired output vector. The generalization
-capability of the network allows it to produce a correct output even when
-it is given an input vector that is partially incorrect. This makes the
-network useful for pattern -recognition, pattern - completion, and signal -
-enhancement applications.
+### COUNTER PROPAGATION NETWORKS
+#### INTRODUCTION:
+
+The Counter propagation network developed by Robert Hecht Nielsen goes beyond the representational limits of single - layer networks. As compared to Back propagation, it can reduce training time by hundredfold Counter propagation is a combination of two well-known algorithms; the self - organizing map of Kohonen and the Grossberg The Counter propagation network functions as a look-up table capable of generalization. The training process associates input vectors with corresponding output vectors. These vectors may be binary consisting of ones and zeros, or continuous. Once the network is trained application of an input vector produces the desired output vector. The generalization capability of the network allows it to produce a correct output even when it is given an input vector that is partially incorrect. This makes the network useful for pattern -recognition, pattern - completion, and signal - enhancement applications.
 
 
 
-NETWORK STRUCTURE:
-The neuron in layer O serve only as fan - out points and
-perform no computation. Each layer O neuron connects to every neuron in
-layer 1 (called the KOHONEN LAYER) through a separate weight Wmin
-these will be collectively reffered to as the weight matrix W. Each neuron
-in layer 1 is connected to every neuron in layer2 (called the GROSSBERG
-LAYER) by a weight Vnp ;these comprise the weight matrix V.
+#### NETWORK STRUCTURE:
+The neuron in layer O serve only as fan - out points and perform no computation. Each layer O neuron connects to every neuron in layer 1 (called the KOHONEN LAYER) through a separate weight Wmin these will be collectively reffered to as the weight matrix W. Each neuron in layer 1 is connected to every neuron in layer2 (called the GROSSBERG LAYER) by a weight Vnp ;these comprise the weight matrix V.
 
 ![Feedforward counter propagation network](assets/images/ffcpn.png)
 
-Feedfortrard Counterpropagation Network
-Counter propagation functions in two modes; the
-NORMAL MODE, in which it accepts an input vector X and produces an
-output vector Y, and the TRAINING MODE in which an input vector is
-applied and the weights are adjusted to yield the desired output vector
+Feedforward Counterpropagation Network 
+
+
+Counter propagation functions in two modes; the NORMAL MODE, in which it accepts an input vector X and produces an
+output vector Y, and the TRAINING MODE in which an input vector is applied and the weights are adjusted to yield the desired output vector
 
 
 
-NORMAL OPERATION:
-The Kohonen laver :
-The Kohonen layer functions in a 'winner- take -all fashion';
-that is, for given input vector, one and only one Kohonen neuron outputs a
-logical one; all other outputs are zero. Associated with each Kohonen
-neuron it to each input Kohonen neuron K1 has weights
-wIl,w21,.. wm1, comprising a weight vector WI.These connect by
-way of the input layer to input signals x1,×2,.....xm,comprising the input
-vector X. As with neurons in most networks, the NET output of each
-Kohonen neuron is simply the summation inputs . This may be expressed as
+#### NORMAL OPERATION:
+*The Kohonen laver :*
+The Kohonen layer functions in a 'winner- take -all fashion'; that is, for given input vector, one and only one Kohonen neuron outputs a logical one; all other outputs are zero. Associated with each Kohonen neuron it to each input Kohonen neuron K1 has weights wIl,w21,.. wm1, comprising a weight vector WI.These connect by way of the input layer to input signals x1,×2,.....xm,comprising the input vector X. As with neurons in most networks, the NET output of each Kohonen neuron is simply the summation inputs . This may be expressed as
 follows:
-.............tWmiXm
+
+```
 NET j = wljx1+w2ix2+
 where NET i is the NET output of kohonen neuron j
 NET j = xiwij
@@ -719,51 +781,41 @@ N= XW
 where N is the vector of Kohonen layer NET ouputs.
 The Kohonen neuron with the largest NET value is the 'winner'. Its
 output is set to one; all others are set to zero.
+```
 
+*Grossberg Laver:*
 
-Grossberg Laver:
-The Grossberg layer functions in a familiar manner. Its
-NET output is the weighted sum of the Kohonen layer outputs
-k1.k2.k3.
-..kn, forming the vector K. The connecting weight vector
-designated V consists of the weights v11, v21, .....p. The NET output
-of each Grossberg neuron is then
+The Grossberg layer functions in a familiar manner. Its NET output is the weighted sum of the Kohonen layer outputs
+k1.k2.k3...kn, forming the vector K. The connecting weight vector designated V consists of the weights v11, v21, .....p. The NET output of each Grossberg neuron is then
+```
 NET i = kiwii
 where NET j is the output of the Grossberg neuron j, or in vector form
 Y=KV
+
 where Y= the Grossberg - layer output vector
 K=the Kohonen - layer output vector
 V= the Grossberg layer weight matrix
 If the Kohonen layer is operated such that one neuron's
-NET is at one and all others are at zero, only ane element of the K vector
-is nonzero, and the calculation is simple. The only action of
-each neuron in the Grossberg layer is to output the value of the weight that
-connects it to the single nonzero Kohonen neuron.
-TRAINING THE KOHONEN LAYER:
-Kohonen training is aself - organizing algorithm that
-operates in the supervised mode. For this reason, it is difficult to predict
-which specific Kohonen neuron will be activated for a given input vector.
-It is only necessary to ensure that training separates input vectors.
+```
+
+NET is at one and all others are at zero, only ane element of the K vector is nonzero, and the calculation is simple. The only action of each neuron in the Grossberg layer is to output the value of the weight that connects it to the single nonzero Kohonen neuron. 
+
+#### TRAINING THE KOHONEN LAYER:
+
+Kohonen training is aself - organizing algorithm that operates in the supervised mode. For this reason, it is difficult to predict which specific Kohonen neuron will be activated for a given input vector. It is only necessary to ensure that training separates input vectors.
 
 
-Preprocessing the Input Vectors :
-It is highly to normalize all input vector before applyingthem
-to the network. This is done by dividing each component of an input vector
-by that vector's length. This length is found by taking the square root of the
-sum of the squares of all of the vector's components . In symbols
+*Preprocessing the Input Vectors :*
+
+It is highly to normalize all input vector before applying them to the network. This is done by dividing each component of an input vector by that vector's length. This length is found by taking the square root of the sum of the squares of all of the vector's components . In symbols 
+
+```
 Xi'= Xi /(X1^2+X2^2 + hmmm+ Xn^2)^1/2
-This converts an input vector into a unit vector pointing in
-the same direction ;that is, a vector of unit length in n-dimensional space.
-ring To train the Kohonen layer, an input vector is applied and
-its dot product is calculated with the weight vector associated with each
-Kohonen neuron. The neuron with the highest dot product is declared the
-"winner " and its weighta are adjusted Because the dot product operation
-used to calculate the NET values is a measure of similarity between the inut
-and weight vectors the training process actually consists of selecting the
-Kohonen neuron whose weight is most similar to the input vector, and it
-still more similar. The network self - organizes so that a given Kohonen
-neuron has maximum output for a given input vector: The training
-equation that follows is used
+```
+
+This converts an input vector into a unit vector pointing in the same direction ;that is, a vector of unit length in n-dimensional space. ring To train the Kohonen layer, an input vector is applied and its dot product is calculated with the weight vector associated with each Kohonen neuron. The neuron with the highest dot product is declared the "winner " and its weighta are adjusted Because the dot product operation used to calculate the NET values is a measure of similarity between the input and weight vectors the training process actually consists of selecting the Kohonen neuron whose weight is most similar to the input vector, and it still more similar. The network self - organizes so that a given Kohonen neuron has maximum output for a given input vector: The training equation that follows is used
+
+```
 Wnew = Wold + (x - Wold )
 where
 Wnew = the new value of a weight connecting an input
@@ -771,110 +823,44 @@ component x to the winning neuron
 Wnew = the previous value of this weight
 
 
-= a training rate coefficient that may vary during the training
-process
-Each weight associated with the winning Kohonen neuron is
-changed by an amount proportional to the difference between its value and
-the value of the input to which it connects The direction of the change
-minimizes the difference between the weight its input. The variable is a
-training rate coefficient that usually starts out at 0.7 and may be gradually
-reduced during training. This allows large intial steps for rapid, coarse
-training and smaller steps as the final value approached .
-If only one input vector were to be associated with each
-Kohonen neuron, the Kohonen layer could be trained with a single
-calculation per weight. The weights of a winning neuron would be made
-equal to the components of the training vector (=1_ Usually the training
-set includes many input vectors that are similar and the network should be
-trained to activate the same Kohonen neuron for each of them. In this
-case, the weights of that neuron should be the average of the input vectors
-that will activate it. Setting to a low value will reduce the effect of each
-training step, making the final value an average of the input vectors to
-which it was trained. In this way, the weights associated with a neuron will
-assume a value near the "center" of the input vectors for which that neuron
-is the "winner".
+= a training rate coefficient that may vary during the training process
 
+```
+
+Each weight associated with the winning Kohonen neuron is changed by an amount proportional to the difference between its value and the value of the input to which it connects The direction of the change minimizes the difference between the weight its input. The variable is a training rate coefficient that usually starts out at 0.7 and may be gradually
+reduced during training. This allows large initial steps for rapid, coarse training and smaller steps as the final value approached . If only one input vector were to be associated with each Kohonen neuron, the Kohonen layer could be trained with a single calculation per weight. The weights of a winning neuron would be made equal to the components of the training vector =1_ Usually the training set includes many input vectors that are similar and the network should be
+trained to activate the same Kohonen neuron for each of them. In this case, the weights of that neuron should be the average of the input vectors that will activate it. Setting to a low value will reduce the effect of each training step, making the final value an average of the input vectors to which it was trained. In this way, the weights associated with a neuron will assume a value near the "center" of the input vectors for which that neuron
+is the "winner". 
 
 Interpolative Mode:
-In the interpolative mode, a group of the Kohonen neurons
-having the highest outputs is allowed to persent its outputs to the
-Grossberg layer. The number of neurons in this group must be chosen for
-the application, and ther is no conclusive evidence regarding an optimum
-size Once the group is determined , its set of NET outputs is treated as a
-vector and normalized to until length by dividing each each NET value by
-the squareroot of the sum of the squares of the NET values in the group.
-All neurons not in the group have their outputs set to zero.
+In the interpolative mode, a group of the Kohonen neurons having the highest outputs is allowed to present its outputs to the Grossberg layer. The number of neurons in this group must be chosen for the application, and ther is no conclusive evidence regarding an optimum size Once the group is determined , its set of NET outputs is treated as a
+vector and normalized to until length by dividing each each NET value by the square root of the sum of the squares of the NET values in the group. All neurons not in the group have their outputs set to zero.
+
 TRAINING THE GROSSBERG LAYER
-An input vector is applied, the Kohonen outputs are
-established, and the grossberg outputs are calculated as in normal
-operation. Next, each weight is adjusted only if it connects to a Kohonen
-neuron having a nonzero output. The amount of the weight adjustment is
-proportional to the difference between the weight and desired output of the
+
+An input vector is applied, the Kohonen outputs are established, and the grossberg outputs are calculated as in normal
+operation. Next, each weight is adjusted only if it connects to a Kohonen neuron having a nonzero output. The amount of the weight adjustment is proportional to the difference between the weight and desired output of the
 Grossberg neuron to which it connects. In symbols
+
+```
 Vij=Vij old + (Yj -Vij ) Ki
 Ki = the output of Kohonen neuron i (only one Kohonen neuron
 where
 is nonzero )
 Yj = component j of the vector of desired outputs
-Initially is set approximately 0.1 and is gradually reduced
-as training progresses.
+```
 
----
+Initially is set approximately 0.1 and is gradually reduced as training progresses.
 
-<!-- source: College-project-03.pdf; page: 6 -->
-<!-- source-image: pages/03-College-project-03-page-6.png -->
-<!-- structure: prose; confidence: 0.50 -->
-<!-- visual-structure: figure; confidence: 0.60; reasons: non-text-visual-density -->
-<!-- review-marker: figure-visual-verification -->
+The weights of the grossberg layer will converge to the average values of the desired out whereas the weights of the Kohonen layer are trained to the average values of the inputs. Grossberrg training is supervised; the algorithm has a desired output to which it trains. The unsupervised, self - organising operation of the Kohonen layer produces outputs at indeterminate positions;these mapped to the desired output of the Grossberg layer.
 
-The weights of the grossberg layer will converge to the
-average values of the desired out whereas the weights of the Kohonen
-layer are trained to the average values of the inputs. Grossberrg training is
-supervised; the algorithm has a desired output to which it trains. The
-unsupervised, self - organising operation of the Kohonen layer produces
-outputs at indeterminate positions;these mapped to the desired output of
-the Grossberg layer.
-APPLICATION:
-In addition to the usual vector - mapping functions ,counter
-propagation is useful in Data Compression. Acounter propagation network
-can be used to compress data prior to transmission, there by reducing the
-number of bits that must be sent Suppose an image to transmitted. It can
-be divided into subimages S Each subimage is further sudivided into
-pixels (picture elements ). Each subimage is then a vector, the elements of
-which are the pixels of which are the pixels of which the subimage is
-composed. For simplicity, assume that each pixel is either one (light) or
-zero (dark) If there are n pixels in asubimage If there are n pixels in
-asubimage, then n bits will be required to transmit it. If some distortion
-can be tolerated, substantially fewer bits are actually required to transmit
-typical images, thereby allowing an image to be transmitted rapidly. This
-is possible because of the statistical distribution of sub image vectors. Some
-occur frequently while others occur so seldom that they can be
 
----
+##### APPLICATION:
+In addition to the usual vector - mapping functions ,counter propagation is useful in Data Compression. Acounter propagation network can be used to compress data prior to transmission, there by reducing the number of bits that must be sent Suppose an image to transmitted. It can be divided into subimages S Each subimage is further sudivided into
+pixels (picture elements ). Each subimage is then a vector, the elements of which are the pixels of which are the pixels of which the subimage is composed. For simplicity, assume that each pixel is either one (light) or zero (dark) If there are n pixels in asubimage If there are n pixels in asubimage, then n bits will be required to transmit it. If some distortion can be tolerated, substantially fewer bits are actually required to transmit typical images, thereby allowing an image to be transmitted rapidly. This is possible because of the statistical distribution of sub image vectors. Some occur frequently while others occur so seldom that they can be approximated roughly. The method of vector quantisation finds these shorter bit strings that best represent subimages A Counter propagation network can be used to perform vector quantisation. The set of subimage vectors is used as input to train the kohonen layer in the accertive mode in which only a single neuron is allowed to be 1. The Grossberg weights are trained to produce the binary code of the index of the Kohonen neuron that is 1. For example, if Kohonen neuron 7 is 1 (and the others are all 0), the Grossberg layer will be trained to output 00... ..000111 (the binary code for 7 ). It is this shorter bit string is transmitted. 
 
-<!-- source: College-project-03.pdf; page: 7 -->
-<!-- source-image: pages/03-College-project-03-page-7.png -->
-<!-- structure: prose; confidence: 0.50 -->
-<!-- visual-structure: figure; confidence: 0.60; reasons: non-text-visual-density -->
-<!-- review-marker: figure-visual-verification -->
-
-approximated roughly. The method of vector quantisation finds these
-shorter bit strings that best represent subimages
-A Counter propagation network can be used to perform
-vector quantisation. The set of subimage vectors is used as input to train
-the kohonen layer in the accertive mode in which only a single neuron is
-allowed to be 1. The Grossberg weights are trained to produce the binary
-code of the index of the Kohonen neuron that is 1. For example, if
-Kohonen neuron 7 is 1 (and the others are all 0), the Grossberg layer will
-be trained to output 00...
-..000111 (the binary code for 7 ). It is this
-shorter bit string is transmitted.
-At the receiving end, an identically trained
-counterpropagation network accepts the binary code and produces the
-inverse function, an approximation of the original subimage.
-This method has been applied both to speech and images,
-yielding dat compression ratios of 10:1 to 100:1. The quality has been
-acceptable, however some distortion of the data at the receiving end is
-inevitable.
+At the receiving end, an identically trained counterpropagation network accepts the binary code and produces the inverse function, an approximation of the original subimage. This method has been applied both to speech and images,
+yielding dat compression ratios of 10:1 to 100:1. The quality has been acceptable, however some distortion of the data at the receiving end is inevitable.
 
 
 
