@@ -44,6 +44,6 @@ def mean_squared_error(inputs: Iterable[Sequence[float]], targets: Iterable[Sequ
     output_count=layer_sizes[-1]; error=0.0
     for pattern,target in zip(rows,expected):
         prediction=forward(pattern, chromosome, layer_sizes=layer_sizes, upper_range=upper_range, scale=scale)
-        if len(target)!=output_count: raise ValueError(f"network requires {output_count} target outputs")
+        if len(target)!=output_count: raise ValueError(f"network requires {output_count} target output" + ("" if output_count == 1 else "s"))
         error += sum((prediction[i]-float(target[i]))**2 for i in range(output_count))
     return error/(len(rows)*output_count)
