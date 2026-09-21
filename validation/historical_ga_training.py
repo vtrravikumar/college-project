@@ -1,36 +1,15 @@
 """End-to-end historical-style GA training loop.
 
-This is a modern Python reconstruction of the GA training flow evidenced by
-Code-01. It is not historical Python and does not claim byte-for-byte
-equivalence to the C program.
-
-The loop combines the reconstructed:
-- binary chromosome/population
-- historical-style fitness evaluation
-- roulette selection
-- crossover and mutation
-- two-child lower-error survivor
-- replacement of the current worst member
-
-For weight optimisation, connectivity is supplied separately and remains
-fixed while the 100-bit weight chromosome evolves, matching the report's
-separate treatment of weights and connections.
-
-The random initialisation is necessarily a modern reproducible choice because
-the original random stream/initial population cannot be recovered exactly.
+Modern Python reconstruction.  Defaults preserve the recovered 2-2-2-1,
+100-bit weight chromosome with separate connectivity.
 """
-
 from __future__ import annotations
-
 from dataclasses import dataclass
 from typing import Sequence
-
 import numpy as np
-
-from historical_chromosome import build_chromosome
-from historical_fitness import mean_squared_error
+from historical_chromosome import build_chromosome, connection_layout
+from historical_fitness import mean_squared_error, DEFAULT_LAYER_SIZES
 from historical_ga_generation import generate_one_step
-
 
 @dataclass(frozen=True)
 class HistoricalTrainingResult:
@@ -39,109 +18,42 @@ class HistoricalTrainingResult:
     generations_completed: int
     success: bool
     initial_best_fitness: float
-    best_fitness_history: tuple[float, ...]
-
-
-def _fitness_function(
-    chromosome_bits: np.ndarray,
-    connectivity_bits: str,
-    inputs: tuple[Sequence[float], ...],
-    targets: tuple[Sequence[float], ...],
-    *,
-    upper_range: float,
-) -> float:
-    chromosome = build_chromosome(
-        "".join(str(int(bit)) for bit in chromosome_bits),
-        connectivity_bits,
-    )
-    return mean_squared_error(
-        inputs,
-        targets,
-        chromosome,
-        upper_range=upper_range,
-    )
-
+    best_fitness_history: tuple[float,...]
 
 def train_historical_ga(
     rng: np.random.Generator,
-    inputs: tuple[Sequence[float], ...],
-    targets: tuple[Sequence[float], ...],
+    inputs: tuple[Sequence[float],...],
+    targets: tuple[Sequence[float],...],
     *,
-    population_size: int,
-    generations: int,
-    crossover_probability: float,
-    mutation_probability: float,
-    upper_range: float,
-    connectivity_bits: str = "1" * 10,
-    success_threshold: float = 0.05,
+    population_size:int, generations:int, crossover_probability:float,
+    mutation_probability:float, upper_range:float,
+    connectivity_bits:str="1"*10, success_threshold:float=0.05,
+    layer_sizes:Sequence[int]=DEFAULT_LAYER_SIZES,
+    chromosome_bits:int|None=None,
+    evolve_connectivity:bool=False,
 ) -> HistoricalTrainingResult:
-    """Run the reconstructed binary GA until success or max generations."""
-    if population_size < 2:
-        raise ValueError("population_size must be at least 2")
-    if generations < 0:
-        raise ValueError("generations must be non-negative")
-    if len(connectivity_bits) != 10 or any(bit not in "01" for bit in connectivity_bits):
-        raise ValueError("connectivity_bits must contain exactly 10 binary values")
-
-    population = rng.integers(
-        0, 2, size=(population_size, 100), dtype=np.uint8
-    )
-
-    def evaluate(chromosome: np.ndarray) -> float:
-        return _fitness_function(
-            chromosome,
-            connectivity_bits,
-            inputs,
-            targets,
-            upper_range=upper_range,
-        )
-
-    fitness = np.array([evaluate(chromosome) for chromosome in population])
-    best_index = int(np.argmin(fitness))
-    best_chromosome = population[best_index].copy()
-    best_fitness = float(fitness[best_index])
-    initial_best = best_fitness
-    history = [best_fitness]
-
-    if best_fitness < success_threshold:
-        return HistoricalTrainingResult(
-            best_chromosome=best_chromosome,
-            best_fitness=best_fitness,
-            generations_completed=0,
-            success=True,
-            initial_best_fitness=initial_best,
-            best_fitness_history=tuple(history),
-        )
-
-    completed = 0
+    links=sum(layer_sizes[i]*layer_sizes[i+1] for i in range(3))
+    if len(connectivity_bits)!=links: raise ValueError(f"connectivity_bits must contain exactly {links} bits")
+    weight_bits=links*10
+    if chromosome_bits is None: chromosome_bits=weight_bits + (links if evolve_connectivity else 0)
+    expected=weight_bits + (links if evolve_connectivity else 0)
+    if chromosome_bits!=expected: raise ValueError(f"chromosome_bits must be {expected} for this representation")
+    population=rng.integers(0,2,size=(population_size,chromosome_bits),dtype=np.uint8)
+    def evaluate(chromosome):
+        bits="".join(str(int(b)) for b in chromosome[:weight_bits])
+        conn=connectivity_bits if not evolve_connectivity else "".join(str(int(b)) for b in chromosome[weight_bits:])
+        return mean_squared_error(inputs,targets,build_chromosome(bits,conn),layer_sizes=layer_sizes,upper_range=upper_range)
+    fitness=np.array([evaluate(c) for c in population])
+    best_i=int(np.argmin(fitness)); best=population[best_i].copy(); best_fit=float(fitness[best_i]); initial=best_fit; history=[best_fit]
+    if best_fit<success_threshold:
+        return HistoricalTrainingResult(best,best_fit,0,True,initial,tuple(history))
+    completed=0
     for _ in range(generations):
-        result = generate_one_step(
-            rng,
-            population,
-            fitness,
-            crossover_probability=crossover_probability,
-            mutation_probability=mutation_probability,
-            evaluate=evaluate,
-        )
-        population = result.new_population
-        fitness = np.array([evaluate(chromosome) for chromosome in population])
-
-        current_best_index = int(np.argmin(fitness))
-        current_best = float(fitness[current_best_index])
-        if current_best < best_fitness:
-            best_fitness = current_best
-            best_chromosome = population[current_best_index].copy()
-        history.append(best_fitness)
-        completed += 1
-
-        if best_fitness < success_threshold:
-            break
-
-    return HistoricalTrainingResult(
-        best_chromosome=best_chromosome,
-        best_fitness=best_fitness,
-        generations_completed=completed,
-        success=best_fitness < success_threshold,
-        initial_best_fitness=initial_best,
-        best_fitness_history=tuple(history),
-    )
+        result=generate_one_step(rng,population,fitness,crossover_probability=crossover_probability,mutation_probability=mutation_probability,evaluate=evaluate)
+        population=result.new_population
+        fitness=np.array([evaluate(c) for c in population])
+        i=int(np.argmin(fitness)); current=float(fitness[i])
+        if current<best_fit: best_fit=current; best=population[i].copy()
+        history.append(best_fit); completed+=1
+        if best_fit<success_threshold: break
+    return HistoricalTrainingResult(best,best_fit,completed,best_fit<success_threshold,initial,tuple(history))
