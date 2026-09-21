@@ -34,6 +34,9 @@ jobs:
       - name: Run decoder reconstruction
         run: python experiments/decoder_historical.py
 
+      - name: Run robot reported-solution verification
+        run: python experiments/robot_historical.py
+
       - name: Upload validation results
         uses: actions/upload-artifact@v4
         with:
@@ -42,4 +45,5 @@ jobs:
             validation/results/
             results/parity_historical_seed1998.json
             results/decoder_historical_seed1998.json
+            results/robot_historical_verification.json
           if-no-files-found: error
