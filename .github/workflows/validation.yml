@@ -31,6 +31,9 @@ jobs:
       - name: Run parity reconstruction
         run: python experiments/parity_historical.py
 
+      - name: Run decoder reconstruction
+        run: python experiments/decoder_historical.py
+
       - name: Upload validation results
         uses: actions/upload-artifact@v4
         with:
@@ -38,4 +41,5 @@ jobs:
           path: |
             validation/results/
             results/parity_historical_seed1998.json
+            results/decoder_historical_seed1998.json
           if-no-files-found: error
