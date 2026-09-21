@@ -1,8 +1,13 @@
 """Tests for the historical feed-forward fitness reconstruction."""
 
 from math import isclose
+import sys
+from pathlib import Path
 
 import pytest
+
+VALIDATION = Path(__file__).resolve().parents[1] / "validation"
+sys.path.insert(0, str(VALIDATION))
 
 from historical_chromosome import build_chromosome
 from historical_fitness import forward, mean_squared_error
