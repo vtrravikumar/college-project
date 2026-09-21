@@ -1,128 +1,68 @@
-"""Historical chromosome structure for the 1998 neural-network GA reconstruction.
+"""Historical-style chromosome reconstruction for the 1998 neural-network GA.
 
-This module defines the chromosome layout evidenced by the surviving Code-01
-source and the report. It is a modern Python reconstruction, not historical
-source code.
-
-For the documented 2-2-2-1 network there are 10 possible links:
-- 4 input -> hidden-1
-- 4 hidden-1 -> hidden-2
-- 2 hidden-2 -> output
-
-Code-01 uses CHROMLEN=10 and CONCN=10. A 100-bit weight chromosome is therefore
-ten 10-bit weight fields. Connectivity is stored separately as ten bits.
-
-The exact historical link ordering is not independently recovered from the
-available source. The ordering used here is a documented reconstruction:
-weights/connectivity are grouped layer-by-layer, with source node order before
-destination node order. It must remain explicit so it can be changed if a
-clearer source scan is recovered.
+Modern Python reimplementation, not historical Python.  The default remains
+the recovered 2-2-2-1 case (10 links, 100 weight bits).  The representation is
+now parameterised so other reported networks can be tested without changing
+the historical defaults.
 """
-
 from __future__ import annotations
-
 from dataclasses import dataclass
-from typing import Iterable
+from typing import Iterable, Sequence
+from historical_encoding import DEFAULT_WEIGHT_BITS, bits_to_integer, decode_connectivity, decode_weight_c_observed
 
-from historical_encoding import (
-    DEFAULT_WEIGHT_BITS,
-    bits_to_integer,
-    decode_connectivity,
-    decode_weight_c_observed,
-)
+def connection_layout(layer_sizes: Sequence[int]) -> tuple[tuple[str,int,str,int], ...]:
+    if len(layer_sizes) != 4:
+        raise ValueError("layer_sizes must contain input, hidden1, hidden2, output")
+    names = ("input", "hidden1", "hidden2", "output")
+    links=[]
+    for layer in range(3):
+        for src in range(layer_sizes[layer]):
+            for dst in range(layer_sizes[layer+1]):
+                links.append((names[layer], src, names[layer+1], dst))
+    return tuple(links)
 
-
-DEFAULT_CONNECTION_LAYOUT = (
-    ("input", 0, "hidden1", 0),
-    ("input", 0, "hidden1", 1),
-    ("input", 1, "hidden1", 0),
-    ("input", 1, "hidden1", 1),
-    ("hidden1", 0, "hidden2", 0),
-    ("hidden1", 0, "hidden2", 1),
-    ("hidden1", 1, "hidden2", 0),
-    ("hidden1", 1, "hidden2", 1),
-    ("hidden2", 0, "output", 0),
-    ("hidden2", 1, "output", 0),
-)
-
+DEFAULT_CONNECTION_LAYOUT = connection_layout((2,2,2,1))
 
 @dataclass(frozen=True)
 class HistoricalChromosome:
-    """Separate historical-style weight and connectivity chromosomes."""
-
     weight_bits: str
     connectivity_bits: str
+    link_count: int = len(DEFAULT_CONNECTION_LAYOUT)
 
-    def __post_init__(self) -> None:
-        if len(self.weight_bits) != 10 * DEFAULT_WEIGHT_BITS:
-            raise ValueError(
-                "the documented 2-2-2-1 chromosome requires 100 weight bits"
-            )
-        if len(self.connectivity_bits) != len(DEFAULT_CONNECTION_LAYOUT):
-            raise ValueError("connectivity must contain 10 link bits")
-        if any(bit not in "01" for bit in self.weight_bits):
-            raise ValueError("weight_bits must contain only '0' and '1'")
-        if any(bit not in "01" for bit in self.connectivity_bits):
-            raise ValueError("connectivity_bits must contain only '0' and '1'")
+    def __post_init__(self):
+        expected=self.link_count*DEFAULT_WEIGHT_BITS
+        if len(self.weight_bits) != expected:
+            raise ValueError(f"weight_bits must contain exactly {expected} bits")
+        if len(self.connectivity_bits) != self.link_count:
+            raise ValueError(f"connectivity must contain exactly {self.link_count} link bits")
+        if any(b not in "01" for b in self.weight_bits+self.connectivity_bits):
+            raise ValueError("chromosome fields must contain only '0' and '1'")
 
     @property
-    def weight_chunks(self) -> tuple[str, ...]:
-        """Return the ten fixed-width 10-bit weight fields."""
-        return tuple(
-            self.weight_bits[i : i + DEFAULT_WEIGHT_BITS]
-            for i in range(0, len(self.weight_bits), DEFAULT_WEIGHT_BITS)
-        )
+    def weight_chunks(self):
+        return tuple(self.weight_bits[i:i+DEFAULT_WEIGHT_BITS] for i in range(0,len(self.weight_bits),DEFAULT_WEIGHT_BITS))
 
     @property
-    def encoded_weights(self) -> tuple[int, ...]:
-        """Return the ten raw binary-decoded weight integers."""
-        return tuple(bits_to_integer(chunk) for chunk in self.weight_chunks)
+    def encoded_weights(self):
+        return tuple(bits_to_integer(c) for c in self.weight_chunks)
 
     @property
-    def connectivity(self) -> tuple[int, ...]:
-        """Return the ten separate link-presence bits."""
+    def connectivity(self):
         return decode_connectivity(self.connectivity_bits)
 
-    def decode_weights(
-        self, *, upper_range: float, scale: int = 100
-    ) -> tuple[float, ...]:
-        """Decode all ten weights using the observed Code-01 decoder."""
-        return tuple(
-            decode_weight_c_observed(
-                chunk, upper_range=upper_range, scale=scale
-            )
-            for chunk in self.weight_chunks
-        )
+    def decode_weights(self, *, upper_range: float, scale: int = 100):
+        return tuple(decode_weight_c_observed(c, upper_range=upper_range, scale=scale) for c in self.weight_chunks)
 
-    def active_weights(
-        self, *, upper_range: float, scale: int = 100
-    ) -> tuple[float, ...]:
-        """Apply separate connectivity bits to decoded weights.
+    def active_weights(self, *, upper_range: float, scale: int = 100):
+        return tuple(w if connected else 0.0 for w, connected in zip(self.decode_weights(upper_range=upper_range, scale=scale), self.connectivity))
 
-        A zero connectivity bit produces a zero effective link weight, matching
-        the role of gbit[] in Code-01's finalweights().
-        """
-        decoded = self.decode_weights(upper_range=upper_range, scale=scale)
-        return tuple(
-            weight if connected else 0.0
-            for weight, connected in zip(decoded, self.connectivity)
-        )
-
-
-def build_chromosome(
-    weight_bits: str,
-    connectivity_bits: str | Iterable[int],
-) -> HistoricalChromosome:
-    """Construct and validate the separate historical chromosome fields."""
+def build_chromosome(weight_bits: str, connectivity_bits: str | Iterable[int], *, link_count: int | None = None) -> HistoricalChromosome:
     if isinstance(connectivity_bits, str):
-        encoded_connectivity = connectivity_bits
+        encoded=connectivity_bits
     else:
-        values = tuple(connectivity_bits)
-        if any(bit not in (0, 1) for bit in values):
+        values=tuple(connectivity_bits)
+        if any(v not in (0,1) for v in values):
             raise ValueError("connectivity bits must contain only 0 or 1")
-        encoded_connectivity = "".join(str(bit) for bit in values)
-
-    return HistoricalChromosome(
-        weight_bits=weight_bits,
-        connectivity_bits=encoded_connectivity,
-    )
+        encoded="".join(str(v) for v in values)
+    count=len(encoded) if link_count is None else link_count
+    return HistoricalChromosome(weight_bits, encoded, count)
