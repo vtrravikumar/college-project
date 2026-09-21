@@ -80,13 +80,13 @@ Where historical evidence is incomplete, the modern implementation will document
 | Binary weight representation | Described in methodology | To be verified | Pending exact convention | Medium |
 | Connectivity evolution | Described as part of network design | To be verified | Pending | Medium |
 | Back Propagation baseline | Used for comparison | To be reviewed | Partially established | Medium |
-| XOR | Included in Boolean-function experiments | To be reviewed | Phase 1 harness exists | Medium |
-| 3-bit parity | Reported application | To be reviewed | Pending reconstruction | Medium |
-| Decoder | Reported application | To be reviewed | Pending reconstruction | Medium |
-| Robot inverse kinematics | Reported application | To be reviewed | Pending reconstruction | Medium |
-| GA parameter values | Tables/results in report | To be verified in source | Pending extraction | Medium |
-| Historical execution time | Not yet established | To be investigated | Pending | Unknown |
-| Historical hardware | Not yet established | To be investigated | Pending | Unknown |
+| XOR | Reported Boolean-function experiment; scan confirms 100-bit chromosome and 25/1400/0.9/0.04 parameters | Surviving C is consistent with 10 links × 10 bits | Modern harness exists; historical reported values documented | High |
+| 3-bit parity | Scan confirms 3-2-2-1, 132-bit chromosome, 12-link connectivity, training table and 57/21 sec timings | Surviving C gives 10-bit weight fields | Modern reconstruction completed; 120-bit separate-connectivity and hypothetical 132-bit combined interpretations tested | High for source facts; Medium for encoding interpretation |
+| Decoder | Scan confirms 3-2-2-3, 170-bit chromosome, three training patterns, 16-link table and 84/70 sec timings | Surviving C gives 10-bit weight fields | Modern reconstruction completed; 170-bit encoding remains unresolved | High for source facts; Low-Medium for encoding interpretation |
+| Robot inverse kinematics | Scans confirm 2-4-2, seven training patterns, 16 links, 128-bit chromosome and 0.000208 summed error | Surviving C establishes 10-bit weight fields, but robot-specific encoding is not recovered | Reported solution numerically verified; 128-bit encoding remains unresolved | High for source facts; High for reported-result verification |
+| GA parameter values | Verified against original scans for parity, decoder and robot | Partially verified where surviving source applies | Major application parameters documented | High |
+| Historical execution time | Report contains BP/GA timings for parity, decoder and robot | Not required for algorithm reconstruction | Historical timings documented; modern timing still pending | High for reported values |
+| Historical hardware | Not established in current evidence | Not established | Pending | Unknown |
 
 Confidence describes confidence in the **historical claim**, not confidence that the OCR/source extraction is error-free.
 
