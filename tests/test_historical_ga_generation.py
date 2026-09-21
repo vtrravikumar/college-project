@@ -25,16 +25,20 @@ def test_generation_replaces_worst_member_with_fitter_child():
         ],
         dtype=np.uint8,
     )
-    fitness = np.array([0.20, 0.30, 0.90])
+    # The surviving selection routine uses raw fitness as roulette weights.
+    # With seed 25 this fixture selects the first (zero) chromosome twice.
+    # This deliberately preserves the source-level selection semantics rather
+    # than assuming that lower error receives a higher roulette probability.
+    fitness = np.array([0.20, 0.30, 0.50])
 
     def evaluate(chromosome):
         return float(np.sum(chromosome))
 
     # With crossover disabled, the historical operator uses the last
-    # crossover site. Mutation is also disabled, making the child outcome
-    # deterministic for this test.
+    # crossover site. Mutation is also disabled, so the selected parent
+    # chromosomes are copied unchanged.
     result = generate_one_step(
-        np.random.default_rng(42),
+        np.random.default_rng(25),
         population,
         fitness,
         crossover_probability=0.0,
@@ -42,6 +46,7 @@ def test_generation_replaces_worst_member_with_fitter_child():
         evaluate=evaluate,
     )
 
+    assert result.parent_indices == (0, 0)
     assert result.survivor_index == 2
     assert result.survivor_fitness == 0.0
     np.testing.assert_array_equal(result.old_population[2], [0, 0, 0, 0])
