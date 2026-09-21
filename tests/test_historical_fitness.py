@@ -88,7 +88,10 @@ def test_disconnected_links_are_zeroed_before_forward_pass():
     )
 
     assert connected_prediction != pytest.approx(disconnected_prediction)
-    assert disconnected_prediction == pytest.approx((0.5,))
+    # The downstream active links still produce a nonzero output from the
+    # hidden-layer sigmoid baseline; disabling the first link does not disable
+    # the rest of the network.
+    assert disconnected_prediction == pytest.approx((0.6507776782147005,))
 
 
 def test_input_pattern_must_have_two_values():
