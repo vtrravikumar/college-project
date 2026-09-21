@@ -183,7 +183,7 @@ The initial population is usually created randomly. Individual members of the po
 The working of GA can be illustrated diagrammatically as in figure
 
 ![The working of GA](assets/images/workingofga.png)
- 
+
 Thus a GA has the following components, 
 - a population of binary strings 
 - control parameters. 
@@ -195,19 +195,19 @@ Thus a GA has the following components,
 ##### OPERATORS DESCRIPTION
 
 *SELECTION OPERATOR*
- 
+
 Selection models nature's "survival of the fitness" mechanism. Fitter solution survive while weaker one perish. It can be done using a ranking method, roulette wheel selector or by tournament selection. 
- 
+
 In roulette-wheel selection, each chromosome is assigned a pie-shaped slice on a roulette-wheel where the size is proportional to the fitness of the individual chromosome. The spin is simulated by generating and the total of individual fitness. The winning chromosome is the one in whose slice the roulette spinner ends up. 
- 
+
 In rank based selection, two individuals are chosen using roulette wheel and the member with higher fitness is selected. 
- 
+
 In tournament selection, a set of individuals are sequentially chosen, and the member with the highest fitness is added to the mating pool. 
- 
+
  *CROSSOVER OPERATOR* 
- 
+
 The purpose of cross over is to create children whose genetic material resembles their parent's genes in some fashion. Thus is done with a hope that a child will have better features of both of its parents. 
- 
+
 A simple, one-point crossover between two individuals proceed in two steps. First, a cross site along the string length is chosen uniformly at random. Then the position values are exchanged between the two strings following the cross site
 
 For example, if two selected strings are, 
@@ -222,12 +222,12 @@ D = 0001 1111
 ```
 
 following the crossover operation. 
- 
+
 There are other two types of crossover namely multi-point crossover, partially matched crossover useful for particular application. 
 *MUTATION OPERATOR*
 
 It is the occasional alteration of a chromosome like flipping a bit which has a low probability. Mutation is used to rejuvenate the search, extending the search into previously unexplored areas. It also helps in restoring lost genetic material. 
- 
+
 For example, if all the strings in a population have converged to zero at a given position and the optimal solution has a one at that position. Then crossover cannot generate a one there, while mutation could.
 
 ##### PROBLEM DEPENDENT ISSUES
@@ -923,9 +923,7 @@ acceptable, however some distortion of the data at the receiving end is
 inevitable.
 
 ## APPENDIX A — GENETIC ALGORITHM SOURCE CODE
-
 The following is the reconstructed historical source listing corresponding to the surviving `Code-01.pdf` source document. It is preserved as a documentary reconstruction and is not represented as a verified compilable copy of the original 1998 source.
-
 ```c
 /*
  * HISTORICAL SOURCE RECONSTRUCTION
@@ -1849,9 +1847,7 @@ void storeweights(population pop)
 ```
 
 ## APPENDIX B — BACK-PROPAGATION SOURCE CODE
-
 The following is the reconstructed historical source listing corresponding to the surviving Back-Propagation program in `Code-02.pdf`. It is preserved as a documentary reconstruction and is not represented as a verified compilable copy of the original 1998 source.
-
 ```c
 /*
  * HISTORICAL SOURCE RECONSTRUCTION
@@ -2451,9 +2447,7 @@ void get_op(void)
 ```
 
 ## APPENDIX C — COUNTER-PROPAGATION SOURCE CODE
-
 The following is the reconstructed historical source listing corresponding to the Counter-Propagation program spanning `Code-02.pdf` and `Code-03.pdf`. It is preserved as a documentary reconstruction and is not represented as a verified compilable copy of the original 1998 source.
-
 ```c
 /*
  * HISTORICAL SOURCE RECONSTRUCTION
