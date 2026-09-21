@@ -59,14 +59,22 @@ def test_zero_weights_have_xor_mse_quarter():
 
 
 def test_disconnected_links_are_zeroed_before_forward_pass():
-    # A valid encoded weight of 1.00 is followed by nine zero weights.
-    # Disconnecting that first link must make the network behave exactly like
-    # the all-zero network.
-    first_weight = "0001100100"  # 100 decimal -> 1.00
-    weight_bits = first_weight + ("0" * 90)
+    # Use a 1.00 weight on the first link of each layer so that the
+    # first connectivity bit can affect the final output. A nonzero weight
+    # only in the first layer would be masked by zero downstream weights.
+    one_weight = "0001100100"  # 100 decimal -> 1.00
+    zero_weight = "0" * 10
+    weight_bits = (
+        one_weight
+        + zero_weight * 3
+        + one_weight
+        + zero_weight * 3
+        + one_weight
+        + zero_weight
+    )
 
-    connected = build_chromosome(weight_bits, "1" + "0" * 9)
-    disconnected = build_chromosome(weight_bits, "0" * 10)
+    connected = build_chromosome(weight_bits, "1000100010")
+    disconnected = build_chromosome(weight_bits, "0000100010")
 
     connected_prediction = forward(
         (1.0, 0.0),
