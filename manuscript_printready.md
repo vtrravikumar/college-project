@@ -607,10 +607,9 @@ Finally the weights of the network with optimal connections are optimized by app
 
 *Parameter of NN*
 
-The initial configuration is, eight nodes in the input layer, two nodes in the first hidden layer, two nodes in the second hidden layer and one node in the output The network is not fully connected layer.
+The scanned network diagram establishes the initial configuration as **two nodes in the input layer, four nodes in the hidden layer and two nodes in the output layer**. The network is not fully connected.
 
-
-Parameters of GA !-
+Parameters of GA :-
 128
 Chromosome length
 30
@@ -621,73 +620,67 @@ No. of generation
 Probability of cross over
 0.01
 Probability of mutation
-1.5.1.5
+1.5,1.5
 Range of weights
 Training Data :
-Ipput
-Output
-02
-y
-81
-0.290889
-2.9386
-0.174533
-8.40739
-0.32725
-0.19635
-8.25326
-3.28037
-0.374
-8.0309
-0.2244
-3.70669
-0.436333
-7.69392
-4.24922
-0.2618
-0.5236
-0.31416
-7.14987
-4.9518
-0.6545
-5.86087
-0.3927
-6.19551
-0.872667
-6.92405
-0.5236
-4.33232
-optimal set of weights & links :-
-Optimal set of link
-111011101111110
 
-Optimal set ofweights
-links
-weichts
--1.11
-0.39
--0.37
-nAn
--0.73
-0.6
-nAn
-053
-063
--15
-- 1.42
-0.03
-0.95
--0.78
-16
-0.00
+| x | y | θ1 | θ2 |
+|:---:|:---:|:---:|:---:|
+| 8.40739 | 2.9386 | 0.174533 | 0.290889 |
+| 8.25326 | 3.28037 | 0.19635 | 0.32725 |
+| 8.0309 | 3.70669 | 0.2244 | 0.374 |
+| 7.69392 | 4.24922 | 0.2618 | 0.436333 |
+| 7.14987 | 4.9518 | 0.31416 | 0.5236 |
+| 6.19551 | 5.86087 | 0.3927 | 0.6545 |
+| 4.33232 | 6.92405 | 0.5236 | 0.872667 |
+
+optimal set of weights & links :-
+
+**Optimal set of link**
+
+`1110111011111110`
+
+**Optimal set of weights**
+
+| Link | Weight |
+|---:|---:|
+| 1 | -1.11 |
+| 2 | 0.39 |
+| 3 | -0.37 |
+| 4 | 0.00 |
+| 5 | 1.00 |
+| 6 | -0.73 |
+| 7 | 0.60 |
+| 8 | 0.00 |
+| 9 | 0.57 |
+| 10 | 0.63 |
+| 11 | -1.50 |
+| 12 | -1.42 |
+| 13 | 0.03 |
+| 14 | 0.95 |
+| 15 | -0.78 |
+| 16 | 0.00 |
 
 Neural Networks for Robot kinematics problem
 
 ![Neural Network For Exclusive OR](assets/images/nnrkp.png)
 
-Weights of link 4,8, 11, 16 are zero & others are non-zero. So that the link with zero
-weights can be pruned from the network.
+**Source-scan note:** The scanned prose says links 4, 8, 11 and 16 are zero, but the scanned weight table gives link 11 = -1.50. The connectivity string and weight table agree on zero links 4, 8 and 16. The discrepancy is preserved rather than silently corrected.
+
 Summed Error: 0.000208
+
+#### Phase 1 reconstruction results
+
+The following modern results are separate from the 1998 reported results.
+
+| Experiment | Modern reconstruction result |
+|---|---|
+| XOR | Seeded validation harness; 3 GA runs, 0/3 successful under the current modern validation configuration |
+| Three-bit parity | Separate-connectivity final best MSE **0.249886**; hypothetical 132-bit combined interpretation **0.250000**; neither converged below 0.05 |
+| Decoder | Final best MSE **0.218268** after 1900 generations; not below 0.05 |
+| Robot | Scanned solution reproduces normalized error **0.000207730**, rounding to reported **0.000208** |
+
+Modern runtime measurements are recorded separately in the Phase 1 evidence document. They are not direct comparisons with the 1998 timings because the hardware and execution environments differ.
 
 ### CONCLUSION
 Evolutionary design concepts have been successfully applied to
