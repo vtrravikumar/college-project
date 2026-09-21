@@ -474,25 +474,72 @@ Time comparison of GA & BP:-
 - Time taken for training using BP: **57 secs**
 - Time taken for training using GA: **21 secs**
 
-DECODER Problem Definition:- The problem involves, producing the output which is the decoded values of the given input. Parameters of NN:- The initial configuration is, three nodes in the input layer, two nodes in the first hidden layer, two nodes in the second hidden layer and three node in the output layer. The network is not fully connected. Parameters of GA: - chromosome length 170 Population size 25 No. of generation 1900 Probability of cross over 0.5 Probabilit of mutation 0.01 RanGe of weights -12,12 Training Data :- INPUT OUTPUT 0 0
+DECODER
 
-Optimal set of weights & links :- Optimal set of link Optimal set ofweights links weights .7.27 0.00 .5 02 -11.55 3.45 0.00 2.92 8.18 .9.61 0.00 -2.38 8.28 -6.5 2.57 -2.05 5.09 
+Problem Definition:-
+The problem involves producing the output which is the decoded values of the given input.
 
-Neural Network For Exclusive Decoder problem 
+Parameters of NN:-
+The initial configuration is, three nodes in the input layer, two nodes in the first hidden layer, two nodes in the second hidden layer and three nodes in the output layer. The network is not fully connected.
+
+Parameters of GA:-
+- Chromosome length: **170**
+- Population size: **25**
+- No. of generation: **1900**
+- Probability of cross over: **0.5**
+- Probability of mutation: **0.01**
+- Range of weights: **-12, 12**
+
+Training data:-
+
+| Input | Output |
+|:---:|:---:|
+| 011 | 011 |
+| 101 | 101 |
+| 110 | 110 |
+
+Optimal set of weights & links:-
+
+**Optimal set of link**
+
+`1011101110111111`
+
+**Optimal set of weights**
+
+| Link | Weight |
+|---:|---:|
+| 1 | -7.27 |
+| 2 | 0.00 |
+| 3 | -5.02 |
+| 4 | -11.55 |
+| 5 | 3.45 |
+| 6 | 0.00 |
+| 7 | 2.92 |
+| 8 | 8.18 |
+| 9 | -9.61 |
+| 10 | 0.00 |
+| 11 | -2.38 |
+| 12 | 8.28 |
+| 13 | -6.5 |
+| 14 | 2.57 |
+| 15 | -2.05 |
+| 16 | 5.09 |
+
+The scanned source states that links **2, 6 and 10** have zero weights and that the zero-weight links can be pruned from the network.
+
+**Source-scan verification:** The original scanned pages confirm the **170-bit chromosome**, the 3–2–2–3 architecture, the three training patterns, the 16-bit connectivity string, and the 16-link weight table.
+
+**Encoding note:** A 3-2-2-3 network has **16 possible links**. The surviving C implementation establishes **10-bit weight fields**, which gives **160 weight bits**. Adding all 16 connectivity bits would give **176 bits**, not the reported **170**. Therefore the report's confirmed 170-bit chromosome remains unresolved. The extra 10 bits cannot currently be explained from the recovered C source. We do not infer an encoding without historical evidence.
+
+**Modern reconstruction note:** The Python decoder experiment now uses the **exact three training patterns recovered from the scan**. It remains a modern seeded reconstruction, not the original 1998 random run.
+
+Neural Network For Exclusive Decoder problem
 
 ![Neural Network For Exclusive OR](assets/images/nnxdecoder.png)
 
-Weights of link 2,6,10 are zero others are all non zero
-
-Time Comparison of GA & BP !-
-
-secs
-
-Time taken for training using BP
-
-secs
-
-Time taken for training using GA
+Time comparison of GA & BP:-
+- Time taken for training using BP: **84 secs**
+- Time taken for training using GA: **70 secs**
 
 #### Conclusion
 
