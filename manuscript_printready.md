@@ -335,6 +335,8 @@ For example if the weight falls within the range of -4.5 to +4.5, it will be lin
 
 The first question that stems in one's mind while encoding the weights is on the decision on the number of bits to be used for the representation. The possible range of values that the weights take is the sole factor that determines this.
 
+> **Reconstruction note:** The surviving Genetic Algorithm source defines CHROMLEN as 10, and the 2-2-2-1 network used in the source has 10 weighted links. This provides direct evidence for a 100-bit weight chromosome in that implementation. The report separately describes connectivity as a string whose length equals the number of links. For the three-input parity network, the report states a chromosome length of **132** while the architecture has 12 possible links; using the surviving 10-bit-per-weight encoding would give **120 weight bits**. The remaining difference of 12 bits is consistent with, but does not establish, a combined weight-plus-connectivity representation. The historical value **132 is therefore preserved as reported and remains unresolved rather than being silently corrected**.
+
 ##### CONNECTIVITY OPTIMIZATION
 
 For optimizing the number of links, the presence or absence ofthe links are encoded into the string. The string length will be equal to the number of links in the network. Link presence is indicated by a 1 and the absence by a 0 in the corresponding bit in the string.
@@ -402,9 +404,11 @@ secs
 
 secs
 
-Time taken for training using GA THREE BIT PARITY Problens denition The problem is to produce an output of 1 if there is an odd number of Is in the input pattern. O otherwise Darameters Of NIN The initial configuration is, three nodes in the input layer, two nodes in the first hidden layer, two nodes in the second hidden layer and a single node in the output layer. The network is not fully connected Parameters of GA 132 Chromosome length 30 Population S1ze 1000 No. of generation Probability of cross over 0. 0.09 Probability of mutation -12, 12 Range of weights
+Time taken for training using GA THREE BIT PARITY Problens denition The problem is to produce an output of 1 if there is an odd number of Is in the input pattern. O otherwise Darameters Of NIN The initial configuration is, three nodes in the input layer, two nodes in the first hidden layer, two nodes in the second hidden layer and a single node in the output layer. The network is not fully connected Parameters of GA **132 Chromosome length (reported)** 30 Population S1ze 1000 No. of generation Probability of cross over 0. 0.09 Probability of mutation -12, 12 Range of weights
 
 Training data :- INPUT OUTPUT Optimal set of weights & links Optimal set of link 111011110111 Optimal set of weights weights Links -3187 7.34 -6.41 0.00 6.21 -4.63 155 -5.03 0.00 -0.07 5.09 -1.85 12
+
+> **Reconstruction note:** The parity architecture has 3×2 + 2×2 + 2×1 = **12 possible links**, and the reported connectivity string `111011110111` is also 12 bits long. The surviving source establishes 10-bit weight chunks for the 2-2-2-1 implementation, which would imply **120 weight bits** for 12 links. The report's **132-bit** chromosome therefore cannot currently be reconciled with the surviving source without an additional 12 bits or a different encoding. The trailing `12` in the OCR/transcription of the weight list is treated as the reported weight-range endpoint, not as a thirteenth weight, because the architecture provides 12 links. This remains a documented uncertainty.
 
 Neural Network For Exclusive OR 
 
