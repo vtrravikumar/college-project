@@ -404,21 +404,75 @@ secs
 
 secs
 
-Time taken for training using GA THREE BIT PARITY Problens denition The problem is to produce an output of 1 if there is an odd number of Is in the input pattern. O otherwise Darameters Of NIN The initial configuration is, three nodes in the input layer, two nodes in the first hidden layer, two nodes in the second hidden layer and a single node in the output layer. The network is not fully connected Parameters of GA **132 Chromosome length (reported)** 30 Population S1ze 1000 No. of generation Probability of cross over 0. 0.09 Probability of mutation -12, 12 Range of weights
+Time taken for training using GA THREE BIT PARITY
 
-Training data :- INPUT OUTPUT Optimal set of weights & links Optimal set of link 111011110111 Optimal set of weights weights Links -3187 7.34 -6.41 0.00 6.21 -4.63 155 -5.03 0.00 -0.07 5.09 -1.85 12
+Problem definition:-
+The problem is to produce an output of 1 if there is an odd number of 1s in the input pattern, 0 otherwise.
 
-> **Reconstruction note:** The parity architecture has 3×2 + 2×2 + 2×1 = **12 possible links**, and the reported connectivity string `111011110111` is also 12 bits long. The surviving source establishes 10-bit weight chunks for the 2-2-2-1 implementation, which would imply **120 weight bits** for 12 links. The report's **132-bit** chromosome therefore cannot currently be reconciled with the surviving source without an additional 12 bits or a different encoding. The trailing `12` in the OCR/transcription of the weight list is treated as the reported weight-range endpoint, not as a thirteenth weight, because the architecture provides 12 links. This remains a documented uncertainty.
+Parameters of NN:-
+The initial configuration is, three nodes in the input layer, two nodes in the first hidden layer, two nodes in the second hidden layer and a single node in the output layer. The network is not fully connected.
 
-Neural Network For Exclusive OR 
+Parameters of GA:-
+- Chromosome length: **132**
+- Population size: **30**
+- No. of generation: **1000**
+- Probability of cross over: **0.9**
+- Probability of mutation: **0.09**
+- Range of weights: **-12, 12**
+
+**Source-scan verification:** The original scanned page confirms the chromosome length is **132**; it is not an OCR artefact. The following page also confirms the 12-bit optimal connectivity string and the 12-link weight table.
+
+Training data:-
+
+| Input | Output |
+|:---:|:---:|
+| 000 | 0 |
+| 001 | 1 |
+| 010 | 1 |
+| 011 | 0 |
+| 100 | 1 |
+| 101 | 0 |
+| 110 | 0 |
+| 111 | 1 |
+
+Optimal set of weights & links:-
+
+**Optimal set of link**
+
+`111011110111`
+
+**Optimal set of weights**
+
+| Link | Weight |
+|---:|---:|
+| 1 | -3.87 |
+| 2 | 7.34 |
+| 3 | -6.41 |
+| 4 | 0.00 |
+| 5 | 6.21 |
+| 6 | -4.63 |
+| 7 | 1.55 |
+| 8 | -5.03 |
+| 9 | 0.00 |
+| 10 | -0.07 |
+| 11 | 5.09 |
+| 12 | -1.85 |
+
+The scanned source states that links **4 and 9** have zero weights and that the zero-weight links can be pruned from the network.
+
+**Encoding note:** The 3-2-2-1 architecture has **12 possible links**. The surviving C implementation establishes **10-bit weight fields**, which gives **120 weight bits** for these 12 links. The report's confirmed **132-bit chromosome** is therefore exactly **12 bits longer** than the recovered weight representation. The 12-bit optimal connectivity string provides a plausible explanation if the report's chromosome length represents the **120 weight bits plus 12 connectivity bits**. However, the surviving C implementation stores connectivity separately in `gbit[]`, so this combined interpretation is recorded as **consistent with the report but not proven to be the exact historical internal representation**.
+
+**Modern reconstruction note:** The Python parity experiment tests both representations explicitly: 120 evolving weight bits with separately fixed connectivity, and a 132-bit combined chromosome containing 120 weight bits plus 12 connectivity bits. These are modern reconstructions, not historical Python source.
+
+Neural Network For Exclusive OR
 
 ![Neural Network For Exclusive OR](assets/images/nneor2.png)
 
-Weights of links 4,9, are zero & others are non zero. So the link with zero weights are pruned from the network. Time comparison of GA & BP: - Ting secs Time taken for training using BP
+Weights of links 4,9, are zero & others are non zero. So the link with zero weights are pruned from the network.
 
-secs
-
-Time taken for training using GA
+Time comparison of GA & BP:-
+- Time taken for training using BP: **57 secs**
+- Time taken for training using GA: **21 secs**
 
 DECODER Problem Definition:- The problem involves, producing the output which is the decoded values of the given input. Parameters of NN:- The initial configuration is, three nodes in the input layer, two nodes in the first hidden layer, two nodes in the second hidden layer and three node in the output layer. The network is not fully connected. Parameters of GA: - chromosome length 170 Population size 25 No. of generation 1900 Probability of cross over 0.5 Probabilit of mutation 0.01 RanGe of weights -12,12 Training Data :- INPUT OUTPUT 0 0
 
