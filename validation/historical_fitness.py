@@ -1,144 +1,49 @@
-"""Historical feed-forward fitness reconstruction for the 1998 GA.
+"""Historical feed-forward fitness reconstruction.
 
-This is a modern Python reimplementation of the behaviour evidenced by
-Code-01 and the report. It is not a transcription of historical Python.
-
-The surviving Code-01 forward() routine shows a 2-2-2-1 sigmoid network with
-no bias terms. The ten links are ordered layer-by-layer, matching the
-documented reconstruction in historical_chromosome.py:
-
-    4 input -> hidden1
-    4 hidden1 -> hidden2
-    2 hidden2 -> output
-
-The report describes GA fitness for weight optimisation as the error obtained
-by feed-forwarding the training patterns, with the surviving C source dividing
-the accumulated squared error by NODE3 * NCLS. For the documented 2-2-2-1
-case this is the mean squared error over the four patterns and one output.
-
-This module deliberately does not implement GA survivor/replacement logic;
-that part of generation() remains uncertain in the OCR-derived source.
+Modern Python reimplementation of the feed-forward/MSE behaviour evidenced by
+the surviving C source.  Defaults preserve the recovered 2-2-2-1 network.
 """
-
 from __future__ import annotations
-
 from math import exp
 from typing import Iterable, Sequence
+from historical_chromosome import HistoricalChromosome, connection_layout
 
-from historical_chromosome import HistoricalChromosome
-
-
-INPUT_NODES = 2
-HIDDEN1_NODES = 2
-HIDDEN2_NODES = 2
-OUTPUT_NODES = 1
-PATTERN_COUNT = 4
-
+DEFAULT_LAYER_SIZES=(2,2,2,1)
 
 def sigmoid(value: float) -> float:
-    """Return the sigmoid used by the historical forward propagation."""
-    # The historical C expression is 1/(1+exp(-net)).
-    return 1.0 / (1.0 + exp(-value))
+    return 1.0/(1.0+exp(-value))
 
+def active_weight_matrices(chromosome: HistoricalChromosome, *, layer_sizes: Sequence[int]=DEFAULT_LAYER_SIZES, upper_range: float, scale: int=100):
+    expected_links=sum(layer_sizes[i]*layer_sizes[i+1] for i in range(3))
+    if chromosome.link_count != expected_links:
+        raise ValueError("chromosome link count does not match layer_sizes")
+    weights=chromosome.active_weights(upper_range=upper_range, scale=scale)
+    matrices=[]; offset=0
+    for i in range(3):
+        rows,cols=layer_sizes[i],layer_sizes[i+1]
+        matrices.append([list(weights[offset+r*cols:offset+(r+1)*cols]) for r in range(rows)])
+        offset += rows*cols
+    return tuple(matrices)
 
-def active_weight_matrices(
-    chromosome: HistoricalChromosome,
-    *,
-    upper_range: float,
-    scale: int = 100,
-) -> tuple[list[list[float]], list[list[float]], list[list[float]]]:
-    """Map the ten effective chromosome weights to the three network layers."""
-    weights = chromosome.active_weights(
-        upper_range=upper_range,
-        scale=scale,
-    )
+def forward(inputs: Sequence[float], chromosome: HistoricalChromosome, *, layer_sizes: Sequence[int]=DEFAULT_LAYER_SIZES, upper_range: float, scale: int=100):
+    if len(layer_sizes)!=4:
+        raise ValueError("layer_sizes must contain input, hidden1, hidden2, output")
+    if len(inputs)!=layer_sizes[0]:
+        raise ValueError(f"network requires exactly {layer_sizes[0]} inputs")
+    matrices=active_weight_matrices(chromosome, layer_sizes=layer_sizes, upper_range=upper_range, scale=scale)
+    activation=[float(x) for x in inputs]
+    for matrix in matrices:
+        cols=len(matrix[0])
+        activation=[sigmoid(sum(activation[r]*matrix[r][c] for r in range(len(matrix)))) for c in range(cols)]
+    return tuple(activation)
 
-    hidden1 = [
-        [weights[0], weights[1]],
-        [weights[2], weights[3]],
-    ]
-    hidden2 = [
-        [weights[4], weights[5]],
-        [weights[6], weights[7]],
-    ]
-    output = [[weights[8]], [weights[9]]]
-
-    return hidden1, hidden2, output
-
-
-def forward(
-    inputs: Sequence[float],
-    chromosome: HistoricalChromosome,
-    *,
-    upper_range: float,
-    scale: int = 100,
-) -> tuple[float, ...]:
-    """Run one pattern through the historical 2-2-2-1 network.
-
-    No bias terms are used because the surviving Code-01 forward() source
-    accumulates only weight * activation products.
-    """
-    if len(inputs) != INPUT_NODES:
-        raise ValueError("the historical network requires exactly 2 inputs")
-
-    hidden1, hidden2, output = active_weight_matrices(
-        chromosome,
-        upper_range=upper_range,
-        scale=scale,
-    )
-
-    layer1 = [
-        sigmoid(sum(float(inputs[j]) * hidden1[j][i] for j in range(INPUT_NODES)))
-        for i in range(HIDDEN1_NODES)
-    ]
-    layer2 = [
-        sigmoid(
-            sum(layer1[j] * hidden2[j][i] for j in range(HIDDEN1_NODES))
-        )
-        for i in range(HIDDEN2_NODES)
-    ]
-    result = [
-        sigmoid(
-            sum(layer2[j] * output[j][i] for j in range(HIDDEN2_NODES))
-        )
-        for i in range(OUTPUT_NODES)
-    ]
-    return tuple(result)
-
-
-def mean_squared_error(
-    inputs: Iterable[Sequence[float]],
-    targets: Iterable[Sequence[float]],
-    chromosome: HistoricalChromosome,
-    *,
-    upper_range: float,
-    scale: int = 100,
-) -> float:
-    """Evaluate the chromosome using historical-style feed-forward MSE."""
-    input_rows = tuple(inputs)
-    target_rows = tuple(targets)
-
-    if len(input_rows) != len(target_rows):
-        raise ValueError("inputs and targets must contain the same number of rows")
-    if not input_rows:
-        raise ValueError("at least one training pattern is required")
-
-    squared_error = 0.0
-    output_count = 0
-
-    for pattern, target in zip(input_rows, target_rows):
-        prediction = forward(
-            pattern,
-            chromosome,
-            upper_range=upper_range,
-            scale=scale,
-        )
-        if len(target) != OUTPUT_NODES:
-            raise ValueError("the historical network requires one target output")
-        squared_error += sum(
-            (prediction[i] - float(target[i])) ** 2
-            for i in range(OUTPUT_NODES)
-        )
-        output_count += OUTPUT_NODES
-
-    return squared_error / output_count
+def mean_squared_error(inputs: Iterable[Sequence[float]], targets: Iterable[Sequence[float]], chromosome: HistoricalChromosome, *, layer_sizes: Sequence[int]=DEFAULT_LAYER_SIZES, upper_range: float, scale: int=100):
+    rows=tuple(inputs); expected=tuple(targets)
+    if len(rows)!=len(expected): raise ValueError("inputs and targets must contain the same number of rows")
+    if not rows: raise ValueError("at least one training pattern is required")
+    output_count=layer_sizes[-1]; error=0.0
+    for pattern,target in zip(rows,expected):
+        prediction=forward(pattern, chromosome, layer_sizes=layer_sizes, upper_range=upper_range, scale=scale)
+        if len(target)!=output_count: raise ValueError("network requires one target output" if output_count == 1 else f"network requires {output_count} target outputs")
+        error += sum((prediction[i]-float(target[i]))**2 for i in range(output_count))
+    return error/(len(rows)*output_count)

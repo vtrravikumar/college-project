@@ -28,9 +28,26 @@ jobs:
       - name: Run XOR validation
         run: python validation/validate_project.py --runs 3 --seed 42
 
+      - name: Run parity reconstruction
+        run: python experiments/parity_historical.py
+
+      - name: Run decoder reconstruction
+        run: python experiments/decoder_historical.py
+
+      - name: Run robot reported-solution verification
+        run: python experiments/robot_historical.py
+
+      - name: Benchmark modern Phase 1 workloads
+        run: python scripts/benchmark_phase1.py
+
       - name: Upload validation results
         uses: actions/upload-artifact@v4
         with:
-          name: phase1-xor-validation-results
-          path: validation/results/
+          name: phase1-validation-results
+          path: |
+            validation/results/
+            results/parity_historical_seed1998.json
+            results/decoder_historical_seed1998.json
+            results/robot_historical_verification.json
+            results/phase1_modern_runtime.json
           if-no-files-found: error
