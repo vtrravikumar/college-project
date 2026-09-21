@@ -728,33 +728,15 @@ solution are exchanged.
 
 
 ## References
-D.E.Golberg, "Genetic Algorithm in Search Optimization and Machine
-learning", Addison Wesley, 1989.
-[21
-Jacek M. Zarada," Introduction to Artificial Neural Systems" ,Jaico
-publishing India, 1991
-[3]
-James A. Freeman & David M.Skapura,"Neural Network Algorithm,
-Applications and Programming techniques". Addison Wesley. 1991.
-[4]
-Darrel Whitely, Timothy Starkweather & Chris Bogart," Genetic
-Algorithms and Neural Networks : Optimising Connections anc
-Connectivity", Parallel Computing, 14(1990) pp 347-361.
-[5]
-Daniel Graupe, "Principles of Artificial Neural Network", World Scientific
-Publication Co. Pte. Ltd.
-[6]
-Chin-Teng Lin & C.S George Lee, "Neural Fuzzy System".
-[71
-LiMin Fu, "Neural Networks in Computer Intelligence",McGraw Hill
-International.
-APPENDI
 
----
+- D.E.Golberg, "Genetic Algorithm in Search Optimization and Machine learning", Addison Wesley, 1989.
+- Jacek M. Zarada," Introduction to Artificial Neural Systems" ,Jaico publishing India, 1991
+- James A. Freeman & David M.Skapura,"Neural Network Algorithm, Applications and Programming techniques". Addison Wesley. 1991.
+- Darrel Whitely, Timothy Starkweather & Chris Bogart," Genetic Algorithms and Neural Networks : Optimising Connections and connectivity", Parallel Computing, 14(1990) pp 347-361.
+- Daniel Graupe, "Principles of Artificial Neural Network", World Scientific Publication Co. Pte. Ltd.
+- Chin-Teng Lin & C.S George Lee, "Neural Fuzzy System".
+- LiMin Fu, "Neural Networks in Computer Intelligence",McGraw Hill International.
 
-<!-- source: College-project-02.pdf; page: 22 -->
-<!-- source-image: pages/02-College-project-02-page-22.png -->
-<!-- structure: prose; confidence: 0.50 -->
 
 ## Appendix
 
