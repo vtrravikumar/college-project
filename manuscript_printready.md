@@ -53,7 +53,7 @@ EXTERNAL EXAMINER
 
 
 
-This is to certify that the project titled "Analysis of Artificial Neural Network" is a bonofide work done be by RAVI KUMAR V.T.R. Reg.No E451640 in partial fulfillment of the requirement for the award of the degree of Bachelor of Engineering in Computer Science and Engineering during 1994-1998. 
+This is to certify that the project titled "Analysis of Artificial Neural Network" is a bonofide work done by RAVI KUMAR V.T.R. Reg.No E451640 in partial fulfillment of the requirement for the award of the degree of Bachelor of Engineering in Computer Science and Engineering during 1994-1998. 
 
 
 
@@ -69,7 +69,7 @@ HEAD OF THE DEPARTMENT
 
 We are thankful to our Director Dr. V. Shanmuganathan for giving excellent opportunity for taking up the course and providing a conducive environment to finish our project successfully.
 
-We extend our sincere thanks to Prof.S. Ramakrishnan.(System Manager & Head Of CSE Dept.) for his guidance and suggestions towards the improvement of our project. 
+We extend our sincere thanks to Prof. S. Ramakrishnan.(System Manager & Head Of CSE Dept.) for his guidance and suggestions towards the improvement of our project. 
 
 We have immense pleasure in thanking our guide Miss.Shameem Fathima and our guide Mr. R.Balasubramanian under whose guidance the project has been shaped in a very successful manner. 
 

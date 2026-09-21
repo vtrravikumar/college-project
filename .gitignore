@@ -6,3 +6,8 @@
 
 # Generated page images from source PDFs
 pages/
+
+# Local development / generated files
+.venv/
+results/
+**/__pycache__/
