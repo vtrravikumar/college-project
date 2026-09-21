@@ -232,6 +232,23 @@ The safest Phase 1 conclusion is that the project used an enhanced encoding sche
 
 ---
 
+
+## Modern runtime benchmark
+
+The CI benchmark records wall-clock runtime for the current Python reconstruction on the GitHub Actions runner. These measurements are modern execution data and are **not comparable as hardware performance measurements to the 1998 report's timings**.
+
+Environment:
+- Python: **3.12.14**
+- Platform: **Linux 6.17.0-1022-azure x86_64**
+
+| Workload | Modern runtime |
+|---|---:|
+| Three-bit parity reconstruction | **15.586 sec** |
+| Decoder reconstruction | **7.260 sec** |
+| Robot reported-solution verification | **0.101 sec** |
+
+The benchmark is reproducible through `scripts/benchmark_phase1.py` and is persisted by CI as `results/phase1_modern_runtime.json`.
+
 ## What Phase 1 has established
 
 ### Confirmed
