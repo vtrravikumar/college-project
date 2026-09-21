@@ -1,26 +1,25 @@
 """3-bit decoder reconstruction experiment.
 
-Historical report evidence:
+Historical report evidence verified from the original scanned pages:
 - network: 3-2-2-3
 - not fully connected
-- chromosome length: 170 (reported)
+- chromosome length: 170
 - population: 25
 - generations: 1900
 - crossover: 0.5
 - mutation: 0.01
 - weight range: -12 to +12
-- reported zero-weight links: 2, 6, 10
+- zero-weight links: 2, 6, 10
+- training patterns: 011->011, 101->101, 110->110
 
 Surviving C evidence establishes 10 bits per weight for the recovered GA
 implementation. A 3-2-2-3 network has 16 possible weighted links, hence
-160 weight bits. Connectivity is separately described in the report/source
-model. The reported 170 therefore remains unresolved.
+160 weight bits. The scanned report confirms a 170-bit chromosome. The
+remaining 10 bits are therefore unresolved; 170 is not explained by simply
+appending all 16 connectivity bits.
 
-The training table was not recoverable from OCR beyond its heading. The
-experiment below uses the minimal source-consistent interpretation of a
-3-bit decoder: all eight 3-bit input patterns map to themselves at the
-three outputs. This is explicitly a reconstruction assumption, not recovered
-historical training data.
+This experiment uses the exact training patterns visible in the scan. It is a
+modern seeded reconstruction, not the original 1998 random run.
 """
 from __future__ import annotations
 import json
@@ -32,10 +31,14 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"validation"))
 from historical_ga_training import train_historical_ga
 
-INPUTS=tuple(tuple((n>>i)&1 for i in (2,1,0)) for n in range(8))
+INPUTS=(
+    (0.0,1.0,1.0),
+    (1.0,0.0,1.0),
+    (1.0,1.0,0.0),
+)
 TARGETS=INPUTS
 
-# Report says links 2, 6 and 10 have zero weights; use 1-based link numbering.
+# Scanned report: links 2, 6 and 10 have zero weights.
 CONNECTIVITY=list("1"*16)
 for link in (2,6,10):
     CONNECTIVITY[link-1]="0"
@@ -79,8 +82,8 @@ def run():
         "best_fitness":result.best_fitness,
         "connectivity_target":CONNECTIVITY,
         "zero_weight_links_reported":[2,6,10],
-        "training_data_assumption":"Eight 3-bit input patterns mapped to identical 3-bit outputs; historical training table was not recoverable from OCR.",
-        "chromosome_note":"170 is preserved as reported. With 16 links and surviving 10-bit weight fields, the reconstructed weight chromosome is 160 bits; the extra 10 bits remain unexplained."
+        "training_data":"011->011, 101->101, 110->110",
+        "chromosome_note":"The scanned report confirms 170. With 16 links and surviving 10-bit weight fields, the recovered weight representation is 160 bits. Appending the 16 connectivity bits would give 176, not 170; the extra 10-bit discrepancy remains unresolved."
     }
 
 if __name__=="__main__":
