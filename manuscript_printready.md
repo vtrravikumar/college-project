@@ -10,7 +10,6 @@ author:
   - KUMARESAN U
   - RAGUPATHI KUMAR D.
 
-
 # ------------------------------------------------------------------
 # Publication
 # ------------------------------------------------------------------
@@ -37,35 +36,21 @@ language: en
 
 ## VIVA VOCE EXAMINATION
 
-
-
 The Viva Voce Examination of the Project work done by RAVI KUMAR V.I.R. E 451640 (Reg. No) in partial fulfillment of the requirements for the B.E degree in COMPUTER SCIENCE & ENGINEERING was held on 13 OCTOBER'98 
 
-
-
 INTERNAL EXAMINER
-
-
 
 EXTERNAL EXAMINER
 
 ## CERTIFICATE
 
-
-
 This is to certify that the project titled "Analysis of Artificial Neural Network" is a bonofide work done by RAVI KUMAR V.T.R. Reg.No E451640 in partial fulfillment of the requirement for the award of the degree of Bachelor of Engineering in Computer Science and Engineering during 1994-1998. 
 
-
-
-
 PROJECT GUIDE
-
-
 
 HEAD OF THE DEPARTMENT 
 
 ## Acknowledgement
-
 
 We are thankful to our Director Dr. V. Shanmuganathan for giving excellent opportunity for taking up the course and providing a conducive environment to finish our project successfully.
 
@@ -78,7 +63,6 @@ Last but not the least we would like to thank the Technical support group of our
 Above all, I express my gratitude to my beloved parents for shaping me as an Engineer.
 
 ## Abstract
-
 
 The aim of the project is to implement a system based on Genetic algorithm with enhanced encoding. The system is used to evolve forward Artificial Neural Network which has been applied to problem areas of boolean functions. 
 
@@ -169,11 +153,7 @@ Example: In a particular problem, a variable x to be optimized is evolved using 
       | 1 | 0 | 0 | 1 |
       | 1 | 1 | 1 | 0 |
 
-
-
 #### THE ALGORITHM
-
-
 
 ##### PSEUDOCODE
 
@@ -688,7 +668,6 @@ design and to train Neural Network. The results that are obtained confirm the fa
 that Genetic Algorithm is better tool to train a Neural Network than conventional
 training tools.
 
-
 ## Conclusion
 
 ### INTRODUCTION
@@ -711,7 +690,6 @@ The performance of the GA as an optimization tool for
 training and designing NNs is very good and is comparable to that of the
 available standard techniques.
 
-
 It can be concluded that GAs can be applied to solve any
 optimization problem equally well. Application of Evolutionary concepts
 to Neural architecture is one such example. It is sure that there are lot more
@@ -726,7 +704,6 @@ Parallelism can be increased by using distributed GAs. Here
 multiple copies of GAs are run in parallel and from time to time, best
 solution are exchanged.
 
-
 ## References
 
 - D.E.Golberg, "Genetic Algorithm in Search Optimization and Machine learning", Addison Wesley, 1989.
@@ -737,10 +714,7 @@ solution are exchanged.
 - Chin-Teng Lin & C.S George Lee, "Neural Fuzzy System".
 - LiMin Fu, "Neural Networks in Computer Intelligence",McGraw Hill International.
 
-
 ## Appendix
-
-
 
 COUNTER PROPAGATION NETWORKS
 INTRODUCTION:
@@ -759,8 +733,6 @@ it is given an input vector that is partially incorrect. This makes the
 network useful for pattern -recognition, pattern - completion, and signal -
 enhancement applications.
 
-
-
 NETWORK STRUCTURE:
 The neuron in layer O serve only as fan - out points and
 perform no computation. Each layer O neuron connects to every neuron in
@@ -776,8 +748,6 @@ Counter propagation functions in two modes; the
 NORMAL MODE, in which it accepts an input vector X and produces an
 output vector Y, and the TRAINING MODE in which an input vector is
 applied and the weights are adjusted to yield the desired output vector
-
-
 
 NORMAL OPERATION:
 The Kohonen laver :
@@ -799,7 +769,6 @@ N= XW
 where N is the vector of Kohonen layer NET ouputs.
 The Kohonen neuron with the largest NET value is the 'winner'. Its
 output is set to one; all others are set to zero.
-
 
 Grossberg Laver:
 The Grossberg layer functions in a familiar manner. Its
@@ -825,7 +794,6 @@ operates in the supervised mode. For this reason, it is difficult to predict
 which specific Kohonen neuron will be activated for a given input vector.
 It is only necessary to ensure that training separates input vectors.
 
-
 Preprocessing the Input Vectors :
 It is highly to normalize all input vector before applyingthem
 to the network. This is done by dividing each component of an input vector
@@ -850,7 +818,6 @@ Wnew = the new value of a weight connecting an input
 component x to the winning neuron
 Wnew = the previous value of this weight
 
-
 = a training rate coefficient that may vary during the training
 process
 Each weight associated with the winning Kohonen neuron is
@@ -872,7 +839,6 @@ training step, making the final value an average of the input vectors to
 which it was trained. In this way, the weights associated with a neuron will
 assume a value near the "center" of the input vectors for which that neuron
 is the "winner".
-
 
 Interpolative Mode:
 In the interpolative mode, a group of the Kohonen neurons
@@ -955,8 +921,6 @@ This method has been applied both to speech and images,
 yielding dat compression ratios of 10:1 to 100:1. The quality has been
 acceptable, however some distortion of the data at the receiving end is
 inevitable.
-
-
 
 ## APPENDIX A — GENETIC ALGORITHM SOURCE CODE
 
